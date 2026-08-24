@@ -54,11 +54,31 @@ jobs:
           $exe = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter *.exe -Recurse | Where-Object { $_.Name -match 'Mugen-Bets.exe' } | Select-Object -First 1
           if (-not $exe) { Write-Error "Executable not found"; exit 1 }
           Copy-Item -Path $exe.FullName -Destination $outDir -Force
-          # Copy commonly used associated folders if present
+          # Copy commonly used associated folders: prefer folders next to the built exe, fallback to repo root
           $folders = @('mugen-1.1b1','data','stages','sound')
+          $repoRoot = $env:GITHUB_WORKSPACE
+          $exeDir = Split-Path $exe.FullName
           foreach ($f in $folders) {
-            $src = Join-Path $env:GITHUB_WORKSPACE $f
-            if (Test-Path $src) { Copy-Item -Path $src -Destination $outDir -Recurse -Force }
+            $candidate1 = Join-Path $exeDir $f
+            $candidate2 = Join-Path $repoRoot $f
+            if (Test-Path $candidate1) {
+              Write-Host "Copying $candidate1 -> $outDir"
+              Copy-Item -Path $candidate1 -Destination $outDir -Recurse -Force
+            }
+            elseif (Test-Path $candidate2) {
+              Write-Host "Copying $candidate2 -> $outDir"
+              Copy-Item -Path $candidate2 -Destination $outDir -Recurse -Force
+            }
+            else {
+              Write-Host "Folder not found: $f"
+            }
+          }
+          # Also copy any local mugen engine exe if present (e.g., mugen.exe or similar)
+          $mugenExe = Get-ChildItem -Path $exeDir -Filter "mugen*.exe" -File -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $mugenExe) { $mugenExe = Get-ChildItem -Path $repoRoot -Filter "mugen*.exe" -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1 }
+          if ($mugenExe) {
+            Write-Host "Copying engine exe: $($mugenExe.FullName) -> $outDir"
+            Copy-Item -Path $mugenExe.FullName -Destination $outDir -Force
           }
           # Copy any dll/pdb sitting next to the exe
           $exeDir = Split-Path $exe.FullName
