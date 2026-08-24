@@ -73,7 +73,7 @@ jobs:
           asset_content_type: application/zip
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Mugen-Bets-release
           path: Mugen-Bets-release.zip
