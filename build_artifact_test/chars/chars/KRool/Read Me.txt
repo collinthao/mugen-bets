@@ -1,1 +1,0 @@
-This patch will allow King K Rool to be usable in MUGEN 1.0 at the cost of an increased file size. Simply place the sff file inside of K Rool's folder and replace when prompted.
