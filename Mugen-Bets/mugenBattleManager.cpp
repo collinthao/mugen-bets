@@ -8,6 +8,11 @@
 #include "helpers.h"
 #include "httprequests.h"
 
+extern "C"
+{
+	#include "sffdecompiler.h";
+}
+
 using json = nlohmann::json;
 using characterPointer = std::shared_ptr<Character>;
 
@@ -17,7 +22,7 @@ namespace MugenBattleManager
 {
 	STARTUPINFOA si{sizeof(si)};
 	PROCESS_INFORMATION pi1{}, pi2{};
-	MATCH_TYPE matchType{TWO_VERSUS_ONE};
+	MATCH_TYPE matchType{ONE_VERSUS_ONE};
 	std::string startFlag{ "" };
 	std::map<std::string, std::map<std::string, std::string>> matchResult{
 		{"Winners", {}},
@@ -247,6 +252,7 @@ void MugenBattleManager::SetCharactersStatsJSON()
 		}
 		else
 		{
+
 			std::cout << "Score: " << std::stoi(matchResult["Winners"][characterName])<< '\n';
 			int score = std::stoi(matchResult["Winners"][characterName]);
 	
@@ -254,7 +260,7 @@ void MugenBattleManager::SetCharactersStatsJSON()
 			int updatedLosses = characterData["characters"][characterName]["Losses"];
 			int updatedMatches = characterData["characters"][characterName]["Matches"] + 1;
 			double updatedWinRate = updatedMatches > 10 ? (double)updatedWins/(double)updatedMatches : 0;
-			std::string tier = GetTier(updatedWinRate);
+			std::string tier = updatedMatches > 10 ? GetTier(updatedWinRate) : "N/A";
 
 			std::cout << "Updated Win Rate for " << characterName << ": " << updatedWinRate << '\n';
 			
@@ -267,7 +273,7 @@ void MugenBattleManager::SetCharactersStatsJSON()
 				{"Matches", updatedMatches},
 				{"Tier", tier}
 			};
-
+			std::cout << currentCharacterStats << '\n';
 			characterData["characters"][characterName].clear();
 			jsonData[characterName] = currentCharacterStats;
 			characterData["characters"][characterName] = currentCharacterStats;
@@ -312,7 +318,7 @@ void MugenBattleManager::SetCharactersStatsJSON()
 			int updatedLosses = characterData["characters"][characterName]["Losses"] + score;
 			int updatedMatches = characterData["characters"][characterName]["Matches"] + 1;
 			double updatedWinRate = updatedMatches > 10 ? (double)updatedWins/(double)updatedMatches : 0;
-			std::string tier = GetTier(updatedWinRate);
+			std::string tier = updatedMatches > 10 ? GetTier(updatedWinRate) : "N/A";
 
 			json currentCharacterStats =
 			{
@@ -333,7 +339,7 @@ void MugenBattleManager::SetCharactersStatsJSON()
 	const wchar_t* requestUrl = L"8xkovn5om1.execute-api.us-east-1.amazonaws.com";
 	const wchar_t* requestType = L"GET";
 
-	std::cout << jsonData.dump() << '\n';
+	std::cout << "JSON: " << jsonData.dump() << '\n';
 	HTTP::fetch(requestUrl, requestType, jsonData.dump());
 	std::ofstream out("characterStats.json");
 	out << characterData.dump();
@@ -358,6 +364,13 @@ void MugenBattleManager::SetMatchResult()
 			matchResult["Winners"][charactersForBattle[0]->characterName] = "1";
 
 			matchResult["Losers"][charactersForBattle[1]->characterName] = "1";
+		}
+		else
+		{
+			matchResult["Losers"][charactersForBattle[0]->characterName] = "1";
+
+			matchResult["Winners"][charactersForBattle[1]->characterName] = "1";
+
 		}
 			
 		break;

@@ -1,0 +1,79 @@
+name: Build and package Mugen-Bets
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+
+      - name: Restore NuGet packages
+        run: nuget restore Mugen-Bets.slnx
+
+      - name: Build solution
+        run: msbuild Mugen-Bets.slnx /m /p:Configuration=Release /p:Platform=x64
+
+      - name: Locate exe and prepare artifact
+        shell: pwsh
+        run: |
+          $outDir = "$env:GITHUB_WORKSPACE\build_artifact"
+          New-Item -ItemType Directory -Path $outDir -Force | Out-Null
+          $exe = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter *.exe -Recurse | Where-Object { $_.Name -match 'Mugen-Bets.exe' } | Select-Object -First 1
+          if (-not $exe) { Write-Error "Executable not found"; exit 1 }
+          Copy-Item -Path $exe.FullName -Destination $outDir -Force
+          # Copy commonly used associated folders if present
+          $folders = @('mugen-1.1b1','data','stages','sound')
+          foreach ($f in $folders) {
+            $src = Join-Path $env:GITHUB_WORKSPACE $f
+            if (Test-Path $src) { Copy-Item -Path $src -Destination $outDir -Recurse -Force }
+          }
+          # Copy any dll/pdb sitting next to the exe
+          $exeDir = Split-Path $exe.FullName
+          Get-ChildItem -Path $exeDir -Include *.dll,*.pdb -File | ForEach-Object { Copy-Item -Path $_.FullName -Destination $outDir -Force }
+
+      - name: Zip artifact
+        shell: pwsh
+        run: |
+          $zip = "$env:GITHUB_WORKSPACE\Mugen-Bets-release.zip"
+          if (Test-Path $zip) { Remove-Item $zip }
+          Compress-Archive -Path "$env:GITHUB_WORKSPACE\build_artifact\*" -DestinationPath $zip -Force
+
+      - name: Create GitHub Release (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          body: "Automated release for ${{ github.ref_name }}"
+
+      - name: Upload release asset (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: Mugen-Bets-release.zip
+          asset_name: Mugen-Bets-release-${{ github.ref_name }}.zip
+          asset_content_type: application/zip
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Mugen-Bets-release
+          path: Mugen-Bets-release.zip
