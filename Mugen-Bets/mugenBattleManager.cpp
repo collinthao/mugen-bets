@@ -59,6 +59,18 @@ fs::path MugenBattleManager::findMugenDir()
 		if (p.is_directory() && p.path().filename() == "mugen-1.1b1") return p.path();
 	}
 
+	// 4) try to find repository root (look for solution file or .git) and search from there
+	fs::path repoRoot;
+	for (fs::path p = base; !p.empty(); p = p.parent_path()) {
+		if (fs::exists(p / "Mugen-Bets.slnx") || fs::exists(p / ".git")) { repoRoot = p; break; }
+		if (p == p.root_path()) break;
+	}
+	if (!repoRoot.empty()) {
+		for (auto &q : fs::recursive_directory_iterator(repoRoot)) {
+			if (q.is_directory() && q.path().filename() == "mugen-1.1b1") return q.path();
+		}
+	}
+
 	return fs::path{};
 }
 
