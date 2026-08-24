@@ -20,6 +20,9 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore Mugen-Bets.slnx
 
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1
+
       - name: Build solution (locate MSBuild and run)
         shell: pwsh
         run: |
