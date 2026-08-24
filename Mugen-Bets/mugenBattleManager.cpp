@@ -78,8 +78,11 @@ fs::path MugenBattleManager::findMugenDir()
 void MugenBattleManager::StartBattle()
 {
 	fs::path mugenDir = findMugenDir();
+	std::string mugenDirStr;
+	const char* mugenCwd = NULL;
 	if (!mugenDir.empty()) {
-		std::string mugenDirStr = mugenDir.string();
+		mugenDirStr = mugenDir.string();
+		mugenCwd = mugenDirStr.c_str();
 		SetCurrentDirectoryA(mugenDirStr.c_str());
 	}
 
@@ -93,7 +96,7 @@ void MugenBattleManager::StartBattle()
 	fs::path watcherPath = (mugenDir.empty() ? fs::path("MugenWatcher.exe") : mugenDir / "MugenWatcher.exe");
 	CreateProcessA(
 		(LPSTR)watcherPath.string().c_str(),
-		NULL, NULL, NULL, FALSE, 0, NULL, NULL,
+		NULL, NULL, NULL, FALSE, 0, NULL, (LPSTR)mugenCwd,
 		&si, &pi1
 	);
 
@@ -107,7 +110,7 @@ void MugenBattleManager::StartBattle()
 	CreateProcessA(
 		NULL,
 		cmdBuf.data(),
-		NULL, NULL, FALSE, 0, NULL, NULL,
+		NULL, NULL, FALSE, 0, NULL, (LPSTR)mugenCwd,
 		&si, &pi1
 	);
 
