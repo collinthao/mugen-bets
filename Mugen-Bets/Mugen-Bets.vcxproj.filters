@@ -27,6 +27,9 @@
     <ClCompile Include="httprequest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Libraries\sffdecompiler-master\sffdecompiler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mugenBattleManager.h">
@@ -39,6 +42,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="httprequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\sffdecompiler-master\sffdecompiler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
