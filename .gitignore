@@ -17,3 +17,7 @@ mugen-1.1b1/
 .vs/
 *.db
 *.VC.db
+# Ignore build outputs and packaged artifacts
+Mugen-Bets/x64/
+build_artifact/
+*.zip
