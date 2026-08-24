@@ -71,44 +71,29 @@ jobs:
           if (Test-Path $zip) { Remove-Item $zip }
           Compress-Archive -Path "$env:GITHUB_WORKSPACE\build_artifact\*" -DestinationPath $zip -Force
 
-      - name: Create or update public Release and upload asset
-        shell: pwsh
+      - name: Create or update public Release
+        id: create_public_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: Release
+          release_name: Release
+          body: Automated CI build
+          draft: false
+          prerelease: false
+          allowUpdates: true
+          makeLatest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          $token = $env:GITHUB_TOKEN
-          $repoFull = $env:GITHUB_REPOSITORY
-          $parts = $repoFull -split '/' 
-          $owner = $parts[0]
-          $repo = $parts[1]
-          $tag = 'Release'
-          $apiBase = "https://api.github.com/repos/$owner/$repo"
-          $headers = @{ Authorization = "token $token"; Accept = 'application/vnd.github.v3+json' }
-          Write-Host "Checking for existing release $tag"
-          try {
-            $release = Invoke-RestMethod -Uri "$apiBase/releases/tags/$tag" -Headers $headers -Method Get -ErrorAction Stop
-            Write-Host "Found existing release id=$($release.id)"
-          }
-          catch {
-            Write-Host "Release not found; creating"
-            $body = @{ tag_name = $tag; name = $tag; body = "Automated CI build"; draft = $false; prerelease = $false } | ConvertTo-Json
-            $release = Invoke-RestMethod -Uri "$apiBase/releases" -Headers $headers -Method Post -Body $body -ContentType 'application/json'
-            Write-Host "Created release id=$($release.id)"
-          }
-          $uploadUrl = ($release.upload_url -split '\{')[0]
-          Write-Host "uploadUrl: '$uploadUrl'"
-          $assetPath = "$env:GITHUB_WORKSPACE\Mugen-Bets-release.zip"
-          if (-not (Test-Path $assetPath)) { Write-Error "Asset not found: $assetPath"; exit 1 }
-          $fileName = Split-Path $assetPath -Leaf
-          $escapedName = [System.Uri]::EscapeDataString($fileName)
-          $uploadUri = "$uploadUrl?name=$escapedName"
-          Write-Host "escapedName: $escapedName"
-          Write-Host "uploadUri: '$uploadUri'"
-          if ($uploadUri -notmatch '^https?://') { Write-Error "UploadUri malformed: $uploadUri"; exit 1 }
-          Write-Host "Uploading $fileName to release"
-          $headers = @{ Authorization = "token $token"; Accept = 'application/vnd.github.v3+json' }
-          Invoke-RestMethod -Uri $uploadUri -Headers $headers -Method Post -InFile $assetPath -ContentType 'application/zip' -ErrorAction Stop
-          Write-Host "Upload complete"
+
+      - name: Upload release asset (public Release)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_public_release.outputs.upload_url }}
+          asset_path: Mugen-Bets-release.zip
+          asset_name: Mugen-Bets-release.zip
+          asset_content_type: application/zip
 
       - name: Create GitHub Release (on tag)
         if: startsWith(github.ref, 'refs/tags/')
