@@ -2,6 +2,7 @@
 #include "mugenBattleManager.h"
 #include <memory>
 #include <filesystem>
+#include <vector>
 #include <random>
 #include <set>
 #include <nlohmann/json.hpp>
@@ -29,21 +30,23 @@ namespace MugenBattleManager
 		{"Losers", {}},
 	};
 };
-	
+    
+// Helper: locate the mugen runtime directory relative to the build/output root
+fs::path MugenBattleManager::findMugenDir()
+{
+	fs::path base = fs::current_path();
+	fs::path cand = base / "mugen-1.1b1";
+	if (fs::exists(cand) && fs::is_directory(cand)) return cand;
+	// fallback: recursive search for folder named 'mugen-1.1b1'
+	for (auto &p : fs::recursive_directory_iterator(base)) {
+		if (p.is_directory() && p.path().filename() == "mugen-1.1b1") return p.path();
+	}
+	return fs::path{};
+}
+
+
 void MugenBattleManager::StartBattle()
 {
-	// Ensure we run from the mugen runtime directory next to the build output.
-	auto findMugenDir = []() -> fs::path {
-		fs::path base = fs::current_path();
-		fs::path cand = base / "mugen-1.1b1";
-		if (fs::exists(cand) && fs::is_directory(cand)) return cand;
-		// fallback: recursive search for folder named 'mugen-1.1b1'
-		for (auto &p : fs::recursive_directory_iterator(base)) {
-			if (p.is_directory() && p.path().filename() == "mugen-1.1b1") return p.path();
-		}
-		return fs::path{};
-	};
-
 	fs::path mugenDir = findMugenDir();
 	if (!mugenDir.empty()) {
 		std::string mugenDirStr = mugenDir.string();
@@ -53,23 +56,30 @@ void MugenBattleManager::StartBattle()
 	if (availableCharacters.empty()) PopulateAvailableCharacters();
 
 	SetCharactersForBattle();
-	
+    
 	SetStartFlag();
 
+	// Launch MugenWatcher from the mugen runtime directory
+	fs::path watcherPath = (mugenDir.empty() ? fs::path("MugenWatcher.exe") : mugenDir / "MugenWatcher.exe");
 	CreateProcessA(
-	NULL,
-	(LPSTR)"MugenWatcher.exe",
-	NULL, NULL, FALSE, 0, NULL, NULL,
-	&si, &pi1
+		(LPSTR)watcherPath.string().c_str(),
+		NULL, NULL, NULL, FALSE, 0, NULL, NULL,
+		&si, &pi1
 	);
-	
+
+	// Build full command-line for mugen.exe inside mugenDir
+	fs::path mugenPath = (mugenDir.empty() ? fs::path("mugen.exe") : mugenDir / "mugen.exe");
+	std::string fullCmd = mugenPath.string() + std::string(" ") + startFlag; // startFlag contains args portion
+	// Ensure mutable buffer for CreateProcessA
+	std::vector<char> cmdBuf(fullCmd.begin(), fullCmd.end());
+	cmdBuf.push_back('\0');
+
 	CreateProcessA(
-	NULL,
-	(LPSTR)startFlag.c_str(),
-	NULL, NULL, FALSE, 0, NULL, NULL,
-	&si, &pi1
+		NULL,
+		cmdBuf.data(),
+		NULL, NULL, FALSE, 0, NULL, NULL,
+		&si, &pi1
 	);
-	
 
 }
 		
@@ -85,12 +95,19 @@ void MugenBattleManager::WaitForBattleEnd()
 	
 void MugenBattleManager::PopulateAvailableCharacters()
 {
-	// Discover the chars directory relative to the current working directory / build root
-	fs::path base = fs::current_path();
-	fs::path charsPath = base / "mugen-1.1b1" / "chars";
+	// Discover the chars directory inside the resolved mugen runtime directory
+	fs::path mugenDir = findMugenDir();
+	fs::path charsPath;
+	if (!mugenDir.empty()) {
+		charsPath = mugenDir / "chars";
+	} else {
+		fs::path base = fs::current_path();
+		charsPath = base / "mugen-1.1b1" / "chars";
+	}
+
 	if (!fs::exists(charsPath) || !fs::is_directory(charsPath)) {
-		// fallback: search for any folder named 'chars' under mugen-1.1b1 or current tree
-		for (auto &p : fs::recursive_directory_iterator(base)) {
+		// fallback: search for any folder named 'chars' under the current tree
+		for (auto &p : fs::recursive_directory_iterator(fs::current_path())) {
 			if (p.is_directory() && p.path().filename() == "chars") { charsPath = p.path(); break; }
 		}
 	}
@@ -119,7 +136,10 @@ std::vector<std::string> MugenBattleManager::GetBattleResult()
 
 	std::vector<std::string> lines{};
 
-	std::ifstream file("MugenWatcher.log");
+	// Prefer the watcher log inside the mugen runtime directory
+	fs::path mugenDir = findMugenDir();
+	fs::path logPath = mugenDir.empty() ? fs::path("MugenWatcher.log") : mugenDir / "MugenWatcher.log";
+	std::ifstream file(logPath.string());
 
 	std::string line;
 
@@ -140,8 +160,7 @@ void MugenBattleManager::SetStartFlag()
 
 
 	case 2:
-		startFlag = "mugen.exe";
-		startFlag += " -p1 ";
+		startFlag = "-p1 ";
 		startFlag += charactersForBattle[0]->characterName;
 		startFlag += " -p1.color ";
 		startFlag += charactersForBattle[0]->colorPalette;
@@ -155,8 +174,7 @@ void MugenBattleManager::SetStartFlag()
 		std::cout << startFlag << '\n';
 		break;
 	case 3:
-		startFlag = "mugen.exe";
-		startFlag += " -p1 ";
+		startFlag = "-p1 ";
 		startFlag += charactersForBattle[0]->characterName;
 		startFlag += " -p1.color ";
 		startFlag += charactersForBattle[0]->colorPalette;
@@ -175,8 +193,7 @@ void MugenBattleManager::SetStartFlag()
 		std::cout << startFlag << '\n';
 		break;
 	case 4:
-		startFlag = "mugen.exe";
-		startFlag += " -p1 ";
+		startFlag = "-p1 ";
 		startFlag += charactersForBattle[0]->characterName;
 		startFlag += " -p1.color ";
 		startFlag += charactersForBattle[0]->colorPalette;
