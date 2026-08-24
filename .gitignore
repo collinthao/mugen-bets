@@ -1,5 +1,7 @@
 *.exe
 
+# Allow the mugen runtime exes in repo (they live under Mugen-Bets/mugen-1.1b1)
+!Mugen-Bets/mugen-1.1b1/*.exe
 
 *.ipch
 *.pdb
