@@ -58,22 +58,19 @@ jobs:
           $repoRoot = $env:GITHUB_WORKSPACE
           $exeDir = Split-Path $exe.FullName
 
-          # Prefer including the repository's mugen-1.1b1 folder if present, otherwise include any next to the build output
-          $repoMugen = Join-Path $repoRoot 'mugen-1.1b1'
-          $exeMugen = Join-Path $exeDir 'mugen-1.1b1'
-          if (Test-Path $repoMugen) {
-            Write-Host "Copying repo mugen-1.1b1 -> $outDir"
-            Copy-Item -Path $repoMugen -Destination $outDir -Recurse -Force
-          }
-          elseif (Test-Path $exeMugen) {
-            Write-Host "Copying build-output mugen-1.1b1 -> $outDir"
-            Copy-Item -Path $exeMugen -Destination $outDir -Recurse -Force
+          # Find the repo's mugen-1.1b1 folder anywhere (handles Mugen-Bets/mugen-1.1b1 layout); fallback to build output
+          $foundMugen = Get-ChildItem -Path $repoRoot -Directory -Filter 'mugen-1.1b1' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
+          if (-not $foundMugen) { $foundMugen = Get-ChildItem -Path $exeDir -Directory -Filter 'mugen-1.1b1' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 }
+          if ($foundMugen) {
+            Write-Host "Copying mugen-1.1b1 from $($foundMugen.FullName) -> $outDir"
+            Copy-Item -Path $foundMugen.FullName -Destination $outDir -Recurse -Force
           }
           else {
-            Write-Host "mugen-1.1b1 folder not found in repo root or next to build output"
+            Write-Host "mugen-1.1b1 folder not found in repo or next to build output"
           }
 
           # Also ensure chars directories are present (search repo and build output)
+          # Also find any 'chars' directories anywhere in the repo or next to build output and include them
           $charsFound = Get-ChildItem -Path $repoRoot -Directory -Filter 'chars' -Recurse -ErrorAction SilentlyContinue
           if (-not $charsFound) { $charsFound = Get-ChildItem -Path $exeDir -Directory -Filter 'chars' -Recurse -ErrorAction SilentlyContinue }
           foreach ($c in $charsFound) {
