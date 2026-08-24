@@ -36,7 +36,7 @@ jobs:
               }
             }
           }
-          if (-not (Test-Path $msbuild)) { Write-Error "MSBuild not found on runner"; exit 1 }
+          if (-not $msbuild -or -not (Test-Path $msbuild)) { Write-Error "MSBuild not found on runner"; exit 1 }
           & $msbuild "Mugen-Bets.slnx" /m /p:Configuration=Release /p:Platform=x64
 
       - name: Locate exe and prepare artifact
