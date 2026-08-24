@@ -67,6 +67,18 @@ jobs:
           if (Test-Path $zip) { Remove-Item $zip }
           Compress-Archive -Path "$env:GITHUB_WORKSPACE\build_artifact\*" -DestinationPath $zip -Force
 
+      - name: Publish or update public Release tag
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: Release
+          name: Release
+          body: "Automated nightly/CI build"
+          draft: false
+          prerelease: false
+          files: Mugen-Bets-release.zip
+
       - name: Create GitHub Release (on tag)
         if: startsWith(github.ref, 'refs/tags/')
         id: create_release
