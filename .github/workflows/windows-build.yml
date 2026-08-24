@@ -96,13 +96,18 @@ jobs:
             Write-Host "Created release id=$($release.id)"
           }
           $uploadUrl = ($release.upload_url -split '\{')[0]
+          Write-Host "uploadUrl: '$uploadUrl'"
           $assetPath = "$env:GITHUB_WORKSPACE\Mugen-Bets-release.zip"
           if (-not (Test-Path $assetPath)) { Write-Error "Asset not found: $assetPath"; exit 1 }
           $fileName = Split-Path $assetPath -Leaf
           $escapedName = [System.Uri]::EscapeDataString($fileName)
           $uploadUri = "$uploadUrl?name=$escapedName"
+          Write-Host "escapedName: $escapedName"
+          Write-Host "uploadUri: '$uploadUri'"
+          if ($uploadUri -notmatch '^https?://') { Write-Error "UploadUri malformed: $uploadUri"; exit 1 }
           Write-Host "Uploading $fileName to release"
-          Invoke-RestMethod -Uri $uploadUri -Headers @{ Authorization = "token $token"; 'Content-Type' = 'application/zip' } -Method Post -InFile $assetPath -ErrorAction Stop
+          $headers = @{ Authorization = "token $token"; Accept = 'application/vnd.github.v3+json' }
+          Invoke-RestMethod -Uri $uploadUri -Headers $headers -Method Post -InFile $assetPath -ContentType 'application/zip' -ErrorAction Stop
           Write-Host "Upload complete"
 
       - name: Create GitHub Release (on tag)
