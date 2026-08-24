@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ main, master ]
 
+# Allow workflow to create/update releases with GITHUB_TOKEN
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-latest
@@ -67,17 +71,38 @@ jobs:
           if (Test-Path $zip) { Remove-Item $zip }
           Compress-Archive -Path "$env:GITHUB_WORKSPACE\build_artifact\*" -DestinationPath $zip -Force
 
-      - name: Publish or update public Release tag
-        uses: ncipollo/release-action@v1
+      - name: Create or update public Release and upload asset
+        shell: pwsh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag: Release
-          name: Release
-          body: "Automated nightly/CI build"
-          draft: false
-          prerelease: false
-          files: Mugen-Bets-release.zip
+        run: |
+          $token = $env:GITHUB_TOKEN
+          $repoFull = $env:GITHUB_REPOSITORY
+          $parts = $repoFull -split '/' 
+          $owner = $parts[0]
+          $repo = $parts[1]
+          $tag = 'Release'
+          $apiBase = "https://api.github.com/repos/$owner/$repo"
+          $headers = @{ Authorization = "token $token"; Accept = 'application/vnd.github.v3+json' }
+          Write-Host "Checking for existing release $tag"
+          try {
+            $release = Invoke-RestMethod -Uri "$apiBase/releases/tags/$tag" -Headers $headers -Method Get -ErrorAction Stop
+            Write-Host "Found existing release id=$($release.id)"
+          }
+          catch {
+            Write-Host "Release not found; creating"
+            $body = @{ tag_name = $tag; name = $tag; body = "Automated CI build"; draft = $false; prerelease = $false } | ConvertTo-Json
+            $release = Invoke-RestMethod -Uri "$apiBase/releases" -Headers $headers -Method Post -Body $body -ContentType 'application/json'
+            Write-Host "Created release id=$($release.id)"
+          }
+          $uploadUrl = $release.upload_url -replace '\{.+$',''
+          $assetPath = "$env:GITHUB_WORKSPACE\Mugen-Bets-release.zip"
+          if (-not (Test-Path $assetPath)) { Write-Error "Asset not found: $assetPath"; exit 1 }
+          $fileName = Split-Path $assetPath -Leaf
+          $uploadUri = "$uploadUrl?name=$fileName"
+          Write-Host "Uploading $fileName to release"
+          Invoke-RestMethod -Uri $uploadUri -Headers @{ Authorization = "token $token"; 'Content-Type' = 'application/zip' } -Method Post -InFile $assetPath -ErrorAction Stop
+          Write-Host "Upload complete"
 
       - name: Create GitHub Release (on tag)
         if: startsWith(github.ref, 'refs/tags/')
