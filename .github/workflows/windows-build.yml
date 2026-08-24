@@ -58,9 +58,19 @@ jobs:
           $repoRoot = $env:GITHUB_WORKSPACE
           $exeDir = Split-Path $exe.FullName
 
-          # Find the repo's mugen-1.1b1 folder anywhere (handles Mugen-Bets/mugen-1.1b1 layout); fallback to build output
-          $foundMugen = Get-ChildItem -Path $repoRoot -Directory -Filter 'mugen-1.1b1' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1
-          if (-not $foundMugen) { $foundMugen = Get-ChildItem -Path $exeDir -Directory -Filter 'mugen-1.1b1' -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 }
+          # Check common locations for the mugen-1.1b1 folder (explicit paths) first
+          $candidates = @(
+            (Join-Path $repoRoot 'Mugen-Bets\mugen-1.1b1'),
+            (Join-Path $repoRoot 'mugen-1.1b1'),
+            (Join-Path $repoRoot 'Mugen-Bets\mugen-1.1b1\mugen-1.1b1'),
+            (Join-Path $exeDir 'mugen-1.1b1')
+          )
+          $foundMugen = $null
+          foreach ($p in $candidates) {
+            if (Test-Path $p) { $foundMugen = Get-Item $p; break }
+          }
+          # Fallback: robust recursive search for directory name 'mugen-1.1b1'
+          if (-not $foundMugen) { $foundMugen = Get-ChildItem -Path $repoRoot -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -ieq 'mugen-1.1b1' } | Select-Object -First 1 }
           if ($foundMugen) {
             Write-Host "Copying mugen-1.1b1 from $($foundMugen.FullName) -> $outDir"
             Copy-Item -Path $foundMugen.FullName -Destination $outDir -Recurse -Force
@@ -71,8 +81,8 @@ jobs:
 
           # Also ensure chars directories are present (search repo and build output)
           # Also find any 'chars' directories anywhere in the repo or next to build output and include them
-          $charsFound = Get-ChildItem -Path $repoRoot -Directory -Filter 'chars' -Recurse -ErrorAction SilentlyContinue
-          if (-not $charsFound) { $charsFound = Get-ChildItem -Path $exeDir -Directory -Filter 'chars' -Recurse -ErrorAction SilentlyContinue }
+          $charsFound = Get-ChildItem -Path $repoRoot -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -ieq 'chars' }
+          if (-not $charsFound) { $charsFound = Get-ChildItem -Path $exeDir -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -ieq 'chars' } }
           foreach ($c in $charsFound) {
             Write-Host "Copying chars folder: $($c.FullName) -> $outDir\chars"
             $dest = Join-Path $outDir 'chars'
