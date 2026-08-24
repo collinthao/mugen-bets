@@ -20,8 +20,22 @@ jobs:
       - name: Restore NuGet packages
         run: nuget restore Mugen-Bets.slnx
 
-      - name: Build solution
-        run: msbuild Mugen-Bets.slnx /m /p:Configuration=Release /p:Platform=x64
+      - name: Build solution (locate MSBuild and run)
+        shell: pwsh
+        run: |
+          $msbuild = (Get-Command msbuild -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Source) -ErrorAction SilentlyContinue
+          if (-not $msbuild) {
+            $vswhere = "$env:ProgramFiles(x86)\Microsoft Visual Studio\Installer\vswhere.exe"
+            if (Test-Path $vswhere) {
+              $inst = & $vswhere -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+              if ($inst) {
+                $candidate = Join-Path $inst "MSBuild\Current\Bin\MSBuild.exe"
+                if (Test-Path $candidate) { $msbuild = $candidate }
+              }
+            }
+          }
+          if (-not (Test-Path $msbuild)) { Write-Error "MSBuild not found on runner"; exit 1 }
+          & $msbuild "Mugen-Bets.slnx" /m /p:Configuration=Release /p:Platform=x64
 
       - name: Locate exe and prepare artifact
         shell: pwsh
