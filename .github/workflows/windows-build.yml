@@ -89,6 +89,15 @@ jobs:
             Copy-Item -Path $c.FullName -Destination $dest -Recurse -Force
           }
 
+          # Explicit fallback: directly copy the nested chars folder if present in the inner project path
+          $explicitChars = Join-Path $repoRoot 'Mugen-Bets\mugen-1.1b1\chars'
+          if (Test-Path $explicitChars) {
+            Write-Host "Explicitly copying chars from $explicitChars -> $outDir\mugen-1.1b1\chars"
+            $destParent = Join-Path $outDir 'mugen-1.1b1'
+            New-Item -ItemType Directory -Path $destParent -Force | Out-Null
+            Copy-Item -Path $explicitChars -Destination (Join-Path $destParent 'chars') -Recurse -Force
+          }
+
           # Copy other common asset folders if present in repo root
           $otherFolders = @('data','stages','sound')
           foreach ($f in $otherFolders) {
