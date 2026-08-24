@@ -11,7 +11,7 @@
 
 extern "C"
 {
-	#include "sffdecompiler.h";
+	#include "sffdecompiler.h"
 }
 
 using json = nlohmann::json;

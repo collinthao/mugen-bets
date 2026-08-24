@@ -10,6 +10,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <filesystem>
 #include "character.h"
 
 enum MATCH_TYPE
@@ -31,6 +32,9 @@ namespace MugenBattleManager
 	void SetCharactersStatsJSON();
 	void SetMatchResult();
 	std::string GetTier(double winRate);
+
+	// Locate the mugen runtime directory (mugen-1.1b1) relative to the build/output root
+	std::filesystem::path findMugenDir();
 	static std::vector<std::shared_ptr<Character>>	charactersForBattle;
 	static std::vector <std::string>				availableCharacters;
 	extern std::map < std::string, std::map<std::string, std::string> > matchResult;
