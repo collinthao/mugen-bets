@@ -54,31 +54,49 @@ jobs:
           $exe = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter *.exe -Recurse | Where-Object { $_.Name -match 'Mugen-Bets.exe' } | Select-Object -First 1
           if (-not $exe) { Write-Error "Executable not found"; exit 1 }
           Copy-Item -Path $exe.FullName -Destination $outDir -Force
-          # Copy commonly used associated folders: prefer folders next to the built exe, fallback to repo root
-          $folders = @('mugen-1.1b1','data','stages','sound')
+          # Ensure all required runtime data is included.
           $repoRoot = $env:GITHUB_WORKSPACE
           $exeDir = Split-Path $exe.FullName
-          foreach ($f in $folders) {
-            $candidate1 = Join-Path $exeDir $f
-            $candidate2 = Join-Path $repoRoot $f
-            if (Test-Path $candidate1) {
-              Write-Host "Copying $candidate1 -> $outDir"
-              Copy-Item -Path $candidate1 -Destination $outDir -Recurse -Force
-            }
-            elseif (Test-Path $candidate2) {
-              Write-Host "Copying $candidate2 -> $outDir"
-              Copy-Item -Path $candidate2 -Destination $outDir -Recurse -Force
-            }
-            else {
-              Write-Host "Folder not found: $f"
-            }
+
+          # Prefer including the repository's mugen-1.1b1 folder if present, otherwise include any next to the build output
+          $repoMugen = Join-Path $repoRoot 'mugen-1.1b1'
+          $exeMugen = Join-Path $exeDir 'mugen-1.1b1'
+          if (Test-Path $repoMugen) {
+            Write-Host "Copying repo mugen-1.1b1 -> $outDir"
+            Copy-Item -Path $repoMugen -Destination $outDir -Recurse -Force
           }
-          # Also copy any local mugen engine exe if present (e.g., mugen.exe or similar)
-          $mugenExe = Get-ChildItem -Path $exeDir -Filter "mugen*.exe" -File -ErrorAction SilentlyContinue | Select-Object -First 1
-          if (-not $mugenExe) { $mugenExe = Get-ChildItem -Path $repoRoot -Filter "mugen*.exe" -Recurse -File -ErrorAction SilentlyContinue | Select-Object -First 1 }
-          if ($mugenExe) {
-            Write-Host "Copying engine exe: $($mugenExe.FullName) -> $outDir"
-            Copy-Item -Path $mugenExe.FullName -Destination $outDir -Force
+          elseif (Test-Path $exeMugen) {
+            Write-Host "Copying build-output mugen-1.1b1 -> $outDir"
+            Copy-Item -Path $exeMugen -Destination $outDir -Recurse -Force
+          }
+          else {
+            Write-Host "mugen-1.1b1 folder not found in repo root or next to build output"
+          }
+
+          # Also ensure chars directories are present (search repo and build output)
+          $charsFound = Get-ChildItem -Path $repoRoot -Directory -Filter 'chars' -Recurse -ErrorAction SilentlyContinue
+          if (-not $charsFound) { $charsFound = Get-ChildItem -Path $exeDir -Directory -Filter 'chars' -Recurse -ErrorAction SilentlyContinue }
+          foreach ($c in $charsFound) {
+            Write-Host "Copying chars folder: $($c.FullName) -> $outDir\chars"
+            $dest = Join-Path $outDir 'chars'
+            Copy-Item -Path $c.FullName -Destination $dest -Recurse -Force
+          }
+
+          # Copy other common asset folders if present in repo root
+          $otherFolders = @('data','stages','sound')
+          foreach ($f in $otherFolders) {
+            $src = Join-Path $repoRoot $f
+            if (Test-Path $src) { Write-Host "Copying $src -> $outDir"; Copy-Item -Path $src -Destination $outDir -Recurse -Force }
+          }
+
+          # Copy any mugen engine executables found anywhere in the repo or next to build output
+          $engineExes = @()
+          $engineExes += Get-ChildItem -Path $exeDir -Filter 'mugen*.exe' -File -ErrorAction SilentlyContinue
+          $engineExes += Get-ChildItem -Path $repoRoot -Filter 'mugen*.exe' -Recurse -File -ErrorAction SilentlyContinue
+          $engineExes = $engineExes | Select-Object -Unique
+          foreach ($eng in $engineExes) {
+            Write-Host "Including engine exe: $($eng.FullName) -> $outDir"
+            Copy-Item -Path $eng.FullName -Destination $outDir -Force
           }
           # Copy any dll/pdb sitting next to the exe
           $exeDir = Split-Path $exe.FullName
