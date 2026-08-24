@@ -32,8 +32,23 @@ namespace MugenBattleManager
 	
 void MugenBattleManager::StartBattle()
 {
+	// Ensure we run from the mugen runtime directory next to the build output.
+	auto findMugenDir = []() -> fs::path {
+		fs::path base = fs::current_path();
+		fs::path cand = base / "mugen-1.1b1";
+		if (fs::exists(cand) && fs::is_directory(cand)) return cand;
+		// fallback: recursive search for folder named 'mugen-1.1b1'
+		for (auto &p : fs::recursive_directory_iterator(base)) {
+			if (p.is_directory() && p.path().filename() == "mugen-1.1b1") return p.path();
+		}
+		return fs::path{};
+	};
 
-	SetCurrentDirectoryA("C:/Users/colli/source/repos/Mugen-Bets/Mugen-Bets/mugen-1.1b1");
+	fs::path mugenDir = findMugenDir();
+	if (!mugenDir.empty()) {
+		std::string mugenDirStr = mugenDir.string();
+		SetCurrentDirectoryA(mugenDirStr.c_str());
+	}
 
 	if (availableCharacters.empty()) PopulateAvailableCharacters();
 
@@ -70,28 +85,30 @@ void MugenBattleManager::WaitForBattleEnd()
 	
 void MugenBattleManager::PopulateAvailableCharacters()
 {
-	
-	std::string path = "C:/Users/colli/source/repos/Mugen-Bets/Mugen-Bets/mugen-1.1b1/chars/";
-	for (const auto& characterDirectory : fs::directory_iterator(path))
-	{
+	// Discover the chars directory relative to the current working directory / build root
+	fs::path base = fs::current_path();
+	fs::path charsPath = base / "mugen-1.1b1" / "chars";
+	if (!fs::exists(charsPath) || !fs::is_directory(charsPath)) {
+		// fallback: search for any folder named 'chars' under mugen-1.1b1 or current tree
+		for (auto &p : fs::recursive_directory_iterator(base)) {
+			if (p.is_directory() && p.path().filename() == "chars") { charsPath = p.path(); break; }
+		}
+	}
 
-		for (const auto& directoryContents : fs::directory_iterator(characterDirectory.path()))
-		{
-
-			fs::path filePath(directoryContents.path());
-
-			if (filePath.extension() == ".def" &&
-				filePath.stem().string() != "ending" &&
-				filePath.stem().string() != "intro" &&
-				filePath.stem().string() != "CONFIG")
-			{
-				
-				std::string characterName = filePath.stem().string();
-				availableCharacters.push_back(characterName);
-
+	if (!charsPath.empty() && fs::exists(charsPath) && fs::is_directory(charsPath)) {
+		for (const auto& characterDirectory : fs::directory_iterator(charsPath)) {
+			if (!characterDirectory.is_directory()) continue;
+			for (const auto& directoryContents : fs::directory_iterator(characterDirectory.path())) {
+				fs::path filePath(directoryContents.path());
+				if (filePath.extension() == ".def" &&
+					filePath.stem().string() != "ending" &&
+					filePath.stem().string() != "intro" &&
+					filePath.stem().string() != "CONFIG") {
+					std::string characterName = filePath.stem().string();
+					availableCharacters.push_back(characterName);
+				}
 			}
 		}
-
 	}
 
 
