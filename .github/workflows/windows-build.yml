@@ -150,6 +150,19 @@ jobs:
           $uploadUri = "https://uploads.github.com/repos/$owner/$repo/releases/$releaseId/assets?name=$escapedName"
           Write-Host "uploadUri: $uploadUri"
           $headers = @{ Authorization = "token $token"; Accept = 'application/vnd.github.v3+json' }
+          # Check for existing asset with same name and delete it to allow re-upload
+          try {
+            $assets = Invoke-RestMethod -Uri "$apiBase/releases/$releaseId/assets" -Headers $headers -Method Get -ErrorAction Stop
+            $existing = $assets | Where-Object { $_.name -eq $fileName } | Select-Object -First 1
+            if ($existing) {
+              Write-Host "Deleting existing asset id=$($existing.id) name=$($existing.name)"
+              Invoke-RestMethod -Uri "https://api.github.com/repos/$owner/$repo/releases/assets/$($existing.id)" -Headers $headers -Method Delete -ErrorAction Stop
+            }
+          }
+          catch {
+            Write-Host "No existing assets or failed to list assets: $_"
+          }
+
           Invoke-RestMethod -Uri $uploadUri -Headers $headers -Method Post -InFile $assetPath -ContentType 'application/zip' -ErrorAction Stop
           Write-Host "Upload complete"
 
