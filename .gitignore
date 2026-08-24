@@ -1,6 +1,5 @@
 *.exe
-mugen-1.1b1/
-./mugen-1.1b1/
+
 
 *.ipch
 *.pdb

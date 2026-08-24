@@ -1,0 +1,49 @@
+				    Brutal Doomguy
+				Created by smhungary89
+			https://www.deviantart.com/smhungary
+
+-< Fatals >--<===================================================================>-
+
+Fatality              : ~D, DF, F, D, DB, B, x+y / ~D, DF, F, D, DB, B, a+b
+
+Note: Fatalities can only happen after the first round, if the criterias are met.
+Aka the enemy health is below or equal 10%. When a fatality can happen, a helper will indicates the player.
+When you successfully did the combo, you can decide which fatality will occour by holding left, right, up, or down during this state.
+If you don't press and hold any button, the system will choose randomly. The only exceptions are the character specific fatalities. 
+
+-< Hypers >--<===================================================================>-
+
+Shotgun               : ~D, DF, F, D, DF, F, x                    power >= 1500
+Super Shotgun         : ~D, DB, B, D, DB, B, x                    power >= 1500
+Minigun               : ~D, DF, F, D, DF, F, y                    power >= 2000
+Double Pistol         : ~D, DB, B, D, DB, B, y                    power >= 1000
+Chainsaw              : ~D, DF, F, D, DF, F, a                    power >= 2000
+Rocket Launcher       : ~D, DB, B, D, DB, B, a                    power >= 2500
+Plasma Rifle          : ~D, DF, F, D, DF, F, b                    power >= 2500
+BFG9000               : ~D, DB, B, D, DB, B, b                    power = 3000
+Mancubus Flamer       : ~D, DF, F, D, DF, F, c                    power = 3000
+Revenant Rockets      : ~D, DB, B, D, DB, B, c                    power = 3000
+
+-< Supers >--<====================================================================>-
+
+Rifle                 : ~D, DF, F, x / ~D, DF, F, y
+Grenade               : ~F, D, DF, a / ~F, D, DF, b
+Roll                  : ~$B,$F, x / ~$B,$F, y
+Rapid Fire            : ~F, D, DF, x+y / ~D, DF, F, x+y           power >= 500
+Knife                 : ~F, DF, D, DB, B, x / ~F, DF, D, DB, B, y
+
+-< Specials >--<===================================================================>-
+
+Counter               : y+b / a+b
+Super Jump            : ~D, U
+Super Jump Forward    : ~D, UF
+Super Jump Backward   : ~D, UB
+Wall Jump             : $U, $F / $U, $B
+Round Kick            : x / y / z (only if running)
+Sliding Kick          : a / b / c (only if running)
+
+-< Normals >--<====================================================================>-
+
+As usual... =)
+
+Note: This character can crouch walk, and wall jump.

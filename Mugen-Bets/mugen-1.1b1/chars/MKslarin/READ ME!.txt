@@ -1,0 +1,327 @@
+Nintendo's
+SUPER MARIO (102% Complete?) 
+
+Made by ShinRyoga and Neo Ankh
+For WinMugen (Created by Elecbyte)
+ 
+
+*All art by Brad "ShinRyoga" Moore (shin_ryoga@hotmail.com)
+*All programming by Jason "Neo Ankh" Kidd (neoankh@hotmail.com)
+
+ 
+
+***THIS IS A FANWORK AND IS NOT TO BE SOLD UNDER ANY CIRCUMSTANCES!!!***
+
+***Nintendo had nothing to do with this fanwork. It's just my work of appreciation to Nintendo for so many great characters and games, providing and a lifetime of enjoyment.***
+
+***Please do not upload SuperMario to your site unless you have 
+written permission from ShinRyoga or NeoAnkh***
+
+--------------------------------------------------------------------------------
+
+
+ 
+
+Well, it's been a long while since SuperMario was officially released upon the Mugen scene. I have been gone for a few years, so I missed the whole WinMugen-hack-thing or whatever happened. I hope the folks of Elecbyte are doing well, and I thank you so very much for everything you've done for the communty. God bless you guys.
+
+I suppose you could consider this the 102% version of SuperMario for WinMugen. It's basically just the old DOS version with some tweaking. Future updates may possibly be released with minor additions or fixes.
+
+
+CHANGES TO THIS VERSION:
+
+- Some artwork changes (Portraits, EX AirGlide, etc.)
+- Added sounds, and some voice edits by JudgeSpear.
+- Coding optimized by Winane, as well as palettes and several other problems with WinMugen.
+- Spin Throw glitch, and other WinMugen glitches fixed by Valodim.
+- Attack power weakened. He was way too strong before with how combo-easy he is.
+- Palettes have been given subtle differences to stand apart from each other.
+- All attacks that required 2 punches or 2 kicks can be done with any combination of X,Y,Z or A,B,C.
+- Coins added to Coin Punch by Thomas Hsieh, optimized by Winane.
+
+
+
+
+
+--------------------------------------------------------------------------------
+ 
+
+INSTALLATION:
+
+•When you download Mario, unzip him and make sure the folder name is "SuperMario".
+•Place "SuperMario" folder into the "chars" folder within the folder for Mugen.
+•Go to "data" folder...the open "select" def file using NOTEPAD.
+•Scroll down to where it says the following:
+
+
+
+;Insert your characters below.
+
+kfm, stages/kfm.def
+
+;-----------------------
+
+
+
+•Type in "SuperMario" above or below "kfm". Like so:
+
+
+;Insert your characters below.
+
+SuperMario
+kfm, stages/kfm.def
+
+;-----------------------
+
+
+Save the altered "select" file....and SuperMario will then show up in the Character Selection screen next time you run Mugen.
+
+For stages, empty the stage's contents into the "stages" folder, then in the "select" file, type in the stage's name under the section for extra stages. Like so:
+
+
+stages/PeachCastle.def
+
+
+
+If you want Mario's default stage to be Peach's Castle....put his name like this in the characters section of the "select" file:
+
+
+;Insert your characters below.
+
+SuperMario, stages/PeachCastle.def
+kfm, stages/kfm.def
+
+;-----------------------
+
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+GAMEPLAY:
+
+
+SuperMario is a six-button character, and can "chain" most attacks together.
+
+
+X - Light Punch (jab)
+
+Y - Medium Punch (strong)
+
+Z - Hard Punch (fierce)
+
+A - Light Kick (short)
+
+B - Medium (forward)
+
+C - Hard Kick (roundhouse)
+
+
+He can double jump, and tapping forward twice makes him run.
+
+Tapping back twice makes him roll backward mostly invincible.
+
+Tapping 2 kicks simultaneously makes him roll forward invincible
+
+Down+Z is his "launcher", knocking the opponent into the air.
+
+Hold up directly after to "super jump" up with them to combo. Tapping down then up quickly also super jumps
+
+Down+C is his spinning sweep kick...hits opponents in front and behind him. 
+
+Press Start to make him taunt....which can give him more super meter.
+
+
+
+SPECIAL MOVES:
+
+
+* Fireball - (D,DF,F + any punch) (can be done in air)
+
+* Tornado Spin - (D,DB,B + any punch) (can be done in air)
+
+* Coin Punch - (F,D,DF + any punch)
+
+* Air Glide - (Tap Forward twice in air)
+
+* Head Stomp - (D+A in air)
+ 
+* Drill Kick - (D+B in air)
+
+* Butt Stomp - (D+C in air)
+
+* Slide Kick - (run, hold forward + C)
+
+* Spin Throw - (press punch + kick of equal strength together....ex: A+X, B+Y, or C+Z) (can be done in air)
+
+
+
+EX SPECIALS (One level of super meter):
+
+
+* EX Fireball - (D,DF,F, + 2 punches) (Can be done in air)
+
+* EX Tornado Spin - (D,DB,B, 2 punches) (Can be done in air) (can cancel into EX Coin Punch)
+
+* EX Coin Punch - (F,D,DF, 2 punches)
+
+* EX Air Glide - (Tap B,B,F quickly in the air) (can cancel into EX Butt Stomp)
+
+* EX Butt Stomp - (Down + 2 kicks in air)
+
+* EX Spin Throw - (D,DB,B, punch + kick of equal strength)
+
+
+* EX Coin Punch Counter - (B,DB,D + Z) (Done while blocking....takes 2 levels of super meter)
+
+
+
+LEVEL-3 Super Moves  (Uses fully charged super meter):
+
+
+* Invincible Star - (D,DF,F, D,DF,F + A)  (Mario is invincible for 7 seconds)
+
+* Super Hammer - (D,DF,F, D,DF,F + B)
+
+* Super Flame - (D,DF,F, D,DF,F + C)
+
+--------------------------------------------------------------------------------
+
+
+PALETTES:
+
+
+* (x) - Standard Mario color (Red hat/shirt, blue overalls)
+
+* (a) - Luigi color (Green hat/shirt, blue overalls)
+
+* (y) - Wario color (Yellow hat/shirt, purple overalls)
+
+* (b) - Waluigi color (Purple hat/shirt, dark overalls)
+
+* (z) - Fire Mario (White hat/shirt, red-orange overalls)
+
+* (c) - Switched Mario color (Blue hat/shirt, red overalls)
+
+
+SPECIAL PALETTES (These have special abilities....see down below):
+
+* (Hold start, press x or a) - "Neo" Mario
+
+* (Hold start, press y or b) - "Ghost" Mario
+
+* (Hold start, press z or a) - "Stone" Mario
+
+
+
+
+STRENGTHS AND WEAKNESSES OF THE VARIOUS PALETTES:
+
+
+
+"SuperMario" (Any of the normal attack buttons)
+
+(No major strengths or weaknesses)
+
+
+
+"NeoMario" (Start + X or A)
+(Mario wearing black...has green after-images trailing behind him)
+
+Strengths:
+(Hits can cancel into any other hit)
+(No juggle check)
+(Air Glide and Butt Stomp speed boost)
+(Wall Jump....allows for up to 4 jumps)
+(Infinite Guard Cancel....drains Super meter but can do it without any)
+(TIME FREEZE....Down x3 when Life Bar is low....Level 3 Super)
+(Careful though...this freezes your teammate as well!)
+
+Weaknesses:
+(Extremely low attack damage)
+(Cannot throw at all)
+(Cannot use EX Specials)
+(Cannot use Level-3 Super moves)
+
+
+
+"GhostMario" (Start + Y or B)
+(Mario is all white except skin, is transparent...no shadow)
+
+Strengths:
+(Almost completely invulnerable)
+(More powerful throws)
+(Super meter auto-fills rapidly)
+(Invincible Star makes his attacks unblockable/more damage)
+(Last hit of Super Hammer is unblockable)
+(Gives teammate Super meter even after KO)
+(TELEPORT....Down x3...brings you near opponent)
+
+Weaknesses:
+(Life Bar drains rapidly...even during Level-3 Supers)
+(Gotta take them out before you "enter the light!" 
+
+
+
+"StoneMario" (Start + Z or C)
+(Mario is all gray...shakes screen when landing or running)
+
+Strengths:
+(Takes less damage from attacks)
+(Attacks do more damage)
+(Hard Punch knocks opponent across the screen)
+(STATUE BLAST....Down x3 after getting Level-1 Super meter....drains meter fast)
+(Turns Mario into an invulnerable/immobile statue)
+(Any attack button Mario bust out of statue for moderate damage to opponent)
+
+
+Weaknesses:
+(Super meter constantly depletes)
+(Cannot use Air Glide)
+(Cannot perform Level-3 Supers....unless GhostMario is teammate)
+
+
+
+
+
+--------------------------------------------------------------------------------
+
+
+SPECIAL THANKS:
+
+* I'd like to thank God for our talents and and for sending your son Jesus....my Savior.
+
+* Elecbyte for creating the M.U.G.E.N fighting engine.
+
+* Winane, Valodim, Rehapp, Kamek, Artisto, Kung Fu Man, Reu, Psicoso, ElRyano,
+ShoShingo, Doorhenge, JudgeSpear, Doctor M, Orochi Herman, BB Hood, Willoughby Jackson,
+Chairman Kaga, Rich Lockard, and ElRyano for the assistance! This is a list from
+mostly 6 years ago or so...so if you helped us and we forgot to list your name,
+we are deeply sorry. Just let me know.
+
+* Everyone in the Mugen community for continued support and for all the compliments!
+
+* Nintendo! For creating Mario, and making the best games in the business. (By the way, please don't sue us......we love you guys and buy all your products. This is non-profit, and is made in the deepest respects to your characters. Thanks again!)
+
+* HAL Laboratory Inc, Capcom, Retro Studios, Microsoft, Apple Computer, and Adobe Systems Inc.
+
+* THANK YOU EVERYONE WHO DOWNLOADED OUR FIRST MUGEN CREATION! I hope you enjoy him. Also, don't forget to watch his ending...it's over 5 minutes long!
+
+* Thank you Neo Ankh, for being a great friend and helping me with SuperMario! I could never have done this without you, buddy.
+
+* My family and friends. I love you, guys.
+
+* My sweet Elizabeth, for being the greatest part of my life. Thank you for everything
+that you are. I love you, beautiful.
+         
+
+--------------------------------------------------------------------------------
+
+
+CURRENT PROJECT:  Samus Aran of the Metroid series!
+(Inspired by Metroid Prime)
+
+Thanks again, everone...and God bless!  ^_^
+- Brad "ShinRyoga" Moore

@@ -1,0 +1,171 @@
+;---------------------------------------------------------------------------
+;Settings
+[Statedef 9998]
+type = S
+
+;--------------;
+; Voice switch ;
+;--------------;
+;If you prefer Doomguy as a wisecracking smartass like Duke Nukem, Lo Wang, or Caleb then this is for you.
+;Talkative by default.
+[State 9998, Player sound]
+type = VarSet
+trigger1 = !IsHelper
+v = 20
+value = 1
+;value = 0 ; Mute
+;value = 1 ; Talkative
+
+;-----------------------;
+; Weapons sounds switch ;
+;-----------------------;
+;This switch is to change the weapon sounds.
+;Project Brutality for default.
+[State 9998, Weapons sound]
+type = VarSet
+trigger1 = !IsHelper
+v = 21
+value = 2
+;value = 0 ; Brutal Doom
+;value = 1 ; Brutal Doom Platinum
+;value = 2 ; Project Brutality
+;value = 3 ; Brutal Doom Black Edition
+;value = 4 ; Doom 4
+;value = 5 ; Quake 4
+
+;------------------------;
+; Movement sounds switch ;
+;------------------------;
+;This switch is to change the move sounds.
+;Half-Life by default.
+[State 9998, Movement sound]
+type = VarSet
+trigger1 = !IsHelper
+v = 22
+value = 2
+;value = 0 ; Doom 3
+;value = 1 ; Doom 4
+;value = 2 ; Half-Life
+;value = 3 ; Painkiller
+;value = 4 ; Quake 3
+;value = 5 ; Quake 4
+;value = 6 ; RTCW
+;value = 7 ; Wolfenstein (2009)
+
+;-------------------;
+; Armor type switch ;
+;-------------------;
+;This switch is to change the armor type.
+;Heavy by default.
+[State 9998, Var]
+type = VarSet
+trigger1 = !IsHelper
+v = 50
+value = 3
+;value = 0 ; None
+;value = 1 ; Light
+;value = 2 ; Medium
+;value = 3 ; Heavy
+ignorehitpause = 1
+
+;-------------------;
+; Gore Janitor switch ;
+;-------------------;
+;Makes Gibs disappear after 60 ticks.
+;Disabled by default.
+[State 9998 Var]
+type = VarSet
+trigger1 = !IsHelper
+v = 45
+value = 0
+;value = 0 ; Disable
+;value = 1 ; Enable
+
+;-------------------;
+; Fatality switch ;
+;-------------------;
+;Allow fatalities.
+;Enabled by default.
+[State 9998, Var]
+type = VarSet
+trigger1 = !IsHelper
+v = 55
+value = 2
+;value = 0 ; Disable
+;value = 1 ; Only pseudo-fatalities
+;value = 2 ; Enable
+
+;---------------------------------------------------------------------------
+[State 9998]
+type = SelfState
+triggerall = !IsHelper
+trigger1 = RoundNo = 1
+value = 190
+
+[State 9998]
+type = SelfState
+triggerall = !IsHelper
+trigger1 = RoundNo > 1
+value = 0
+
+;AI Difficulty Helper
+;---------------------------------------------------------------------------
+[Statedef 9999]
+type = S
+physics = N
+anim = 9999
+ctrl = 0
+velset = 0,0
+
+;---------------------[AILevel]
+
+;Please change the "Value" in the following description between 1 and 8.
+
+[State 9999, AI Level Switch]
+type = ParentVarSet
+triggerall = IsHelper(9999)
+triggerall = Parent,ID = Root,ID
+trigger1 = Root,Var(59) && !Root,Var(57)
+v = 57
+
+value = 8 ;(Change here between 1-8)
+
+;1 = I'm too young to die
+;2 = Hey, not too rough
+;3 = Hurt me plenty
+;4 = Man and a Half
+;5 = Brutal
+;6 = Ultra-Violence
+;7 = Nightmare!
+;8 = Last Man on Earth
+
+ignorehitpause = 1
+
+;---------------------------------------------------------------------------
+
+[State 9999]
+type = AssertSpecial
+trigger1 = IsHelper
+flag = Invisible
+flag2 = NoShadow
+ignorehitpause = 1
+
+[State 9999, Bind]
+type = BindToRoot
+trigger1 = IsHelper(9999)
+time = 1
+facing = 1
+pos = 0,0
+ignorehitpause = 1
+
+[State 9999, Change]
+type = SelfState
+trigger1 = !IsHelper
+value = 0
+ctrl = 1
+
+[State 9999, Destroy]
+type = DestroySelf
+triggerall = IsHelper
+trigger1 = RoundState != 2
+trigger2 = !Root,Alive || Root,Lose

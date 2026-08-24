@@ -1,0 +1,42 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Ragna the Bloodedge" 
+displayname = "Ragna" 
+versiondate = 09,30,2009    
+mugenversion = 1.0          
+author = "OHMSBY"         
+pal.defaults = 1      
+
+[Files]
+cmd     = Ragna.cmd
+cns     = Ragna.cns
+st      = Ragna.cns
+st2     = Helpers.cns
+st3     = -2-3.cns
+st4	= BurstHUD.cns
+stcommon = Ragna_common.cns
+sprite  = Ragna.sff
+anim    = Ragna.air
+sound   = Ragna.snd
+;sound   = RagnaJPN.snd
+
+[Palette Keymap]
+a = 1
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+a2 = 7
+b2 = 8
+c2 = 9
+x2 = 10
+y2 = 11
+z2 = 12
+
+[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def
