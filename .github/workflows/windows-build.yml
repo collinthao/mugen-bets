@@ -95,8 +95,14 @@ jobs:
           $engineExes += Get-ChildItem -Path $repoRoot -Filter 'mugen*.exe' -Recurse -File -ErrorAction SilentlyContinue
           $engineExes = $engineExes | Select-Object -Unique
           foreach ($eng in $engineExes) {
-            Write-Host "Including engine exe: $($eng.FullName) -> $outDir"
-            Copy-Item -Path $eng.FullName -Destination $outDir -Force
+            $destPath = Join-Path $outDir (Split-Path $eng.FullName -Leaf)
+            if ($eng.FullName -ieq $destPath) {
+              Write-Host "Skipping copy of $($eng.FullName) — already in artifact"
+            }
+            else {
+              Write-Host "Including engine exe: $($eng.FullName) -> $outDir"
+              Copy-Item -Path $eng.FullName -Destination $outDir -Force
+            }
           }
           # Copy any dll/pdb sitting next to the exe
           $exeDir = Split-Path $exe.FullName
