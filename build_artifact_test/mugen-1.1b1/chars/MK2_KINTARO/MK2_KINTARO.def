@@ -1,0 +1,42 @@
+;KINTARO from MORTAL KOMBAT II by OMEGAPSYCHO
+;Copyright NETHERREALM STUDIOS, WARNER BROTHERS 2015
+; E-mail: OMEGAPSYCHO@Hotmail.com
+;NON PROFIT PROJECT.
+;version 1.0 (100%)  (REMAKE)
+
+; Player information
+[Info]
+name = "KINTARO"
+displayname = "KINTARO" 
+versiondate = 11,08,2015
+mugenversion = 1.1
+author = "OMEGAPSYCHO-MKBoss"
+pal.defaults = 1
+
+; Files for the player
+[Files]
+cmd   = CODE/Cmd_Kintaro.cmd
+cns     = CODE/Constants_Kintaro.cns
+st        = CODE/Common_Kintaro.cns
+st0    = CODE/-2_Kintaro.cns
+st1    = CODE/Others_Kintaro.cns
+st2    = CONFIG.def
+st3    = CODE/Engines_Kintaro.cns
+st4    = CODE/P2States_Kintaro.cns
+st5    = CODE/Moves_Kintaro.cns
+st6    = CODE/OBJECTS_Kintaro.cns
+st7    = CODE/Throws_Kintaro.cns
+st8    = CODE/Specials_Kintaro.cns
+st9    = CODE/Fatalities_Kintaro.cns
+stcommon = CODE/Common_Kintaro.cns
+sprite  = CODE/KINTARO.sff
+anim    = CODE/Air_Kintaro.air
+sound   = CODE/KINTARO.snd    
+
+pal1 = act/Kintaro_Original.act
+pal2 = act/Kintaro_02.act
+pal3 = act/Kintaro_03.act
+pal4 = act/Kintaro_04.act
+pal5 = act/Kintaro_05.act
+pal6 = act/Kintaro_06.act
+pal7 = act/Kintaro_07.act

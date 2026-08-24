@@ -1,0 +1,462 @@
+;---------------------------------------------------------------------------
+; States that are always executed (use statedef -2)
+;---------------------------------------------------------------------------
+
+[Statedef -2]
+
+[State 183, 1]
+type = AssertSpecial
+triggerall = 1
+triggerall = p2life<=2
+trigger1 = stateno = [600,1100]
+trigger2 = Var(26)>=1
+trigger3 = Var(27)>=1
+trigger4 = Var(28)>=1
+trigger5 = Var(29)>=1
+flag = timerfreeze
+ignorehitpause = 1
+
+[State 0, 1]
+type = ChangeAnim
+trigger1 = stateno = [123456,123458]
+trigger1 = anim != 5400
+trigger1 = 1
+value = 5400
+
+[State -2, Guarding]
+type = AssertSpecial
+trigger1 = 1
+flag = nostandguard
+flag2 = nocrouchguard
+flag3 = noairguard
+ignorehitpause = 1
+
+[State -2, NO SLOW]
+type = AssertSpecial
+trigger1 = 1
+ignorehitpause = 1
+flag = nokoslow
+ignorehitpause = 1
+
+[State -2, VAR]
+type = AssertSpecial
+triggerall = 1
+triggerall = p2life<=2
+trigger1 = stateno = [600,1100]
+trigger2 = Var(26)>=1
+trigger3 = Var(27)>=1
+trigger4 = Var(28)>=1
+trigger5 = Var(29)>=1
+flag = Nomusic
+ignorehitpause = 1
+
+[State -2, VAR]
+type = AssertSpecial
+triggerall = 1
+triggerall = p2life<=2
+trigger1 = stateno = [600,1100]
+trigger2 = Var(26)>=1
+trigger3 = Var(27)>=1
+trigger4 = Var(28)>=1
+trigger5 = Var(29)>=1
+flag = NoBarDisplay
+ignorehitpause = 1
+
+[State -2]
+type = NotHitBy
+trigger1 = 1
+trigger1 = p2name != "GORO"
+trigger1 = p2name != "MOTARO"
+trigger1 = p2name != "KINTARO"
+trigger1 = p2name != "SHAO KAHN"
+value = ,NT,ST,HT
+time = -1
+Ignorehitpause = 1
+
+[State 6, 2]
+type = PlayerPush
+trigger1 = 1
+value = 1
+Ignorehitpause = 1
+
+;******************************
+;VAR LIST
+;******************************
+;Var(0) reservada para low,High punch p2 in aire
+;Var(1) reservada para low,High punch p2 in tierra
+;Var(2) reservada para detectar low punch
+;Var(3) reservada para detectar high punch
+;Var(4) WOMAN DETECTOR
+;Var(5) Guard/Idle detector
+;Var(6) Fatality Theme
+;Var(7) Combo AI SWITCH
+;Var(8) Fatality End Theme
+;Var(9)
+;Var(10)
+;Var(11)
+;Var(12) JUMP ESCÀPE SWITCH
+;Var(13) KNOCKED RECOVERY ANIM
+;Var(14) BACKGROUNDS
+;Var(15)
+;Var(16)
+;Var(17) FLAWLES VICTORY SWITCH
+;Var(18) FLAWLES VICTORY SWITCH
+;Var(19) FLAWLES VICTORY SWITCH
+;Var(20) 
+;Var(21)
+;Var(22)
+;Var(23)
+;Var(24) SOUND MODE CONFIG SWITCH
+;Var(25) OLD-NEW (SOUND MODE) SELECT
+;Var(26) Fatality Secuence Switch
+;Var(27) Fatality Secuence Switch
+;Var(28) Fatality Secuence Actvated
+;Var(29)
+;Var(30)
+;Var(31)
+;Var(32)
+;Var(33)
+;Var(34) FATALITY SWITCH
+;Var(35) Uppercut Hit Voices OLD
+;Var(36) Uppercut Hit Voices NEW
+;Var(37)
+;Var(38)
+;Var(39)
+;Var(40)
+;Var(41)
+;Var(42)
+;Var(43)
+;Var(44)
+;Var(45)
+;Var(46)
+;Var(47)
+;Var(48)
+;Var(49)
+;Var(50) A.I. SWITCHES
+;Var(51)
+;Var(52)
+;Var(53)
+;Var(54)
+;Var(55) FATALITY TIME ONE TIME
+;Var(56) ANTI-CHEAT 
+;Var(57)
+;Var(58) FATALITY TIME
+;Var(59)
+;******************************
+;*******************************
+
+
+[State -2, Low_High_Punches]
+type = VarRangeSet
+trigger1 = p2StateType != A
+trigger1 = 1
+trigger1 = stateno != [200,206]
+Value = 0
+First = 0
+Last = 3
+
+[State -2, Guard/Idle_detector]
+Type = VarSet
+triggerall = 1
+trigger1 = stateno != [200,207]
+v = 5
+Value = 0
+
+[State -2, fatality_Theme]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 6
+range = 1,4
+
+[State -2, fatality_End_Theme]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 8
+range = 1,5
+
+[State -2, Jump-Escape-Switch]
+Type = VarSet
+trigger1 = 1
+trigger1 = stateno != [540,559]
+v = 12
+Value = 0
+
+[State 5120, KNOCKED_RECOVERY_ANIM] 
+type = VarSet
+trigger1 = 1
+trigger1 = stateno != 5120
+var(13) = 0
+
+[State -2, BACKGROUNDS]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 14
+range = 21001,21012
+
+[State -2, VAR]
+type = Varset
+trigger1 = Win
+trigger1 = life >= lifemax
+trigger1 = roundstate = 3 || roundstate = 4
+v = 17
+value = 1
+[State -2, VAR]
+type = Varset
+trigger1 = var(17) = 1
+trigger1 = roundstate = 0 || roundstate = 1 || roundstate = 2
+v = 18
+value = 1
+[State -2, VAR]
+type = Varset
+trigger1 = var(18) = 1
+trigger1 = Win
+trigger1 = life >= lifemax
+trigger1 = roundstate = 3 || roundstate = 4
+v = 19
+value = 1
+
+[State -2, FATALITY_SWITCH]
+type = Varset
+triggerall = 1
+trigger1 = Roundstate = 0
+trigger2 = Roundstate = 1
+v = 34
+value = 0
+
+[State -2, UppercutHitVoices_OLD]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 35
+range = 1,9
+[State -2, UppercutHitVoices_NEW]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 36
+range = 10,25
+
+;************FATALITY*************
+
+[State -2, 1] 
+type = varset
+triggerall = NumEnemy = 1
+triggerall = NumPartner = 0
+trigger1 = Win >= 1
+trigger1 = NumHelper(7000) = 0
+v = 58
+value = 1
+
+[State -2, 2] 
+type = varset
+trigger1 = Win >= 1
+trigger1 = NumHelper(7000) = 1
+trigger1 = p2life != 0
+trigger2 = var(55) = 1
+v = 58
+value = 0
+
+[State -2, 3] 
+type = AttackMulSet
+triggerall = NumEnemy = 1
+triggerall = NumPartner = 0
+triggerall = !Var(58) 
+triggerall = p2Life <= 1
+trigger1 = Win = 0 
+trigger1 = RoundNo != 1 
+trigger2 = P2StateNo = 49999
+value = 9999
+
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+trigger1 = NumHelper(7000) >= 1
+v = 55
+value = 1
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+trigger1 = NumHelper(7000) >= 1
+v = 19
+value = 1
+
+[State -2, 1] 
+type = varset
+triggerall = NumEnemy = 1
+triggerall = NumPartner = 0
+trigger1 = 1
+trigger1 = var(19)= 1
+trigger1 = roundstate = 0 || roundstate = 1
+v = 58
+value = 1
+
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+triggerall = 1
+trigger1 = var(55)= 1
+trigger1 = roundstate = 0 || roundstate = 1
+trigger2 = enemy,life >=2
+v = 55
+value = 0
+
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+trigger1 = 1
+trigger1 = Roundno = 1
+trigger1 = Win = 0
+trigger1 = roundstate = 0 || roundstate = 1
+v = 58
+value = 0
+
+;ANTI-CHEAT OFF
+[State 300, 0]
+type = Varset
+Triggerall = var(56) = 1
+trigger1 = (GameTime%90)=0
+v = 56
+value = 0
+
+[State -2, FATALITY win]
+Type = VarRangeSet
+trigger1 = 1
+trigger1 = roundstate = 0 || roundstate = 1
+Value = 0
+First = 26
+Last = 29
+
+
+
+[State -2, 1]
+type = Explod
+trigger1 = var(50) = 0
+trigger1 = facing = 1
+trigger1 = NumExplod(21052) = 0
+trigger1 = 1
+anim = 21052
+ID = 21052
+pos = 5,234
+sprpriority = 50
+postype = Left
+bindtime = -1
+ignorehitpause = 1
+scale = 0.5,0.5
+ownpal = 1
+
+[State -2, 1]
+type = Explod
+trigger1 = var(50) = 0
+trigger1 = facing = -1
+trigger1 = NumExplod(21052) = 0
+trigger1 = 1
+anim = 21052
+ID = 21052
+pos = -55,234
+sprpriority = 50
+postype = right
+bindtime = -1
+ignorehitpause = 1
+scale = 0.5,0.5
+ownpal = 1
+
+[State 981]
+type = RemoveExplod
+trigger1 = roundstate = 0
+trigger2 = roundstate = 1
+trigger3 = roundstate = 3
+trigger4 = roundstate = 4
+trigger5 = var(50) = 1
+trigger6 = stateno = [600,1100]
+trigger7 = Var(26)>=1
+trigger8 = Var(27)>=1
+trigger9 = Var(28)>=1
+trigger10 = Var(29)>=1
+ID = 21052
+
+
+[State -1, MOVE LIST]
+type = Helper
+triggerall = var(50) = 0
+triggerall = AIlevel = 0
+triggerall = Numhelper(49000) = 0
+triggerall = roundstate = 2
+triggerall = stateno != [5000,5410]
+triggerall = P2stateno != 29001
+triggerall = movetype != H
+triggerall = stateno != [600,1100]
+triggerall = command = "start"
+triggerall = !GetHitVar(isbound)
+triggerall = ctrl = 1
+trigger1 = 1
+helpertype = normal
+name = "MOVE_LIST"
+id = 49000
+pos = 0,0
+sprpriority = 90
+postype = Left
+stateno = ifelse(var(25) = 0,50000,60000)
+KeyCtrl = 1
+ownpal = 1
+removetime = -1
+ignorehitpause = 0
+size.xscale = 1
+size.yscale = 1
+
+[State -1, DANGER]
+type = Helper
+triggerall = Numhelper(22200) = 0
+triggerall = roundstate = 2
+trigger1 = 1
+helpertype = normal
+name = "DANGER"
+id = 22200
+pos = 0,0
+sprpriority = 90
+postype = Left
+stateno = 22200
+KeyCtrl = 1
+ownpal = 1
+removetime = -1
+ignorehitpause = 0
+size.xscale = 1
+size.yscale = 1
+
+[State ]
+type = Helper
+triggerall = 1
+triggerall = numhelper(1023) = 0
+triggerall = Var(34) = 1
+trigger1 = enemy,stateno = [5050,5150]
+trigger2 = p2stateno = [5050,5150]
+trigger3 = enemynear,stateno = [5050,5150]
+helpertype = Normal
+ID = 1023
+name = "BLOOD_FLOOR" 
+postype = p2
+pos = (0)*const(size.xscale),(0)*const(size.yscale)
+stateno = 1023
+ignorehitpause = 1
+ownpal = 1
+keyctrl = 0
+
+;---------------------------------------------------------------------------
+; States that are executed when in self's state file (use statedef -3)
+;---------------------------------------------------------------------------
+
+[Statedef -3]
+
+[State -3,Display.de.Tela]
+type = DisplayToClipboard
+trigger1 = 1
+text = "WWW.OMEGAPSYCHO.WEBS.COM"
+
+;[State -3,Display]
+;type = DisplayToClipboard
+;trigger1 = var(47) >= 1
+;text = "Var(47)=%d, var 47 activada"
+;Params = var(47)
+;[State -3,Display.de.Tela]
+;type = DisplayToClipboard
+;trigger1 = var(47) <= 0
+;text = "Var(47)=%d, var 47 desactivada"
+;params = var(47)

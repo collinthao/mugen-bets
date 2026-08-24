@@ -1,0 +1,1059 @@
+;-----------------------------------------------------------------------------
+[Statedef -2];常時監視ステート(相手に行動を制御されても関係無く常に実行される)
+;-----------------------------------------------------------------------------
+
+;デバッグモードに白い文字の表示を加える
+[State -2, デバッグ表示]
+type = DisplayToClipboard
+trigger1 = 1
+text = "1=%d,V50=%d,V1-J=%d,V24-D=%f,Var14-B=%d"
+params = Helper(10010+id),var(13) ,var(9),Helper(10010+id),Var(3),Helper(10010+id),fVar(24),Helper(10010+id),Var(14)
+ignorehitpause = 1
+
+;表示を横に加える
+[State -2, デバッグ表示その2]
+type = AppendToClipboard
+trigger1 = 1
+text = " V13-A=%d,V21-R=%d,Pos X=%d,Y=%d"
+params = var(13),var(21),ceil(Pos X),PrevStateNo
+ignorehitpause = 1
+
+;表示を下に加える
+[State -2, デバッグ表示その3]
+type = AppendToClipboard
+trigger1 = 1
+text = "\nDist X=%d,Y=%d, Vel X=%d/10,Y=%d/10 : Power=%d"
+params = floor(P2BodyDist X),ceil(P2BodyDist Y),ceil(Vel X*10),floor(Vel Y*10),Power
+ignorehitpause = 1
+
+; 1,1以降ワイド画面自動切り替え
+[State 5900, 1]
+type = VarSet
+trigger1 = var(2) = 2
+trigger1 = 2**9 = 4096
+var(2) = 0
+;winmugen通常画面比率
+
+; 1,1以降ワイド画面自動切り替え
+[State 5900, 1]
+type = VarSet
+trigger1 = var(2) = 2
+trigger1 = 2**9 != 4096
+var(2) = 1
+;mugen1.1ワイド画面比率
+
+
+
+[state -2, キャンセルダウン]
+type = Varset
+trigger1 = movehit
+trigger1 = prevstateno = [1000,2999]
+var(3) = 1
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, キャンセルダウン]
+type = Varset
+trigger1 = movetype != A
+var(3) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, キャンセルカウント]
+type = Varadd
+trigger1 = prevstateno = [200,2999]
+trigger1 = stateno = [200,2999]
+trigger1 = time = 1
+var(4) = 1
+ignorehitpause = 1
+Persistent = 3
+
+[state -2, キャンセルカウント]
+type = Varset
+trigger1 = stateno != [790,791]
+trigger1 = movetype != A
+var(4) = 0
+ignorehitpause = 1
+Persistent = 1
+
+
+[State -2, ヒット時画面端押し戻し]
+type = velset
+triggerall = frontEdgeBodyDist <= 240
+triggerall = EnemyNear(var(30)),backEdgeBodyDist <= 30
+triggerall = var(4)
+trigger1 = stateno = [1100,1199]
+trigger1 = movetype = A
+trigger1 = time = 1
+x = -var(4)
+IgnoreHitPause = 1
+
+[State -2, ヘルパーヒット時画面端押し戻し]
+type = velset
+triggerall = statetype != A
+triggerall = frontEdgeBodyDist <= 90
+triggerall = EnemyNear(var(30)),backEdgeBodyDist <= 10
+triggerall = var(12) = 1
+trigger1 = anim = 1100||anim = 1101
+x = -6+var(12)
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヘルパー画面端ヒット減少]
+type = Varadd
+trigger1 = var(12)
+var(12) = -1
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヘルパー画面端ヒットリセット]
+type = Varset
+trigger1 = var(12) < 0
+var(12) = 0
+ignorehitpause = 1
+Persistent = 1
+
+
+[State -3, システムヘルパー]
+type=helper
+trigger1=!NumHelper(10010+id)
+trigger1=alive
+helpertype=normal
+name="var"
+stateno=10010
+ID=10010+id
+pos=0, 0
+postype=p1
+facing=1
+keyctrl=1
+pausemovetime=2147483647
+supermovetime=2147483647
+persistent = 1
+ignorehitpause = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;ヒットタイム;;;;;;;;;;;;;;;;;;;;;
+[state -2, ヒットタイム弱]
+type = VarSet
+trigger1 = var(36) = 0
+var(36) = 8 + ifelse(Helper(10010+id),var(23),5,0)
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットタイム弱]
+type = VarSet
+trigger1 = stateno = 200||stateno = 230
+trigger2 = stateno = 400||stateno = 430
+trigger3 = stateno = 600||stateno = 630
+var(36) = 8 + ifelse(Helper(10010+id),var(23),5,0)
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットタイム強]
+type = VarSet
+trigger1 = stateno = 210||stateno = 240||(stateno = [300,399])
+trigger2 = stateno = 410||stateno = 440
+trigger3 = stateno = 610||stateno = 640
+var(36) = 14 + ifelse(Helper(10010+id),var(23),5,0)
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 必殺ヒットタイム強]
+type = VarSet
+trigger1 = stateno = [1100,1199]
+trigger2 = stateno = [2100,2199]
+var(36) = 16+ ifelse(Helper(10010+id),var(23),5,0)
+ignorehitpause = 1
+Persistent = 1
+;;;;;;;;;;;;;;;;;;;;;;;;ガードタイム;;;;;;;;;;;;;;;;;;;;;
+
+[state -2, ヒットタイム弱]
+type = VarSet
+trigger1 = var(38) = 0
+var(37) = 8
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットタイム弱]
+type = VarSet
+trigger1 = stateno = 200||stateno = 230
+trigger2 = stateno = 400||stateno = 430
+trigger3 = stateno = 600||stateno = 630
+var(37) = 8
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットタイム強]
+type = VarSet
+trigger1 = stateno = 210||stateno = 240||(stateno = [300,399])
+trigger2 = stateno = 410||stateno = 440
+trigger3 = stateno = 610||stateno = 640
+var(37) = 14
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 必殺ヒットタイム強]
+type = VarSet
+trigger1 = stateno = [1100,1199]
+trigger2 = stateno = [2100,2199]
+var(37) = 16
+ignorehitpause = 1
+Persistent = 1
+;;;;;;;;;;;;;;;;;;;;;;;;空中ヒットタイム;;;;;;;;;;;;;;;;;;;;;
+
+
+[state -2, ヒットタイム弱]
+type = VarSet
+trigger1 = var(38) = 0
+var(38) = 12 + ifelse(Helper(10010+id),var(23),5,0)
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットタイム弱]
+type = VarSet
+trigger1 = stateno = 200||stateno = 230
+trigger2 = stateno = 400||stateno = 430
+trigger3 = stateno = 600||stateno = 630
+var(38) = 13 + ifelse(Helper(10010+id),var(23),5,0)
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットタイム強]
+type = VarSet
+trigger1 = stateno = 210||stateno = 240||(stateno = [300,399])
+trigger2 = stateno = 410||stateno = 440
+trigger3 = stateno = 610||stateno = 640
+trigger4 = stateno = [1100,1199]
+trigger5 = stateno = [2100,2199]
+Trigger6 = NumHelper(1050)
+trigger6 = Helper(1050),stateno = 1050||Helper(1050),stateno = 1051
+Trigger7 = NumHelper(2050)
+trigger7 = Helper(2050),stateno = 2050||Helper(2050),stateno = 2051
+var(38) = 20 + ifelse(Helper(10010+id),var(23),5,0)
+ignorehitpause = 1
+Persistent = 1
+
+;;;;;;;;;;;;;;;;;;;;;;;;ヒットポーズ;;;;;;;;;;;;;;;;;;;;;
+
+[state -2, ヒットポーズ]
+type = VarSet
+Trigger1 = NumHelper(1450)
+trigger1 = Helper(1450),stateno = 1450
+var(39) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットポーズ強]
+type = VarSet
+trigger1 = stateno = 210||stateno = 240
+trigger2 = stateno = 410||stateno = 440
+trigger3 = stateno = 610||stateno = 640
+var(39) = 4
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットポーズ特殊]
+type = VarSet
+trigger1 = stateno = [300,399]
+trigger2 = stateno = 780
+var(39) = 4
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットポーズ必殺]
+type = VarSet
+trigger1 = stateno = [1000,2999]
+var(39) = 4
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, ヒットポーズカウンター]
+type = VarSet
+trigger1 = Helper(10010+id),fvar(19) > 1.0
+var(39) = 10
+ignorehitpause = 1
+Persistent = 1
+
+;**********************************
+
+[State -2, タッグ時3P以降]
+Type = VarSet
+trigger1= NumPartner
+trigger1= Partner,id < id
+var(40) = 1
+IgnoreHitPause = 1
+
+
+;***************************************************************************
+;---------------------------------------------------------------------------
+;----------------------------補正云々---------------------------------------
+;---------------------------------------------------------------------------
+;***************************************************************************
+
+[State -2, スクロール];負けて倒れたらカメラワークを相手に移す処理
+type = ScreenBound
+triggerall = (Life <= 0) || (!Alive) || (Lose)
+trigger1 = (StateNo = 5150) && (RoundState = 4)
+value = 0
+MoveCamera = 0,0
+IgnoreHitPause = 1
+
+;---------------------------------------------------------------------------
+;変数管理
+
+[State -2, 空中ガード不可]
+Type = AssertSpecial
+Trigger1 = fvar(4) != 4
+Trigger1 = !(EnemyNear(var(30)),HitDefAttr = A,AA,AP||EnemyNear(var(30)),statetype = A)
+flag = NoAirGuard
+ignorehitpause = 1
+
+[state -2, コマンドリセット]
+type = VarSet
+triggerall = RoundState = 2
+triggerall = !var(8)
+trigger1 = StateNo = 0
+trigger2 = StateNo = 52
+trigger3 = StateNo = [5000,5210]
+trigger4 = MoveType = H
+var(1) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[State -2, タッグ用生死判別]
+Type = VarSet
+trigger1 = RoundState = 2
+var(30) = 0 + (NumEnemy >= 2 && EnemyNear(0),life <= 0)
+IgnoreHitPause = 1
+
+;------------------------------------------------------------------------------
+;先行入力
+
+;同時押し---------------------
+[State -3, ボタン押し認識]
+Type = Null
+triggerall = roundstate = 2
+Triggerall = var(9) < 100
+trigger1 = (command = "x")&&floor(var(9)%10) != 8
+Trigger1 = 0&& Var(9) := 10
+trigger2 = (command = "y")&&floor(var(9)%10) != 8
+Trigger2 = 0&& Var(9) := 20
+trigger3 = (command = "z")&&floor(var(9)%10) != 8
+Trigger3 = 0&& Var(9) := 30
+trigger4 = (command = "a")&&floor(var(9)%10) != 8
+Trigger4 = 0&& Var(9) := 40
+trigger5 = (command = "b")&&floor(var(9)%10) != 8
+Trigger5 = 0&& Var(9) := 50
+trigger6 = (command = "c")&&floor(var(9)%10) != 8
+Trigger6 = 0&& Var(9) := 60
+trigger7 = (var(9) = 14)&&(command = "holdx")
+Trigger7 = 0&& Var(9) := 18
+trigger8 = (var(9) = 24)&&(command = "holdy")
+Trigger8 = 0&& Var(9) := 28
+trigger9 = (var(9) = 34)&&(command = "holdz")
+Trigger9 = 0&& Var(9) := 38
+trigger10 = (var(9) = 44)&&(command = "holda")
+Trigger10 = 0&& Var(9) := 48
+trigger11 = (var(9) = 54)&&(command = "holdb")
+Trigger11 = 0&& Var(9) := 58
+trigger12 = (var(9) = 64)&&(command = "holdc")
+Trigger12 = 0&& Var(9) := 68
+trigger13 = (var(9) = 18)&&(command != "holdx")
+Trigger13 = 0&& Var(9) := 0
+trigger14 = (var(9) = 28)&&(command != "holdy")
+Trigger14 = 0&& Var(9) := 0
+trigger15 = (var(9) = 38)&&(command != "holdz")
+Trigger15 = 0&& Var(9) := 0
+trigger16 = (var(9) = 48)&&(command != "holda")
+Trigger16 = 0&& Var(9) := 0
+trigger17 = (var(9) = 58)&&(command != "holdb")
+Trigger17 = 0&& Var(9) := 0
+trigger18 = (var(9) = 68)&&(command != "holdc")
+Trigger18 = 0&& Var(9) := 0
+IgnoreHitPause = 1
+
+[state -2, ボタン押し認識x]
+type = Varadd
+triggerall = roundstate = 2
+triggerall = (var(9) < 100)
+triggerall = floor(var(9)%10) <= 3
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holdx")
+trigger2 = (command = "holdy")
+trigger3 = (command = "holdz")
+trigger4 = (command = "holda")
+trigger5 = (command = "holdb")
+trigger6 = (command = "holdc")
+var(9) = 1
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押しP×2]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (var(9) != [100,999])||(var(9) = [0,99])
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holdx")&&(command = "holdy")
+trigger2 = (command = "holdx")&&(command = "y")
+trigger3 = (command = "holdy")&&(command = "holdx")
+trigger4 = (command = "holdy")&&(command = "x")
+trigger5 = (command = "holdx")&&(command = "holdz")
+trigger6 = (command = "holdx")&&(command = "z")
+trigger7 = (command = "holdy")&&(command = "holdz")
+trigger8 = (command = "holdy")&&(command = "z")
+var(9) = 100
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押しK×2]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (var(9) != [100,999])||(var(9) = [0,99])
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holda")&&(command = "holdb")
+trigger2 = (command = "holda")&&(command = "b")
+trigger3 = (command = "holdb")&&(command = "holda")
+trigger4 = (command = "holdb")&&(command = "a")
+trigger5 = (command = "holda")&&(command = "holdc")
+trigger6 = (command = "holda")&&(command = "c")
+trigger7 = (command = "holdb")&&(command = "holdc")
+trigger8 = (command = "holdb")&&(command = "c")
+var(9) = 200
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押し弱×2]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (var(9) != [100,999])||(var(9) = [0,99])
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holdx")&&(command = "holda")
+trigger2 = (command = "holdx")&&(command = "a")
+trigger3 = (command = "holda")&&(command = "holdx")
+trigger4 = (command = "holda")&&(command = "x")
+var(9) = 300
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押し中×2]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (var(9) != [100,999])||(var(9) = [0,99])
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holdy")&&(command = "holdb")
+trigger2 = (command = "holdy")&&(command = "b")
+trigger3 = (command = "holdb")&&(command = "holdy")
+trigger4 = (command = "holdb")&&(command = "y")
+var(9) = 400
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押し強×2]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (var(9) != [100,999])||(var(9) = [0,99])
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holdz")&&(command = "holdc")
+trigger2 = (command = "holdz")&&(command = "c")
+trigger3 = (command = "holdc")&&(command = "holdz")
+trigger4 = (command = "holdc")&&(command = "z")
+var(9) = 500
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押しP×3]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (var(9) != [600,699])||(var(9) = [100,199])||(var(9) = [0,99])
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holdx")&&(command = "holdy")&&(command = "holdz")
+trigger2 = (command = "holdx")&&(command = "holdy")&&(command = "z")
+trigger3 = (command = "holdx")&&(command = "holdz")&&(command = "holdy")
+trigger4 = (command = "holdx")&&(command = "holdz")&&(command = "y")
+trigger5 = (command = "holdy")&&(command = "holdz")&&(command = "holdx")
+trigger6 = (command = "holdy")&&(command = "holdz")&&(command = "x")
+var(9) = 600
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押しk×3]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (var(9) != [700,799])||(var(9) = [200,299])||(var(9) = [0,99])
+triggerall = floor(var(9)%10) != 8
+trigger1 = (command = "holda")&&(command = "holdb")&&(command = "holdc")
+trigger2 = (command = "holda")&&(command = "holdb")&&(command = "c")
+trigger3 = (command = "holda")&&(command = "holdc")&&(command = "holdb")
+trigger4 = (command = "holda")&&(command = "holdc")&&(command = "b")
+trigger5 = (command = "holdb")&&(command = "holdc")&&(command = "holda")
+trigger6 = (command = "holdb")&&(command = "holdc")&&(command = "a")
+var(9) = 700
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 同時押し解除]
+type = VarSet
+trigger1 = var(9) = [100,199]
+trigger1 = (command != "holdx")&&(command != "holdy")
+trigger2 = var(9) = [200,299]
+trigger2 = (command != "holda")&&(command != "holdb")
+trigger3 = var(9) = [300,399]
+trigger3 = (command != "holdx")&&(command != "holda")
+trigger4 = var(9) = [400,499]
+trigger4 = (command != "holdy")&&(command != "holdb")
+trigger5 = var(9) = [500,599]
+trigger5 = (command != "holdz")&&(command != "holdc")
+trigger6 = var(9) = [600,699]
+trigger6 = (command != "holdx")&&(command != "holdy")&&(command != "holdz")
+trigger7 = var(9) = [700,799]
+trigger7 = (command != "holda")&&(command != "holdb")&&(command != "holdc")
+trigger8 = roundstate != 2
+trigger9 = var(9) = -1
+trigger9 = (command != "holdx")&&(command != "holdy")&&(command != "holdz")
+trigger9 = (command != "holda")&&(command != "holdb")&&(command != "holdc")
+var(9) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[State -3, ボタン押し認識]
+Type = Null
+triggerall = roundstate = 2
+Triggerall = var(9) > 100
+trigger1 = (var(9) = 104)
+trigger1 = (command = "holdx")||(command = "holdy")
+Trigger1 = 0&& Var(9) := 108
+trigger2 = (var(9) = 204)
+trigger2 = (command = "holda")||(command = "holdb")
+Trigger2 = 0&& Var(9) := 208
+trigger3 = (var(9) = 304)
+trigger3 = (command = "holdx")||(command = "holda")
+Trigger3 = 0&& Var(9) := 308
+trigger4 = (var(9) = 404)
+trigger4 = (command = "holdy")||(command = "holdb")
+Trigger4 = 0&& Var(9) := 408
+trigger5 = (var(9) = 504)
+trigger5 = (command = "holdx")||(command = "holdy")||(command = "holdz")
+Trigger5 = 0&& Var(9) := 508
+trigger6 = (var(9) = 604)
+trigger6 = (command = "holda")||(command = "holdb")||(command = "holdc")
+Trigger6 = 0&& Var(9) := 608
+IgnoreHitPause = 1
+
+[state -2, 同時押し解除]
+type = VarSet
+trigger1 = floor(var(9)%100) = 5
+var(9) = -1
+ignorehitpause = 1
+Persistent = 1
+
+[State -1, リセット時間]
+type = varadd
+triggerall = roundstate = 2
+trigger1 = var(9) >= 100
+trigger1 = floor(var(9)%100) = [0,3]
+var(9) = 1
+Persistent = 1
+;強弱離し---------------------
+[state -2, 強弱離し]
+type = VarSet
+triggerall = roundstate = 2
+Triggerall = (stateno != 40)
+triggerall = (command = "離しx")||(command = "離しa")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 強弱離し]
+type = VarSet
+triggerall = roundstate = 2
+Triggerall = (stateno != 40)
+triggerall = (command = "離しy")||(command = "離しb")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 1
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 強弱離し]
+type = VarSet
+triggerall = roundstate = 2
+Triggerall = (stateno != 40)
+triggerall = (command = "離しz")||(command = "離しc")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 2
+ignorehitpause = 1
+Persistent = 1
+
+;ジャンプ---------------------
+[state -2, 強弱離し]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (command = "離しx")||(command = "離しa")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 強弱離し]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (command = "離しy")||(command = "離しb")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 1
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 強弱離し]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (command = "離しz")||(command = "離しc")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 2
+ignorehitpause = 1
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = stateno = 40||stateno = 720||stateno = 721||stateno = 722
+triggerall = movetype != H
+triggerall = roundstate = 2
+triggerall = !var(8)
+trigger1 = command = "c"
+var(8) = 65000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = stateno = 40||stateno = 720||stateno = 721||stateno = 722
+triggerall = movetype != H
+triggerall = roundstate = 2
+triggerall = !var(8)
+trigger1 = command = "b"
+var(8) = 64000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = stateno = 40||stateno = 720||stateno = 721||stateno = 722
+triggerall = movetype != H
+triggerall = roundstate = 2
+triggerall = !var(8)
+trigger1 = command = "a"
+var(8) = 63000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = stateno = 40||stateno = 720||stateno = 721||stateno = 722
+triggerall = movetype != H
+triggerall = roundstate = 2
+triggerall = !var(8)
+triggerall = command = "holddown"
+trigger1 = command = "z"
+var(8) = 62000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = stateno = 40||stateno = 720||stateno = 721
+triggerall = movetype != H
+triggerall = roundstate = 2
+triggerall = !var(8)
+trigger1 = command = "y"
+var(8) = 61000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = stateno = 40||stateno = 720||stateno = 721||stateno = 722
+triggerall = movetype != H
+triggerall = roundstate = 2
+triggerall = !var(8)
+trigger1 = command = "x"
+var(8) = 60000
+Persistent = 1
+;リバサ---------------------
+[state -2, 強弱]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (command = "x"||command = "holdx")||(command = "a"||command = "holda")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, 強弱]
+type = VarSet
+triggerall = roundstate = 2
+triggerall = (command = "y"||command = "holdy")||(command = "b"||command = "holdb")
+trigger1 = floor(var(8)%10000) = [5,99]
+var(1) = 1
+ignorehitpause = 1
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = statetype = L
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+triggerall = command = "holdup"
+trigger1 = command = "c"
+var(8) = 79700
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = statetype = L
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+triggerall = command = "holdback"
+trigger1 = command = "c"
+var(8) = 79600
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = statetype = L
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+triggerall = command = "holdfwd"
+trigger1 = command = "c"
+var(8) = 79500
+Persistent = 1
+
+
+[State -1, 1]
+type = varset
+Triggerall = movetype = H||stateno = 5120||movetype = A
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+trigger1 = command = "→↓←→y"
+var(8) = 210100
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = movetype = H||stateno = 5120||movetype = A
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+trigger1 = command = "→↓←→x"
+var(8) = 210000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = movetype = H||stateno = 5120||movetype = A
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+trigger1 = command = "↓→↓→y"
+var(8) = 200100
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = movetype = H||stateno = 5120||movetype = A
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+trigger1 = command = "↓→↓→x"
+var(8) = 200000
+Persistent = 1
+
+
+[State -1, 1]
+type = varset
+Triggerall = movetype = H||stateno = 5120||movetype = A
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+trigger1 = command = "→↓←K"
+var(8) = 120000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = movetype = H||stateno = 5120||movetype = A
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+trigger1 = command = "←→P"
+var(8) = 110000
+Persistent = 1
+
+[State -1, 1]
+type = varset
+Triggerall = movetype = H||stateno = 5120||movetype = A
+triggerall = roundstate = 2
+triggerall = (!var(8))||(var(8) = [512000,512999])
+trigger1 = command = "↓→P"
+var(8) = 100000
+Persistent = 1
+
+;入力---------------------
+
+
+[State -1, リセット時間]
+type = varadd
+triggerall = roundstate = 2
+trigger1 = var(8)
+var(8) = 1
+Persistent = 1
+
+
+[State -1, 先行入力リセット]
+type = varset
+trigger1 = roundstate != 2
+trigger2 = var(8) < 0
+Trigger3 = (var(8) = [20000,399999])&&movetype = A&&time = 1
+Trigger4 = ((stateno = [900,929])||(stateno = [1000,2999]))&&time >= 3
+trigger5 = statetype != L&&statetype != A
+trigger5 = floor(var(8)%100) = 15
+trigger6 = statetype = L||statetype = A
+trigger6 = floor(var(8)%100) = 25
+Trigger7 = stateno = 1305 
+var(8) = 0
+Persistent = 1
+
+;******************補正合計******************************************************
+
+;---------------補正合計----------------------------------------
+
+[State -2, アタック]
+type = AttackMulSet
+trigger1 = roundstate = 2
+value = Helper(10010+id),fVar(24)
+ignorehitpause = 1
+
+[State -2, ディフェンス]
+type = DefenceMulSet
+trigger1 = roundstate = 2
+trigger1 = Helper(10010+id),fVar(20)
+value = 1/Helper(10010+id),fVar(20)
+ignorehitpause = 1
+
+[State -2, 初撃防御力ヒット確認リセット]
+type = VarSet
+triggerall = !IsHelper
+trigger1 = MoveType != H
+trigger2 = StateNo = [120, 159]
+trigger3 = StateNo = 771
+trigger4 = (Life <= 100)
+v = 33
+value = 0
+ignorehitpause = 1
+
+[State -2, 初撃防御力ヒット確認]
+type = VarSet
+triggerall = (Life > 100)
+triggerall = !IsHelper
+trigger1 = MoveType = H
+trigger1 = StateNo != [120, 159]
+trigger1 = StateNo != 771
+v = 33
+value = GetHitVar(HitCount)
+ignorehitpause = 1
+
+[State -2, 初撃防御力]
+type           = LifeAdd
+triggerall = (Life > 100)
+triggerall     = Alive
+triggerall     = life - var(35) > 0
+triggerall = StateNo != 771
+triggerall     = var(33) = 1
+triggerall     = var(34) := GetHitVar(Damage)
+trigger1       = var(35) := Floor(var(34) * (1.0 - ((Const(data.defence) / Helper(10010+id),fvar(20)) / 100)))
+value          = var(35)
+absolute       = 1
+persistent     = 0
+ignorehitpause = 1
+
+[State -2, 初撃防御力KO]
+type           = LifeAdd
+triggerall = (Life > 100)
+triggerall     = var(33) = 1
+triggerall     = Alive
+trigger1     = life - var(35) <= 0
+value          = -1
+absolute       = 1
+persistent     = 0
+ignorehitpause = 1
+;******************補正合計******************************************************
+
+;******************パレット・残像消去******************************************************
+[State -2, 残像]
+type = AfterImage
+trigger1 = StateNo = 0
+trigger2 = StateNo = 52
+trigger3 = StateNo = [5000,5210]
+trigger4 = ctrl = 1
+Time = 0
+
+;******************パレット・残像消去******************************************************
+
+
+;******************ヘルパー******************************************************
+
+[State -2, 音を鳴らす]
+type = PlaySnd
+trigger1 = NumTarget(800) >= 1
+trigger1 = target(800),Stateno = 816
+trigger1 = target(800),Vel Y > 0&&target(800),Pos Y >= 0
+value = 1, 2
+ignorehitpause = 1
+
+;************************************************************************
+;###############KO時の処理###########################
+
+;*************Varセット******************
+[State -2, Varセット]
+type = VarSet
+trigger1 = roundstate = 2
+var(10) = 0
+ignorehitpause = 1
+Persistent = 1
+
+[State -2, Varセット]
+type = VarSet
+trigger1 = var(10)
+var(10) = -1
+supermovetime = 99999
+supermovetime = 99999
+pausemovetime = 99999
+ignorehitpause = 1
+Persistent = 1
+
+[State -2, Varセット]
+type = VarSet
+trigger1 = NumExplod(30100) = 1
+trigger2 = NumExplod(30101) = 1
+var(10) = -1
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, Varセット]
+type = VarSet
+triggerall = var(10) = 0
+triggerall = winko
+trigger1 = movecontact = 1
+trigger1 = stateno = [200,799]
+trigger2 = stateno = [800,999]
+var(10) = 1
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, Varセット]
+type = VarSet
+triggerall = NumExplod(30100) = 0||NumExplod(30101) = 0
+triggerall = var(10) = 0
+triggerall = winko
+trigger1 = movecontact = 1
+trigger1 = stateno = [1100,1199]
+Trigger2 = NumHelper(1050)
+trigger2 = Helper(1050),movecontact
+trigger4 = stateno = [1210,1299]
+var(10) = 2
+ignorehitpause = 1
+Persistent = 1
+
+[state -2, Varセット]
+type = VarSet
+triggerall = NumExplod(30100) = 0||NumExplod(30101) = 0
+triggerall = var(10) = 0
+triggerall = winko
+trigger1 = movecontact = 1
+trigger1 = stateno = [2100,2199]
+Trigger2 = NumHelper(2050)
+trigger2 = Helper(2050),movecontact
+var(10) = 3
+ignorehitpause = 1
+Persistent = 1
+
+[State 1000, 3]
+type = EnvShake
+trigger1 = var(10) > 1
+time = 1
+freq = 0
+ampl = 0
+phase = 0
+
+;**************************************
+
+[State -2,***]
+type = PlaySnd
+trigger1 = var(10) = 1
+value = 200,0
+IgnoreHitPause = 1 
+
+[State -2,***]
+type = PlaySnd
+trigger1 = var(10) = 2||var(10) = 3
+value = 200,1
+IgnoreHitPause = 1 
+
+[State 3000,00]
+type = ALLPalfx
+trigger1 = var(10) = 2
+add = 250,0,0
+sinadd = -100, -100, -100,40
+time = 23
+supermovetime = 99999
+supermovetime = 99999
+pausemovetime = 99999
+IgnoreHitPause = 1 
+Persistent = 0
+
+;**************************************
+
+[State 3000,00]
+type = ALLPalfx
+trigger1 = var(10) = 3
+add = 250,0,0
+sinadd = -100, -100, -100,40
+time = 23
+supermovetime = 99999
+supermovetime = 99999
+pausemovetime = 99999
+IgnoreHitPause = 1 
+Persistent = 0
+
+[State 1000,***]
+type = Pause
+trigger1 = var(10) = 3
+time = 23
+movetime = 0
+IgnoreHitPause = 1 
+Persistent = 0
+
+;#################################################
+;音
+[State -2, 音を鳴らす]
+type = PlaySnd
+triggerall = Time = 1
+trigger1 = stateno = 52  ;ジャンプ後の着地
+value = 100, 0
+
+[State -2, ダメージボイス]
+type = PlaySnd
+triggerall = Time = 1
+triggerall = Alive && GameTime % 3 = 0
+trigger1 = stateno=5000 || stateno=5010 || stateno=5020
+trigger2 = stateno = 5070 || stateno = 5080
+value = 10,random/333
+channel = 0
+
+;コピペ
+;ワーヒー式悲鳴連呼システム・汎用
+[State -2,Lose Voice]
+type = PlaySnd
+triggerall = !IsHelper
+triggerall = !Alive
+trigger1 = Time = 0
+trigger1 = Hitshakeover = 0
+value = 11, 0  ;悲鳴の番号。通常は11,0だが、キャラによってはその他の番号
+channel = 14   ;悲鳴を一度あげるたびに声が切れるかどうか。台詞が長いキャラはここを消すこと
+ignorehitpause = 1
+
+
+[State -2,消去]
+type = RemoveExplod
+trigger1 = anim != 2100
+id = 2110
+
+
+

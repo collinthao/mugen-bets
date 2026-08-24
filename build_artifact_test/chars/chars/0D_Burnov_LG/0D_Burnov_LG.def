@@ -1,0 +1,33 @@
+
+[Info]
+Name         ="Burnov"
+DisplayName  ="Burnov_LG"
+VersionDate  = 
+mugenversion = 1.0          ;Version of M.U.G.E.N character works on (X.XX)
+Author       = "(^o^)"
+Pal.Defaults = 1,2,3,4
+localcoord = 320
+;localcoord = 426, 240
+
+[Files]
+Cmd      =CNS/cmd.cns
+Cns      =CNS/Status.cns
+St       =CNS/Status.cns
+StCommon =common1.cns
+Sprite   =Data/sff.sff
+Anim     =Data/air.air
+Sound    =Data/snd.snd
+St1=config.txt
+st2=CNS/-2.cns
+St3=CNS/AI.cns
+st4=CNS/Base.cns
+st5=CNS/System.cns
+
+
+pal1=Act/4.act
+pal2=Act/5.act
+pal3=Act/6.act
+pal4=Act/1.act
+pal5=Act/2.act
+pal6=Act/3.act
+

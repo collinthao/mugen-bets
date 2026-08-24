@@ -1,0 +1,1452 @@
+
+[Data]
+life = 2000 ;6000
+attack = 220 ;220
+defence = 30 ;30
+power = 65535 ;65535
+fall.defence_up = 0
+liedown.time = 0
+airjuggle = 999
+sparkno = -1
+guard.sparkno = -1
+KO.echo = 0
+volume = 0
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+[Size]
+xscale = .5
+yscale = .5
+ground.back = 30
+ground.front = 30
+air.back = 30
+air.front = 30
+height = 97
+attack.dist = 320
+proj.attack.dist = 320
+proj.doscale = 0
+head.pos = 7, -170
+mid.pos = 0, -110
+shadowoffset = 0
+draw.offset = 0,0
+
+[Velocity]
+walk.fwd=0
+walk.back=0
+run.fwd=0,0
+run.back=0,0
+jump.neu=0,0
+jump.back=0
+jump.fwd=0
+
+[Movement]
+airjump.num=0
+airjump.height=97
+yaccel=.35
+stand.friction=.5
+crouch.friction=.5
+
+[Statedef 180]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = SelfState
+trigger1 = RoundState < 3
+trigger2 = !Winko
+value = 0
+
+[State ]
+type = Playsnd
+trigger1 = !animelemTime(1) && Matchover
+value = 0,29
+[State ]
+type = Playsnd
+trigger1 = !animelemTime(1) && Matchover
+value = 0,29
+[State ]
+type = Playsnd
+trigger1 = !animelemTime(1) && Matchover
+value = 0,29
+
+[State ]
+type = Explod
+trigger1 = !animelemTime(1) && RoundState >= 3 && Matchover
+id=180
+anim=180
+postype=L
+pos=48,var(7)
+scale=1,1
+ownpal=1
+removetime=1300
+bindtime=-1
+sprpriority=999999
+ignorehitpause = 1
+
+[State ]
+type = assertspecial
+trigger1 = !Matchover
+trigger1 = animelemTime(1) = [0,300]
+flag = Roundnotover
+
+[State ]
+type = assertspecial
+trigger1 = Matchover
+trigger1 = animelemTime(1) = [0,1300]
+flag = Roundnotover
+flag2 = Nomusic
+
+
+[Statedef 190]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = Changeanim
+trigger1 = anim != 1
+value = 1
+[State ]
+type = Changestate
+trigger1 = Time && !Numhelper
+value=Stateno
+[State ]
+type = Posset
+trigger1 = Time < 10
+y=400
+[state ]
+type = Posadd
+trigger1 = Pos Y >0
+y = -1
+
+[State ]
+type = Assertspecial
+trigger1 = 1
+flag = Intro
+
+[State ]
+type = ChangeState
+trigger1 = Time >= 500
+value = 0
+
+[Statedef 200]
+type = S
+movetype = U
+physics = N
+hitdefpersist=1
+
+[State ]
+type = Assertspecial
+triggerall = Palno > 3
+trigger1=(playerid(sysvar(2)),sysvar(4)&(32767-63))/64 = [101,112]
+flag = unguardable
+
+[State ]
+type = Ctrlset
+trigger1 = 1
+value = 0
+
+[State ]
+type = Statetypeset
+trigger1 = Gametime%900 >599
+Statetype = A
+
+[State ]
+type = Statetypeset
+trigger1 = Gametime%900 <300
+Statetype = C
+
+[State ]
+type = ChangeState
+trigger1 = Movetype != A
+value = 0
+ctrl = 1
+[Statedef 1000]
+type = A
+movetype = U
+physics = N 
+[State ]
+type = ChangeState
+trigger1 = ishelper(65000)
+value = 5150
+[State ]
+type=SelfState
+trigger1 = !Ishelper
+value=5050
+[State ]
+type=Screenbound
+trigger1=1
+value=0
+[State ]
+type=Changeanim
+trigger1=anim!=0 + 2*ishelper(1002) + 3*ishelper(1003)
+trigger1=Anim!=6000
+value=0+ 2*ishelper(1002) + 3*ishelper(1003)
+ignorehitpause=1
+[State ]
+type=Changeanim
+trigger1=ishelper(1002) || ishelper(1003)
+trigger1=Root,Sysvar(3) <= lifemax*60 /2 && Root,palno < 7
+value=1
+ignorehitpause=1
+[State ]
+type=Changeanim
+trigger1=Root,sysfvar(3) >= 100
+value=1
+ignorehitpause=1
+
+
+[State ]
+type=Assertspecial
+trigger1=!ishelper(1001)
+flag=Invisible
+ignorehitpause=1
+[State ]
+type=playerpush
+trigger1=!ishelper(1000)
+value=0
+ignorehitpause=1
+[State ]
+type=nothitby
+trigger1=ishelper(1001)
+value=SCA
+ignorehitpause=1
+[State ]
+type=nothitby
+trigger1=ishelper(1001)
+value2=SCA
+ignorehitpause=1
+[State ]
+type = Attackdist
+trigger1 = Root,Palno > 3
+trigger1=playeridexist(Root,sysvar(2))
+trigger1=(playerid(Root,sysvar(2)),sysvar(4)&(32767-63))/64 > 0
+trigger1=(playerid(Root,sysvar(2)),sysvar(4)&(32767-63))/64 != 400 && (playerid(Root,sysvar(2)),sysvar(4)&(32767-63))/64 != 421
+
+trigger2 = Root,Palno > 3
+trigger2=playeridexist(Root,var(31))
+trigger2=(playerid(Root,var(31)),sysvar(4)&(32767-63))/64 > 0
+trigger2=(playerid(Root,var(31)),sysvar(4)&(32767-63))/64 != 400 && (playerid(Root,var(31)),sysvar(4)&(32767-63))/64 != 421
+
+trigger3 = Root,Palno > 3
+trigger3=playeridexist(Root,var(32))
+trigger3=(playerid(Root,var(32)),sysvar(4)&(32767-63))/64 > 0
+trigger3=(playerid(Root,var(32)),sysvar(4)&(32767-63))/64 != 400 && (playerid(Root,var(32)),sysvar(4)&(32767-63))/64 != 421
+value = 0
+ignorehitpause = 1
+[State ]
+type = Assertspecial
+trigger1 = Root,Palno > 3
+trigger1=playeridexist(Root,sysvar(2))
+trigger1=(playerid(Root,sysvar(2)),sysvar(4)&(32767-63))/64 > 0
+trigger1=(playerid(Root,sysvar(2)),sysvar(4)&(32767-63))/64 != 400 && (playerid(Root,sysvar(2)),sysvar(4)&(32767-63))/64 != 421
+
+trigger2 = Root,Palno > 3
+trigger2=playeridexist(Root,var(31))
+trigger2=(playerid(Root,var(31)),sysvar(4)&(32767-63))/64 > 0
+trigger2=(playerid(Root,var(31)),sysvar(4)&(32767-63))/64 != 400 && (playerid(Root,var(31)),sysvar(4)&(32767-63))/64 != 421
+
+trigger3 = Root,Palno > 3
+trigger3=playeridexist(Root,var(32))
+trigger3=(playerid(Root,var(32)),sysvar(4)&(32767-63))/64 > 0
+trigger3=(playerid(Root,var(32)),sysvar(4)&(32767-63))/64 != 400 && (playerid(Root,var(32)),sysvar(4)&(32767-63))/64 != 421
+flag = unguardable
+ignorehitpause = 1
+[State ]
+type=Posset
+trigger1=1
+x=root,pos x
+y=root,pos y
+[State ]
+type=Superpause
+trigger1=!Sysvar(0) && Ishelper(1000)
+time=0
+movetime=0
+anim=-1
+darken=0
+[State ]
+type=pause
+trigger1=!Sysvar(0) && Ishelper(1000)
+time=0
+movetime=0
+[State ]
+type=varadd
+trigger1=1
+sysvar(0)=1
+[State ]
+type=varset
+trigger1=1
+fvar(8)=cos((sysvar(0)*2)/260.0)*180
+[State ]
+type=varset
+trigger1=1
+fvar(9)=cos((sysvar(0)*2)/260.0)*180
+
+[State ]
+type=varset
+trigger1=1
+sysfvar(1)=animelemtime(1)*1.0
+ignorehitpause=1
+
+[State ]
+type=offset
+trigger1=ishelper(1001)
+x=(Random%3-Random%3)*(Gametime%3=0 ) + floor(cos(fvar(8)/40.0)*4)
+y=(Random%3-Random%3)*(Gametime%3=0 ) + floor(Sin(fvar(9)/40.0)*4)
+
+[State ]
+type=offset
+trigger1=ishelper(1001) && 0
+x= floor(cos(fvar(8)/60.0)*4)
+y= floor(Sin(fvar(9)/60.0)*4)
+
+[State ]
+type=offset
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = (helper(1002),sysvar(4)&536870912)
+x=(Random%5-Random%5)*(Gametime%2=0 ) + floor(cos(fvar(8)/60.0)*4)
+y=(Random%5-Random%5)*(Gametime%2=0 ) + floor(Sin(fvar(9)/60.0)*4)
+
+
+;奇数偶数
+[State ]
+type = Varset
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&8)
+trigger1 = ((sysvar(4)&(33554431))/32768) = 1
+trigger1 = ((sysvar(4)&(32767-63))/64) > 0
+sysvar(1) = sysvar(1)^512
+ignorehitpause = 1
+
+[State ]
+type = Helper
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&128)
+trigger1 = Root,Palno > 6 
+trigger1 = ((sysvar(4)&(33554431))/32768) > 0
+trigger1 = (sysvar(4)&(32767-63)) > 0
+trigger1 = (sysvar(4)&(32767-63))/64 != 301
+ID=65000
+Stateno=1000
+name="Helper attack"
+postype=p1
+Keyctrl=1
+ownpal = 1
+Helpertype=Player
+size.height = (sysvar(4)&(32767-63))/64 * 10
+Size.Head.Pos = var(0),var(1)
+pausemovetime=999*((Root,var(22)&(1048575-1023))>0)
+ignorehitpause = 1
+
+[State ]
+type=Helper
+trigger1 = Ishelper(1000)
+trigger1 = Root,Palno > 6 && (sysvar(1)&8)
+trigger1 = ((sysvar(4)&(33554431))/32768) = 1
+trigger1 = (sysvar(4)&(32767-63)) > 1
+ID=500
+name="hitdef x"
+postype=p1
+Keyctrl=1
+ownpal=1
+size.height = 500
+Helpertype=Player
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+
+;ATBリセット
+[State ]
+type = Varset
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&128)
+trigger1 = Root,Palno > 6 
+trigger1 = ((sysvar(4)&(33554431))/32768) > 0
+trigger1 = (sysvar(4)&(32767-63))/64 != 301
+trigger1 = (sysvar(4)&(32767-63)) > 0 && (sysvar(4)&63) > 0
+sysvar(4) = sysvar(4) - (sysvar(4)&63) + 16
+ignorehitpause = 1
+
+;Stateno Time初期化
+[State ]
+type = Varset
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&128)
+trigger1 = Root,Palno > 6 
+trigger1 = ((sysvar(4)&(33554431))/32768) > 0
+trigger1 = (sysvar(4)&(32767-63))/64 != 301
+trigger1 = (sysvar(4)&(32767-63)) > 0
+sysvar(4) = sysvar(4)-(sysvar(4)&(33554431-63))
+ignorehitpause = 1
+
+
+[State ]
+type=Assertspecial
+trigger1=1
+flag=Noshadow
+flag2=nowalk
+ignorehitpause=1
+[State ]
+type=Turn
+trigger1=Root,facing != facing
+[State ]
+type=StatetypeSet
+trigger1=1
+Movetype=I
+statetype=S
+ignorehitpause=1
+[State ]
+type = Statetypeset
+trigger1 = Gametime%900 >599
+Statetype = A
+[State ]
+type = Statetypeset
+trigger1 = Gametime%900 <300
+Statetype = C
+[State ]
+type=StatetypeSet
+trigger1=Root,movetype=A
+Movetype=A
+ignorehitpause=1
+[State ]
+type=Hitoverride
+trigger1=1
+stateno=1000
+slot=5
+attr=SCA,AA,AT
+[State ]
+type=Hitoverride
+trigger1=1
+stateno=1001
+slot=1
+attr=SCA,HP
+[State ]
+type=Hitoverride
+trigger1=1
+stateno=1002
+slot=3
+attr=SCA,AP
+[State ]
+type=Hitoverride
+trigger1=1
+stateno=0
+slot=2
+attr=SCA,NA,SA,NT,ST
+
+[State ]
+type=Lifeset
+trigger1=1
+value=lifemax*60
+ignorehitpause = 1
+
+[State ]
+type = Explod
+triggerall = Ishelper(1001)
+trigger1 = playeridexist(root,sysvar(2))
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(33554431))/32768 = 2
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 200
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 223
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 226
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 229
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 233
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 236
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 239
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 243
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 246
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 249
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 300
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 400
+trigger1 = (playerid(root,sysvar(2)),sysvar(4)&(32767-63))/64 != 417
+trigger2 = playeridexist(root,var(31))
+trigger2 = (playerid(root,var(31)),sysvar(4)&(33554431))/32768 = 2
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 200
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 223
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 226
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 229
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 233
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 236
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 239
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 243
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 246
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 249
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 300
+trigger2 = (playerid(root,var(31)),sysvar(4)&(32767-63))/64 != 400
+trigger3 = playeridexist(root,var(32))
+trigger3 = (playerid(root,var(32)),sysvar(4)&(33554431))/32768 = 2
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 200
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 223
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 226
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 229
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 233
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 236
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 239
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 243
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 246
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 249
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 300
+trigger3 = (playerid(root,var(32)),sysvar(4)&(32767-63))/64 != 400
+id = 4
+anim = 4
+postype = p1
+sprpriority = 10
+bindtime = -1
+ownpal = 1
+scale = const(size.xscale),const(size.yscale)
+pausemovetime=999*((Root,var(22)&(1048575-1023))>0)
+
+[State ]
+type = Explod
+triggerall = Ishelper(1000) && Playeridexist(ID)
+trigger1 = numhelper(9650)
+trigger1 = helper(9650),Numtarget
+trigger1 = (Root,var(23)&1023) > 0
+trigger1 = Gametime%4 = 0
+trigger1 = var(14):= Random%30-Random%30 + floor(helper(9650),pos x-pos x)*facing || var(13):=random%80-Random%20-60 +floor(helper(9650),pos y-pos y) || 1
+trigger2 = numhelper(9651)
+trigger2 = helper(9651),Numtarget 
+trigger2 = (Root,var(23)&1023) > 0
+trigger2 = Gametime%4 = 1
+trigger2 = var(14):= Random%30-Random%30 + floor(helper(9651),pos x-pos x)*facing || var(13):=random%80-Random%20-80 +floor(helper(9651),pos x) || 1
+id = 2031
+anim = 2031
+postype = p1
+pos = var(14),var(13)
+vel = 0,-1
+accel = 0,-0.025
+sprpriority = 20
+scale = .25,.25
+ownpal = 1
+trans = add
+supermovetime = 999
+pausemovetime = 999
+ignorehitpause = 1
+
+[State ]
+type = Explod
+triggerall = Ishelper(1000) && Playeridexist(ID)
+trigger1 = numhelper(9650)
+trigger1 = helper(9650),Numtarget 
+trigger1 = (Root,var(23)&1023) > 0
+trigger1 = Gametime%4 = 0
+trigger2 = numhelper(9651)
+trigger2 = helper(9651),Numtarget 
+trigger2 = (Root,var(23)&1023) > 0
+trigger2 = Gametime%4 = 1
+id = 2031
+anim = 2031
+postype = p1
+pos = var(14),var(13)
+vel = 0,-1
+accel = 0,-0.025
+sprpriority = 19
+scale = .25,.25
+trans = sub
+supermovetime = 999
+pausemovetime = 999
+ignorehitpause = 1
+
+;無敵処理
+[State ]
+type = varset
+triggerall = !(sysvar(1)&1)
+trigger1 = RoundState = 2 && (Root,sysvar(1)&1) && sysvar(2) > 180
+sysvar(1) = sysvar(1)|1
+ignorehitpause = 1
+
+[State ]
+type = varset
+triggerall = Root,palno > 6
+trigger1 = gethitvar(damage)
+trigger1 = Ishelper(1000)
+sysvar(2) = 180 - 8 * (root,palno-6)
+ignorehitpause = 1
+[State ]
+type = varset
+triggerall = Root,palno > 6
+trigger1 = gethitvar(damage) && Root,palno != 12
+trigger1 = Ishelper(1002) || Ishelper(1003)
+sysvar(2) = 180 - 8 * (root,palno-6)
+ignorehitpause = 1
+
+[State ]
+type = varset
+trigger1 = var(4) > Root,sysvar(3) && Root,sysvar(3) <= (Root,lifemax*60 /2) && !(sysvar(1)&8)
+trigger2 = !sysvar(2) && (sysvar(1)&8)
+trigger2 = (sysvar(4)&(32767-63))/64 > 0 || (sysvar(4)&63) = 31
+trigger3 = !sysvar(2)  && (sysvar(1)&8) && Numhelper(1002)
+trigger3 = (helper(1002),sysvar(4)&(32767-63))/64 > 0 
+trigger4 = !sysvar(2)  && (sysvar(1)&8) && Numhelper(1003)
+trigger4 = (helper(1003),sysvar(4)&(32767-63))/64 > 0 
+sysvar(2) = -1
+ignorehitpause = 1
+
+[State ]
+type = varset
+triggerall = (sysvar(1)&1) 
+trigger1 = var(4) > Root,sysvar(3) && Root,sysvar(3) <= (Root,lifemax*60 /2)
+trigger2 = sysvar(2) <= 180
+sysvar(1) = sysvar(1)-1
+ignorehitpause = 1
+
+[State ]
+type = varset
+trigger1 = !(sysvar(1)&8)
+trigger1 = var(4) > Root,sysvar(3) && Root,sysvar(3) <= (Root,lifemax*60 /2)
+trigger1 = Root,alive
+sysvar(1) = sysvar(1)|8
+ignorehitpause = 1
+
+;プロテス
+[State ]
+type = varadd
+triggerall = !(sysvar(1)&2)
+trigger1 = PrevStateno = 2010 && ((sysvar(4)&(33554431))/32768) > (120 * !(sysvar(1)&128))
+trigger2 = (sysvar(1)&8)
+trigger3 = Numhelper(1003)
+trigger3 = (Helper(1003),sysvar(1)&2)
+sysvar(1) = 2
+ignorehitpause = 1
+
+
+;シェル
+[State ]
+type = varadd
+triggerall = !(sysvar(1)&4)
+trigger1 = PrevStateno = 2050 && ((sysvar(4)&(33554431))/32768) > (120 * !(sysvar(1)&128))
+trigger2 = (sysvar(1)&8)
+trigger3 = Numhelper(1003)
+trigger3 = (Helper(1003),sysvar(1)&4)
+sysvar(1) = 4
+ignorehitpause = 1
+;ヘイスト 
+[State ]
+type = varadd
+triggerall = !(sysvar(1)&32)
+trigger1 = PrevStateno = 2050 && ((sysvar(4)&(33554431))/32768) > (120 * !(sysvar(1)&128))
+trigger2 = Numhelper(1003)
+trigger2 = (Helper(1003),sysvar(1)&32)
+sysvar(1) = 32
+ignorehitpause = 1
+;ヘイスト 解除
+[State ]
+type = varadd
+triggerall = (sysvar(1)&32)
+trigger1 = (sysvar(1)&8) && Sysvar(2) = 0
+sysvar(1) = -32
+ignorehitpause = 1
+;カウンターリジェネ
+[State ]
+type = Helper
+triggerall = !(sysvar(1)&64)
+trigger1 = Ishelper(1000)
+trigger1 = Root,Palno = 12 
+trigger1 = playeridexist(Root,var(32)) && playeridexist(Root,var(31)) && playeridexist(Root,sysvar(2))
+trigger1 = playerid(Root,var(32)),gethitvar(damage) && playerid(Root,var(31)),gethitvar(damage) && playerid(Root,sysvar(2)),gethitvar(damage)
+trigger2 = Ishelper(1000)
+trigger2 = Root,Palno > 6
+trigger2 = root,var(45) && (Root,sysvar(1)&1) 
+ID=65000
+Stateno=1000
+name="Helper attack"
+postype=p1
+Keyctrl=1
+ownpal = 1
+Helpertype=Player
+size.height = 202 * 10
+pausemovetime=999*((Root,var(22)&(1048575-1023))>0)
+ignorehitpause = 1
+;リジェネ
+[State ]
+type = varadd
+triggerall = !(sysvar(1)&64)
+trigger1 = PrevStateno = 2020 && ((sysvar(4)&(33554431))/32768) > (120 * !(sysvar(1)&128))
+trigger2 = Numhelper(1003)
+trigger2 = (Helper(1003),sysvar(1)&64)
+trigger3 = Root,Palno = 12 
+trigger3 = playeridexist(Root,var(32)) && playeridexist(Root,var(31)) && playeridexist(Root,sysvar(2))
+trigger3 = playerid(Root,var(32)),gethitvar(damage) && playerid(Root,var(31)),gethitvar(damage) && playerid(Root,sysvar(2)),gethitvar(damage)
+trigger4 = Ishelper(1000)
+trigger4 = Root,Palno > 6
+trigger4 = root,var(45) && (Root,sysvar(1)&1) 
+sysvar(1) = 64
+ignorehitpause = 1
+;リジェネ 解除
+[State ]
+type = varadd
+triggerall = (sysvar(1)&64)
+trigger1 = (sysvar(1)&8) && Sysvar(2) = 0
+trigger1 = Root,palno != 12
+sysvar(1) = -64
+ignorehitpause = 1
+
+;カウンター判定
+[State ]
+type = Varset
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&8) && (sysvar(1)&256)&& !(sysvar(1)&1024)
+trigger1 = GetHitvar(Damage) && Sysvar(2) >= 100
+trigger1 = PrevStateno != [4150,4190]
+sysvar(1) = sysvar(1)|1024
+ignorehitpause = 1
+;カウンター判定
+[State ]
+type = Varset
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&8) && !(sysvar(1)&256)
+trigger1 = GetHitvar(Damage) && Sysvar(2) >= 100
+trigger1 = PrevStateno != [4150,4190]
+sysvar(1) = sysvar(1)|256
+ignorehitpause = 1
+[State ]
+type = Varset
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&256) && !(sysvar(1)&1024)
+trigger1 = (sysvar(4)&(32767-63)) = 0 
+trigger1 = PrevStateno = [4150,4190]
+sysvar(1) = sysvar(1)^256
+ignorehitpause = 1
+[State ]
+type = Varset
+trigger1 = Ishelper(1000)
+trigger1 = (sysvar(1)&1024)
+trigger1 = (sysvar(4)&(32767-63)) = 0 
+trigger1 = PrevStateno = [4150,4190]
+sysvar(1) = sysvar(1)^1024
+ignorehitpause = 1
+
+;「無」の力が増幅していく！
+[State ]
+type = Explod
+triggerall = Playeridexist(ID) && Ishelper(1000)
+trigger1 = (sysvar(1)&8) && Sysvar(2) = 0
+trigger1 = Root,sysvar(3) > 9999
+id=8885
+anim=8885
+postype=L
+pos=48,var(7)
+scale=1,1
+ownpal=1
+removetime=180
+bindtime=-1
+sprpriority=999999
+pausemovetime=999*((Root,var(22)&(1048575-1023))>0)
+ignorehitpause = 1
+
+;宇宙の法則が乱れる
+[State ]
+type = Trans
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = (helper(1002),sysvar(4)&536870912)
+trans = Addalpha
+alpha = 256,ifelse( sin(gametime*0.04)>0 && sin(gametime*0.01)>0&& sin(gametime*0.02)>0,256-floor(sin(gametime*0.04)*256),256)
+[State ]
+type=Removeexplod
+trigger1 = Numhelper(1002)
+id=310
+[State ]
+type = Explod
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = Playeridexist(ID) && Playeridexist(Root,ID)
+trigger1 = (helper(1002),sysvar(4)&536870912)
+trigger1 = !Numexplod(310)
+id = 310
+anim = 1
+removetime=-1
+bindtime=-1
+sprpriority=-10
+ownpal=1
+scale=const(size.xscale),const(size.yscale)
+pausemovetime=999
+[State ]
+type = Modifyexplod
+trigger1 = numexplod(310)
+id = 310
+alpha = ifelse( sin(gametime*0.04)>0 && sin(gametime*0.01)>0&& sin(gametime*0.02)>0,256-floor(sin(gametime*0.04)*256),256),256
+
+[State ]
+type = Removeexplod
+trigger1 = Numhelper(1002) && Ishelper(1001) 
+trigger1 = Playeridexist(ID) && Playeridexist(Root,ID)
+trigger1 = !(helper(1002),sysvar(4)&536870912)
+id = 310
+
+[State ]
+type = Null
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = var(13):= 0 || 1
+ignorehitpause = 1
+
+[State ]
+type = Palfx
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = (helper(1002),sysvar(4)&(32767-63))/64 = 302
+trigger1 = ((helper(1002),sysvar(4)&(33554431))/32768) = [56,380]
+trigger1 = var(13):= (((helper(1002),sysvar(4)&(33554431))/32768)-56)*2 || 1
+trigger1 = var(13):= var(13) - (var(13)-256) * (var(13)>256) || 1
+time=1
+mul = 256-var(13),256-var(13),256-var(13)
+ignorehitpause = 1
+[State ]
+type = Palfx
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = (helper(1002),sysvar(4)&(32767-63))/64 = 302
+trigger1 = ((helper(1002),sysvar(4)&(33554431))/32768) = [381,412]
+trigger1 = var(13):= 256-(((helper(1002),sysvar(4)&(33554431))/32768)-381)*8 || 1
+trigger1 = var(13):= var(13) - var(13) * (var(13)<0) || 1
+time=1
+mul = 256-var(13),256-var(13),256-var(13)
+ignorehitpause = 1
+
+[State ]
+type = Palfx
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = (helper(1002),sysvar(4)&536870912)
+trigger1 = fvar(13):= ifelse(sin(180+gametime*0.01)>0,abs(sin(gametime*0.04)),1) || 1
+time=1
+add = -var(13),-var(13),-var(13)
+mul = 128+floor(sin(90+gametime*0.02)*128*fvar(13)),128+floor(sin(gametime*0.02)*128*fvar(13)),128+floor(sin(180+gametime*0.02)*128*fvar(13))
+ignorehitpause = 1
+
+[State ]
+type = Trans
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = numexplod(310) && var(13) > 0
+trans = Addalpha
+alpha = 256-var(13),256-var(13)
+
+[State ]
+type = Modifyexplod
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = numexplod(310) && var(13) > 0
+id = 310
+trans = Addalpha
+alpha = 256-var(13),var(13)
+
+[State ]
+type = Palfx
+trigger1 = Numhelper(1002) && Ishelper(1001)
+trigger1 = (helper(1002),sysvar(4)&536870912)
+trigger1 = sin(gametime*0.04)>0 && sin(gametime*0.01)>0&& sin(gametime*0.02)>0
+time=1
+add = -var(13),-var(13),-var(13)
+mul = 160-floor(sin(gametime*0.04)*32),160-floor(sin(gametime*0.04)*32),160-floor(sin(gametime*0.04)*32)
+color = 192-floor(sin(gametime*0.04)*64)
+ignorehitpause = 1
+
+;MP
+[State ]
+type=PowerSet
+trigger1 = Power >= 10000 && Root,palno < 7
+trigger1 = power > var(6)
+value = 9999
+ignorehitpause = 1
+
+[State ]
+type = Powerset
+triggerall = Playeridexist(ID)
+trigger1 = (sysvar(1)&8) && Sysvar(2) = 0 && Root,palno < 7
+value = 65000
+ignorehitpause = 1
+
+[State ]
+type=PowerSet
+trigger1 = Root,sysvar(3)&& RoundState <= 2 && Root,palno < 7
+trigger1 = !(Root,sysvar(1)&1)
+value = 65000
+ignorehitpause = 1
+
+[State ]
+type = varset
+trigger1 = 1
+var(6) = Power
+ignorehitpause = 1
+
+[State ]
+type=null
+trigger1=fvar(6)>9999
+trigger1=fvar(6):=9999 && 0
+trigger2=fvar(6)<1
+trigger2=fvar(6):=0 && 0
+trigger3=fvar(6)!=[1,9999]
+trigger3=fvar(6):=0 && 0
+ignorehitpause=1
+[State ]
+type=ParentVarset
+triggerall=Ishelper
+triggerall=playeridexist(Parent,id)
+trigger1=fvar(6)
+fvar(6)=fvar(6)
+ignorehitpause = 1
+[State ]
+type=ParentVaradd
+triggerall=Ishelper
+triggerall=playeridexist(Parent,id)
+trigger1=var(20)||var(21)||var(22)||var(23)||var(24)||var(25)||var(26)||var(27)||var(28)||var(29)
+trigger2=var(30)||var(31)||var(32)||var(33)||var(34)||var(35)||var(36)||var(37)||var(38)||var(39)
+trigger3=var(40)||var(41)||var(42)||var(43)||var(44)||var(45)||var(46)||var(47)||var(48)||var(49)
+trigger4=var(50)||var(51)||var(52)||var(53)||var(54)||var(55)||var(56)
+var(45)=1
+ignorehitpause = 1
+[State ]
+type=ParentVaradd
+triggerall=Ishelper
+triggerall=playeridexist(Parent,id)
+trigger1=Root,Stateno != 200&& (Root,Stateno != [5000,5150])&&(Root,Stateno != [0,40])&&(Root,Stateno != [120,190])&&(Root,Stateno != 5900)
+var(45)=10
+ignorehitpause = 1
+[State ]
+type = VarRangeSet
+triggerall = name = "Enuo"
+triggerall = Ishelper
+trigger1=1
+value = 0
+First=40
+last=49
+ignorehitpause=1
+[State ]
+type=null
+triggerall=Ishelper
+triggerall=playeridexist(Parent,id)
+trigger1=var(45)>0
+var(45)=-1
+ignorehitpause = 1
+[State ]
+type=varset
+trigger1=1
+fvar(6)=0
+ignorehitpause=1
+
+
+; Root
+; sysvar(0) time
+; sysvar(1) flag
+; 1 無敵解除
+; 2 プロテス
+; 4 シェル
+; 8 第二形態フラグ
+; 16 死亡演出フラグ
+; 32 ヘイストフラグ
+; 64 行動キャンセルフラグ
+; sysvar(2) 
+; sysvar(3) Life
+; sysvar(4) ABT , State , Time , Flag
+; ** 1-8(-1)
+; 1-63 ABT
+; ** 8-16(-1)
+; 64-32767 Stateno
+; ** 16-25(-1)
+; 32768 - 33554431 Time
+; ** 25
+; ** 26
+; ** 27
+; ** 28
+; ** 29
+; 536870912 グランドクロス Flag
+; ** 30
+; 1073741824 MPがたりないFlag
+; ** 31
+
+
+[State ]
+type = Nothitby
+trigger1 = !(sysvar(1)&1)
+trigger2 = ishelper(1002) || ishelper(1003)
+trigger2 = Root,Sysvar(3) <= lifemax*60/2 && Root,Palno < 7
+value = SCA
+
+
+
+[State ]
+type=varset
+trigger1=1
+var(4)=root,sysvar(3)
+ignorehitpause=1
+[State ]
+type=varadd
+triggerall=!(sysvar(1)&16)
+trigger1=RoundState<=2
+sysvar(2)=1
+ignorehitpause=1
+[State ]
+type=varadd
+triggerall=!(sysvar(1)&16)
+trigger1=!(root,sysvar(1)&1)
+sysvar(2)=180
+ignorehitpause=1
+[State ]
+type=varadd
+trigger1=!Root,sysvar(3)&& !(sysvar(1)&16)
+sysvar(1)=16
+ignorehitpause=1
+[State ]
+type=varset
+trigger1=Root,sysvar(3)&& (sysvar(1)&16)
+sysvar(2)=-180
+ignorehitpause=1
+[State ]
+type=varadd
+trigger1=Root,sysvar(3)&& (sysvar(1)&16)
+sysvar(1)=-16
+ignorehitpause=1
+[State ]
+type=varSet
+trigger1=(sysvar(1)&16) && sysvar(2)>0
+sysvar(2)=0
+ignorehitpause=1
+[State ]
+type=varadd
+trigger1=(sysvar(1)&16)&& Root,movetype != A
+sysvar(2)=-1
+ignorehitpause=1
+[State ]
+type=Changeanim
+trigger1=Anim!=6000 && Sysvar(2) < -220
+value=6000
+ignorehitpause=1
+
+[State ]
+type=Playsnd
+triggerall=(sysvar(1)&16)
+trigger1 = Sysvar(2) = -20
+trigger2 = Sysvar(2) = -130
+value=0,3
+ignorehitpause=1
+[State ]
+type=Playsnd
+triggerall=(sysvar(1)&16)
+trigger1 = Sysvar(2) = -200
+value=11,1
+ignorehitpause=1
+[State ]
+type=Explod
+triggerall=(sysvar(1)&16)
+trigger1 = Sysvar(2) = [-21,-20]
+trigger2 = Sysvar(2) = [-131,-130]
+anim = 6010
+postype = B
+pos = 160,110
+scale = 5,5
+sprpriority=-99999
+bindtime = -1
+ownpal = 1
+ignorehitpause=1
+
+[State ]
+type = Assertspecial
+trigger1=(sysvar(1)&16)
+flag=Nomusic
+ignorehitpause = 1
+[State ]
+type = Assertspecial
+trigger1=(sysvar(1)&16)
+trigger1=sysvar(2) = [-850,-1]
+flag=roundnotover
+ignorehitpause = 1
+[State ]
+type = Removeexplod
+trigger1=(sysvar(1)&16)
+id = 1009
+ignorehitpause=1
+
+[State ]
+type = Changeanim
+trigger1 = !Playeridexist(root,id)
+value = 5
+
+[Statedef 1001]
+type = A
+movetype = U
+physics = N 
+[State ]
+type=ChangeState
+trigger1 = !Ishelper
+value=1000
+[State ]
+type=Lifeadd
+trigger1=1
+value=1-500*(name!="Enuo")
+ignorehitpause=1
+[State ]
+type=SelfState
+trigger1=1
+value=0
+[Statedef 1002]
+type = A
+movetype = U
+physics = N 
+[State ]
+type=ChangeState
+trigger1 = !Ishelper
+value=1000
+[State ]
+type=Lifeadd
+trigger1=1
+value=1-500*(name!="Enuo")
+ignorehitpause=1
+[State ]
+type=SelfState
+trigger1=1
+value=0
+
+; 
+[Statedef 9900]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type=SelfState
+trigger1 = name != "Enuo"
+value=5050
+
+[State ]
+type=SelfState
+trigger1 = !Alive
+value=5150
+
+[State ]
+type = ChangeState
+trigger1 = !playeridexist(sysvar(2))
+value = 0
+
+[Statedef 8000]
+type = A
+movetype = U
+physics = N 
+[State ]
+type=SelfState
+trigger1 = !Ishelper
+value=5050
+[State ]
+type=Screenbound
+trigger1=1
+value=0
+[State ]
+type=Changeanim
+trigger1=1
+value=5
+ignorehitpause=1
+[State ]
+type=assertspecial
+trigger1=1
+flag=Invisible
+flag2=noshadow
+ignorehitpause=1
+[State ]
+type=Playerpush
+trigger1=1
+value=0
+ignorehitpause=1
+[State ]
+type=Posset
+trigger1=Ishelper
+trigger1=Playeridexist(Root,id)
+x=Root,pos x
+y=Root,Pos y
+[State ]
+type=Statetypeset
+trigger1=1
+statetype=A
+movetype=I
+ignorehitpause=1
+[State ]
+type=Changestate
+trigger1=!(root,sysvar(1)&4)
+trigger2=!ishelper(9650)
+value=5150
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=!Numexplod(8000)
+ID=8000
+anim=8000
+postype=L
+pos=160,-120
+sprpriority=-9999999
+scale=20,.5
+removetime=-1
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=!Numexplod(8001)
+ID=8001
+anim=8000
+postype=L
+pos=160,120
+sprpriority=-9999999
+scale=20,.5
+removetime=-1
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Numexplod(8000)=1
+ID=8000
+anim=8000
+postype=L
+pos=160,-120
+sprpriority=-99999999
+scale=20,.5
+ownpal=1
+removetime=-1
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Numexplod(8001)=1
+ID=8001
+anim=8000
+postype=L
+pos=160,120
+sprpriority=-99999999
+scale=20,.5
+ownpal=1
+removetime=-1
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Gametime%4 = 0
+trigger1=var(10):= Random%240-Random%240 - floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*120) || 1
+trigger1=var(11):= Random%160-Random%160 || 1
+trigger1=fvar(10):= 0.0025*(-Random%125) || 1
+scale=.5+fvar(10),.5 + fvar(10)
+ID=8010
+anim=8001
+postype=L
+pos=160+var(10),120+var(11)
+vel=floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)/2,floor(cos(gametime/2*0.04)*5)
+accel=-floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)*0.02,0
+sprpriority=-9999997
+ownpal=1
+removetime=60
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Gametime%4 = 0
+trigger1=var(10):= Random%240-Random%240 - floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*120) || 1
+trigger1=var(11):= Random%160-Random%160 || 1
+trigger1=fvar(10):= 0.0025*(-Random%125) || 1
+scale=.5+fvar(10),.5 + fvar(10)
+ID=8010
+anim=8001
+
+pos=240+var(10),180+var(11)
+vel=floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36),floor(cos(gametime/2*0.04)*5)
+accel=-floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)*0.02,0
+sprpriority=-9999997
+scale=.5,.75
+ownpal=1
+removetime=60
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Gametime%4 = 0
+trigger1=var(10):= Random%240-Random%240 - floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*120) || 1
+trigger1=var(11):= Random%160-Random%160 || 1
+trigger1=fvar(10):= 0.0025*(-Random%125) || 1
+scale=.5+fvar(10),.5 + fvar(10)
+ID=8010
+anim=8001
+postype=L
+pos=80+var(10),180+var(11)
+vel=floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36),floor(cos(gametime/2*0.04)*5)
+accel=-floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)*0.02,0
+sprpriority=-9999997
+scale=.5,.75
+ownpal=1
+removetime=60
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Gametime%4 = 0 && abs(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075) )>0.4
+trigger1=var(10):= Random%240-Random%240 - floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*120) || 1
+trigger1=var(11):= Random%160-Random%160 || 1
+trigger1=fvar(10):= 0.0025*(-Random%125) || 1
+scale=.5+fvar(10),.5 + fvar(10)
+ID=8010
+anim=8001
+postype=L
+pos=240+var(10),60+var(11)
+vel=floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36),floor(cos(gametime/2*0.04)*5)
+accel=-floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)*0.02,0
+sprpriority=-9999997
+scale=.5,.75
+ownpal=1
+removetime=60
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Gametime%4 = 0 && abs(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075) )>0.4
+trigger1=var(10):= Random%240-Random%240 - floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*120) || 1
+trigger1=var(11):= Random%160-Random%160 || 1
+trigger1=fvar(10):= 0.0025*(-Random%125) || 1
+scale=.5+fvar(10),.5 + fvar(10)
+ID=8010
+anim=8001
+postype=L
+pos=80+var(10),180+var(11)
+vel=floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)/2,floor(cos(gametime/2*0.04)*5)
+accel=-floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)*0.02,0
+sprpriority=-9999997
+scale=.5,.75
+ownpal=1
+removetime=60
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+[State ]
+type=Explod
+trigger1=Playeridexist(id)
+trigger1=Gametime%4 = 0 && abs(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075) )>0.4
+trigger1=var(10):= Random%240-Random%240 - floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*120) || 1
+trigger1=var(11):= Random%160-Random%160 || 1
+trigger1=fvar(10):= 0.0025*(-Random%125) || 1
+scale=.5+fvar(10),.5 + fvar(10)
+ID=8010
+anim=8001
+postype=L
+pos=80+var(10),60+var(11)
+vel=floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36),floor(cos(gametime/2*0.04)*5)
+accel=-floor(sin((gametime+sin((gametime-416)*0.0075)*416)*0.0075)*36)*0.02,0
+sprpriority=-9999997
+scale=.5,.75
+ownpal=1
+removetime=60
+supermovetime=9999999
+pausemovetime=9999999
+ignorehitpause=1
+
+[State ]
+type = Assertspecial
+trigger1 = 1
+flag = Nofg
+flag2 = nobg
+[State ]
+type = BGPalfx
+trigger1 = 1
+time=-1
+mul=0,0,0
+add=-255,-255,-255
+[State ]
+type = Palfx
+trigger1 = 1
+trigger1 = fvar(13):= ifelse(sin(gametime*0.01)>0,abs(sin(gametime*0.02)),1) || 1
+trigger1 = var(13):= 32+floor(sin(gametime/2*0.2)*64) || 1
+trigger1 = fvar(14):= 1+sin(gametime*0.02) || 1
+trigger1 = fvar(14):= ifelse(fvar(14)>0.5,1,fvar(14)) || 1
+time=1
+add = floor(sin(90+gametime*0.02)*32*fvar(13)*fvar(14)),floor(sin(gametime*0.02)*32*fvar(13)*fvar(14)),floor(sin(180+gametime*0.02)*32*fvar(13)*fvar(14))
+mul = 206+floor(sin(90+gametime*0.02)*206*fvar(13)),206+floor(sin(gametime*0.02)*206*fvar(13)),206+floor(sin(180+gametime*0.02)*206*fvar(13))
+[State ]
+type = Palfx
+triggerall = var(12):=-128*ifelse( (gametime+200)%1258>500,-1,1) || 1
+trigger1 = sin(gametime*0.04)>0 && sin(gametime*0.01)>0&& sin(gametime*0.02)>0
+time=1
+add = var(13),var(13),var(13)
+mul = 160-floor(sin(gametime*0.04)*var(12)),160-floor(sin(gametime*0.04)*var(12)),160-floor(sin(gametime*0.04)*var(12))
+
+[State ]
+type=Modifyexplod
+trigger1=1
+id=8000
+postype=L
+pos=120,-120+floor(sin(gametime/2*0.02)*360)
+
+[State ]
+type=Modifyexplod
+trigger1=1
+id=8001
+postype=L
+pos=120,360+floor(sin(gametime/2*0.02)*360)
+
+
+[State ]
+type=SelfState
+trigger1=1
+value=5150
+ignorehitpause=1
+
+[statedef 8200]
+[State ]
+type=SelfState
+trigger1 = !Ishelper
+value=5050
+[State ]
+type=Screenbound
+trigger1=1
+value=0
+[State ]
+type=Changeanim
+trigger1=1
+value=5
+ignorehitpause=1
+[State ]
+type=assertspecial
+trigger1=1
+flag=Invisible
+flag2=noshadow
+ignorehitpause=1
+[State ]
+type=Playerpush
+trigger1=1
+value=0
+ignorehitpause=1
+
+[State ]
+type=pause
+trigger1=1
+time=0
+movetime=0
+
+[State ]
+type=superpause
+trigger1=1
+time = 2
+movetime = 2
+anim = -1
+darken = 0
+p2defmul = 1
+unhittable = 0
+
+[State ]
+type = Destroyself
+trigger1=1
+
+[State ]
+type=SelfState
+trigger1=1
+value=5150
+ignorehitpause=1
+
+[Quotes]
+; Up to 100 victory quotes can be specified per language (victory0 - victory99)
+victory0 = "Who enters my demesne? Humans, is it?"
+victory1 = "What do you seek from this place? Power? Fame? Foolish humans."
+victory2 = "I see you've begun to understand my glorious existence here."
+victory3 = "Yet, perhaps it is best you see for yourselves my power... Power that held the whole world in fear... The power of the Void!"
+victory4 = "The forbidden power has finally been released..."

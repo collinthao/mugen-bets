@@ -1,0 +1,1185 @@
+; カンフーマンの入力コマンド定義ファイルです。
+; コマンドの入力キーを設定するパートと、技を実行するための条件を設定するパートに分かれています。
+;------------------------------------------------------------------------------
+;==============================================================================
+; 入力キーの設定パート
+;==============================================================================
+
+;-| ボタン配置 |-----------------------------------------------------
+;各ボタンの配置を簡単に変更できます。
+;このキャラクターのボタン配置を変えたいときなどに使います。
+;x = x を x = a に変えれば、xがaに変わります。
+
+[Remap]
+x = x
+y = y
+z = z
+a = a
+b = b
+c = c
+s = s
+
+;-| CPUアルゴリズム用コマンド |------------------------------
+[Command]
+name = "AI"
+command = a
+time = 1
+[Command]
+name = "AI"
+command = b
+time = 1
+[Command]
+name = "AI"
+command = c
+time = 1
+[Command]
+name = "AI"
+command = x
+time = 1
+[Command]
+name = "AI"
+command = y
+time = 1
+[Command]
+name = "AI"
+command = z
+time = 1
+[Command]
+name = "AI"
+command = s
+time = 1
+[Command]
+name = "AI"
+command = $F
+time = 1
+[Command]
+name = "AI"
+command = $B
+time = 1
+[Command]
+name = "AI"
+command = $U
+time = 1
+[Command]
+name = "AI"
+command = $D
+time = 1
+
+[Command]
+name = "/command"
+command = /a
+time = 1
+[Command]
+name = "/command"
+command = /b
+time = 1
+[Command]
+name = "/command"
+command = /c
+time = 1
+[Command]
+name = "/command"
+command = /x
+time = 1
+[Command]
+name = "/command"
+command = /y
+time = 1
+[Command]
+name = "/command"
+command = /z
+time = 1
+[Command]
+name = "/command"
+command = /s
+time = 1
+[Command]
+name = "/command"
+command = /$F
+time = 1
+[Command]
+name = "/command"
+command = /$B
+time = 1
+[Command]
+name = "/command"
+command = /$U
+time = 1
+[Command]
+name = "/command"
+command = /$D
+time = 1
+
+;-| 標準化 |-------------------------------------------------------
+[Defaults]
+; timeを記述しなかった場合、以下の値が参照されます。最小値は1です。
+command.time = 15
+
+; buffer.timeの値です。1～30まで設定できます。
+; 普通は1です。
+command.buffer.time = 1
+
+;------------------------------------------------------------------------------
+;-| 超必殺技 |-----------------------------------------------------------------
+;コマンドの一部が重なる場合、先に書かれたものが優先されるので
+;気を付けてください。
+
+
+[Command]
+name = "→↓←→x"
+command = ~F, D, B,F,  x
+time = 25
+
+[Command]
+name = "→↓←→y"
+command = ~F, D, B,F,  y
+time = 25
+
+[Command]
+name = "→↓←→x"
+command = ~F, D, B,F,  ~x
+time = 25
+
+[Command]
+name = "→↓←→y"
+command = ~F, D, B,F,  ~y
+time = 25
+
+[Command]
+name = "↓→↓→x"
+command = ~D, F, D, F,   x
+time = 25
+
+[Command]
+name = "↓→↓→y"
+command = ~D, F, D, F,   y
+time = 25
+
+[Command]
+name = "↓→↓→x"
+command = ~D, F, D, F,   ~x
+time = 25
+
+[Command]
+name = "↓→↓→y"
+command = ~D, F, D, F,   ~y
+time = 25
+;------------------------------------------------------------------------------
+;-| 必殺技 |-------------------------------------------------------------------
+;コマンドの一部が重なる場合、先に書かれたものが優先されるので
+;623 → 236の順に登録されています。
+;（注:236等はテンキーでコマンドを表しています）
+
+
+[Command]
+name = "→↓←K"
+command = ~F, D, B, a
+time = 25
+
+[Command]
+name = "→↓←K"
+command = ~F, D, B, b
+time = 25
+
+[Command]
+name = "→↓←K"
+command = ~F, D, ~b, ~a
+time = 25
+
+[Command]
+name = "→↓←K"
+command = ~F, D, ~b, ~b
+time = 25
+
+[Command]
+name = "←→P"
+command = ~B, F, x
+
+[Command]
+name = "←→P"
+command = ~B, F, y
+
+[Command]
+name = "←→P"
+command = ~B, F, ~x
+
+[Command]
+name = "←→P"
+command = ~B, F, ~y
+
+[Command]
+name = "↓→P"
+command = ~D, F, x
+
+[Command]
+name = "↓→P"
+command = ~D, F, y
+
+[Command]
+name = "↓→P"
+command = ~D, F, ~x
+
+[Command]
+name = "↓→P"
+command = ~D, F, ~y
+
+
+[Command]
+name = "jump"    
+command = ~$D,$U
+time = 8
+
+
+[Command]
+name = "Njump"    
+command = ~$D,~U
+time = 8
+
+[Command]
+name = "Hjump"    
+command = ~$D,$U
+time = 8
+
+;------------------------------------------------------------------------------
+;-| キー２回連続入力 |---------------------------------------------------------
+[Command]
+name = "FF"     ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = F, F
+time = 10
+
+[Command]
+name = "BB"     ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = B, B
+time = 10
+
+;------------------------------------------------------------------------------
+;-| 同時押し |-----------------------------------------------------------------
+[Command]
+name = "recovery"   ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = c
+time = 1
+
+[Command]
+name = "recovery"   ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = z
+time = 1
+
+[Command]
+name = "xy"
+command = x+y
+time = 1
+
+[Command]
+name = "xz"
+command = x+z
+time = 1
+
+[Command]
+name = "yz"
+command = y+z
+time = 1
+
+[Command]
+name = "ab"
+command = a+b
+time = 1
+
+[Command]
+name = "ac"
+command = a+c
+time = 1
+
+[Command]
+name = "bc"
+command = b+c
+time = 1
+
+[Command]
+name = "xa"
+command = x+a
+time = 1
+
+[Command]
+name = "yb"
+command = y+b
+time = 1
+
+[Command]
+name = "zc"
+command = z+c
+time = 1
+
+[Command]
+name = "roll"
+command = x+a
+time = 1
+
+;------------------------------------------------------------------------------
+;-| 方向キー＋ボタン |---------------------------------------------------------
+
+;------------------------------------------------------------------------------
+;-| ボタン単発 |---------------------------------------------------------------
+[Command]
+name = "a"
+command = a
+time = 1
+
+[Command]
+name = "b"
+command = b
+time = 1
+
+[Command]
+name = "c"
+command = c
+time = 1
+
+[Command]
+name = "x"
+command = x
+time = 1
+
+[Command]
+name = "y"
+command = y
+time = 1
+
+[Command]
+name = "z"
+command = z
+time = 1
+
+[Command]
+name = "離しa"
+command = ~a
+time = 1
+
+[Command]
+name = "離しb"
+command = ~b
+time = 1
+
+[Command]
+name = "離しc"
+command = ~c
+time = 1
+
+[Command]
+name = "離しx"
+command = ~x
+time = 1
+
+[Command]
+name = "離しy"
+command = ~y
+time = 1
+
+[Command]
+name = "離しz"
+command = ~z
+time = 1
+
+[Command]
+name = "start"
+command = s
+time = 1
+
+
+[command]
+name="fwd"
+command=F
+time=1
+
+[command]
+name="back"
+command=B
+time=1
+
+[command]
+name="up"
+command=U
+time=1
+
+[command]
+name="down"
+command=D
+time=1
+
+[Command]
+name = "holdx"
+command = /x
+time = 1
+
+[Command]
+name = "holdy"
+command = /y
+time = 1
+
+[Command]
+name = "holdz"
+command = /z
+time = 1
+
+[Command]
+name = "holda"
+command = /a
+time = 1
+
+[Command]
+name = "holdb"
+command = /b
+time = 1
+
+[Command]
+name = "holdc"
+command = /c
+time = 1
+
+;---------------------------
+---------------------------------------------------
+;-| 方向キー押しっぱなし |-----------------------------------------------------
+[Command]
+name = "holdfwd"   ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$F
+time = 1
+
+[Command]
+name = "holdback"  ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$B
+time = 1
+
+[Command]
+name = "holdup"    ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$U
+time = 1
+
+[Command]
+name = "holddown"  ;要求済み (キーの変更は可能ですが名前を変えたり無効にしてはいけません)
+command = /$D
+time = 1
+
+;------------------------------------------------------------------------------
+;==============================================================================
+; 技を実行するための条件の設定（ステートエントリーパート）
+;==============================================================================
+;------------------------------------------------------------------------------
+
+[Statedef -1];←この行は絶対に消さないでください。必須の項目です。
+
+;==============================================================================
+;==============================================================================
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\必殺技\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+[State -1, 空中ヘビークラッシュ暗転]
+type = ChangeState
+value = 2151
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = (command = "→↓←→y"||var(8) = [210100,200099])
+triggerall = statetype = A
+triggerall = power >= 1000
+trigger1 = ctrl||((stateno = [200,699])&&time <= 5)
+trigger2 = (stateno = [600,699])
+trigger2 = movecontact
+trigger3 = (stateno = [1000,1099])
+trigger3 = movehit
+
+[State -1, 空中ヘビークラッシュ]
+type = ChangeState
+value = 2150
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = (command = "→↓←→x"||var(8) = [210000,200099])
+triggerall = statetype = A
+triggerALL = (100*life/const(data.life))<=30
+trigger1 = ctrl||((stateno = [200,699])&&time <= 5)
+trigger2 = (stateno = [600,699])
+trigger2 = movecontact
+trigger3 = (stateno = [1000,1099])
+trigger3 = movehit
+
+[State -1, ヘビークラッシュ暗転]
+type = ChangeState
+value = 2101
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = (command = "→↓←→y"||var(8) = [210100,200099])
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = ctrl||stateno = 100||stateno = 102||stateno = 102||((stateno = [200,699])&&time <= 5)
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1&&Animelem = 5,<= 0
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1100,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+
+[State -1, ヘビークラッシュ]
+type = ChangeState
+value = 2100
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = (command = "→↓←→x"||var(8) = [210000,200099])
+triggerall = statetype != A
+triggerALL = (100*life/const(data.life))<=30
+trigger1 = ctrl||stateno = 100||stateno = 102||stateno = 102||((stateno = [200,699])&&time <= 5)
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1&&Animelem = 5,<= 0
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1100,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+
+[State -1, ニトロスプラッシュ暗転]
+type = ChangeState
+value = 2001
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = (command = "↓→↓→y"||var(8) = [200100,200199])
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = ctrl||stateno = 100||stateno = 102||stateno = 102||((stateno = [200,699])&&time <= 5)
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1&&Animelem = 5,<= 0
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1100,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+[State -1, ニトロスプラッシュ]
+type = ChangeState
+value = 2000
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = (command = "↓→↓→x"||var(8) = [200000,200099])
+triggerall = statetype != A
+triggerALL = (100*life/const(data.life))<=30
+trigger1 = ctrl||stateno = 100||stateno = 102||stateno = 102||((stateno = [200,699])&&time <= 5)
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1&&Animelem = 5,<= 0
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1100,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+[State -1, デストロイドヘルダイブ]
+type = ChangeState
+value = 1200
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "→↓←K"||var(8) = [120000,120099]
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102||stateno = 102||((stateno = [200,699])&&time <= 5)
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1&&Animelem = 5,<= 0
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1100,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+[State -1, キャノンボール]
+type = ChangeState
+value = 1150
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "←→P"||var(8) = [110000,110099]
+triggerall = statetype = A
+trigger1 = ctrl||((stateno = [200,699])&&time <= 5)
+trigger2 = (stateno = [600,699])
+trigger2 = movecontact
+trigger3 = (stateno = [1000,1099])
+trigger3 = movehit
+
+
+[State -1, キャノンボール]
+type = ChangeState
+value = 1100
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "←→P"||var(8) = [110000,110099]
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102||stateno = 102||((stateno = [200,699])&&time <= 5)
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1&&Animelem = 5,<= 0
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1100,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+[State -1, ニトロスライム]
+type = ChangeState
+value = 1000
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "↓→P"||var(8) = [100000,100099]
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102||stateno = 102||((stateno = [200,699])&&time <= 5)
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1100,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+[State -1, 技待機]
+type = ChangeState
+value = 791
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "z"
+triggerall = statetype = A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 600||stateno = 630
+trigger2 = Animelem = 3,>= 1
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1000,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+[State -1, 技待機]
+type = ChangeState
+value = 790
+triggerall = !IsHelper
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "z"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 3,>= 1
+trigger3 = (stateno = [200,399])||(stateno = [400,499])||(stateno = [600,699])
+trigger3 = movecontact
+trigger4 = (stateno = [1000,1199])
+trigger4 = movehit
+trigger5 = ctrl = 0
+trigger5 = numHelper(1050)
+trigger5 = Helper(1050),movecontact
+
+[State -1, ヘビークラッシュ]
+type = ChangeState
+value = 2151
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdfwd"
+triggerall = command = "z"
+triggerall = statetype = A
+triggerall = power >= 1000
+trigger1 = stateno = 791
+
+[State -1, ヘビークラッシュ]
+type = ChangeState
+value = 2150
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdback"
+triggerall = command = "z"
+triggerall = statetype = A
+triggerALL = (100*life/const(data.life))<=30
+trigger1 = stateno = 791
+
+[State -1, ヘビークラッシュ暗転]
+type = ChangeState
+value = 2101
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdfwd"
+triggerall = command = "z"
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = stateno = 790
+
+[State -1, ヘビークラッシュ]
+type = ChangeState
+value = 2100
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdback"
+triggerall = command = "z"
+triggerall = statetype != A
+triggerALL = (100*life/const(data.life))<=30
+trigger1 = stateno = 790
+
+
+[State -1, ニトロスプラッシュ暗転]
+type = ChangeState
+value = 2001
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holddown"
+triggerall = command = "z"
+triggerall = statetype != A
+triggerall = power >= 1000
+trigger1 = stateno = 790
+
+[State -1, ニトロスプラッシュ]
+type = ChangeState
+value = 2000
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command != "holddown"
+triggerall = command = "z"
+triggerall = statetype != A
+triggerALL = (100*life/const(data.life))<=30
+trigger1 = stateno = 790
+
+
+[State -1, キャノンボール]
+type = ChangeState
+value = 1150
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdfwd"
+triggerall = command = "x"||command = "y"
+triggerall = statetype = A
+trigger1 = stateno = 791
+
+[State -1, キャノンボール]
+type = ChangeState
+value = 1100
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdfwd"
+triggerall = command = "x"||command = "y"
+triggerall = statetype != A
+trigger1 = stateno = 790
+
+
+[State -1, ニトロスライム]
+type = ChangeState
+value = 1000
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command != "holdup"
+triggerall = command != "holdfwd"
+triggerall = command != "holdback"
+triggerall = command = "x"||command = "y"
+triggerall = statetype != A
+trigger1 = stateno = 790
+
+
+[State -1, デストロイドヘルダイブ]
+type = ChangeState
+value = 1200
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "a"||command = "b"
+triggerall = statetype != A
+trigger1 = stateno = 790
+
+
+;------------------------------------------------------------------------------
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\システム\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+[State -1, ガードキャンセル回り込み]
+type = ChangeState
+value = 781
+triggerall = var(59) != 1
+triggerall = power >=500
+triggerall = (StateNo = [150,153])
+triggerall = statetype != A
+trigger1 = command = "c"
+
+[State -1, ガードキャンセル攻撃]
+type = ChangeState
+value = 780
+triggerall = var(59) != 1
+triggerall = power >=500
+triggerall = (StateNo = [150,153])
+triggerall = statetype != A
+trigger1 = command = "z"
+
+[State -1, 起き上がり攻撃]
+type = ChangeState
+value = 780
+triggerall = var(59) != 1
+triggerall = power >=500
+triggerall = statetype = L
+trigger1 = command = "z"
+trigger1 = Stateno =5120
+
+[State -1, 起き上がりジャンプ]
+type = ChangeState
+value = 797
+triggerall = power >=500
+triggerall = var(59) != 1
+triggerall = statetype = L
+triggerall = (command = "holdup"&&command = "c")||var(8) = [79700,79799]
+trigger1 = Stateno =5120
+
+[State -1, 起き上がりバックステップ]
+type = ChangeState
+value = 796
+triggerall = power >=500
+triggerall = var(59) != 1
+triggerall = statetype = L
+triggerall = (command = "holdback"&&command = "c")||var(8) = [79600,79699]
+trigger1 = Stateno =5120
+
+[State -1, 起き上がりステップ]
+type = ChangeState
+value = 795
+triggerall = power >=500
+triggerall = var(59) != 1
+triggerall = statetype = L
+triggerall = (command = "holdfwd"&&command = "c")||var(8) = [79500,79599]
+trigger1 = Stateno =5120
+
+[State -1, ジャンプキャンセル1]
+type = ChangeState
+value = 766
+triggerall = power >=1000
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdup"
+triggerall = Stateno !=[800,899]
+triggerall = Stateno !=[1200,1299]
+triggerall = Stateno !=[2110,2199]
+triggerall = Stateno !=[795,799]
+triggerall = command = "c"
+trigger1 = Stateno =[200,2999]
+trigger2 = Stateno =50||Stateno =100||Stateno =105
+
+[State -1, ステップキャンセル2]
+type = ChangeState
+value = 765
+triggerall = power >=1000
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdback"
+triggerall = Stateno !=[800,899]
+triggerall = Stateno !=[1200,1299]
+triggerall = Stateno !=[2110,2199]
+triggerall = Stateno !=[795,799]
+triggerall = statetype != A
+triggerall = command = "c"
+trigger1 = Stateno =[200,2999]
+
+[State -1, ステップキャンセル1]
+type = ChangeState
+value = 760
+triggerall = power >=1000
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = Stateno !=[800,899]
+triggerall = Stateno !=[1100,1299]
+triggerall = Stateno !=[2100,2199]
+triggerall = Stateno !=[795,799]
+triggerall = statetype != A
+triggerall = command = "c"
+trigger1 = Stateno =[200,2999]
+
+[State -1, 回り込み]
+type = ChangeState
+value = 700
+triggerall = var(59) != 1
+triggerall = command = "c"
+triggerall = movetype != H
+triggerall = statetype != A
+trigger1 = ctrl||(stateno = [200,499])&&time <= 2
+
+;投げ
+[State -1, Kung Fu Throw]
+type = ChangeState
+value = 801
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "yb"||var(9) = [400,404]
+triggerall = statetype = A
+trigger1 = ctrl||(stateno = [600,699])&&time <= 2
+
+;投げ
+[State -1, Kung Fu Throw]
+type = ChangeState
+value = 800
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "yb"||var(9) = [400,404]
+triggerall = statetype != A
+triggerall = stateno != 100
+trigger1 = ctrl||(stateno = [200,499])&&time <= 2
+
+;ダッシュ
+[State -1, Dash]
+type = ChangeState
+value = 100
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "FF"
+trigger1 = statetype != A
+trigger1 = ctrl
+trigger2 = stateno = 1010&&movehit
+
+;バックステップ
+[State -1, Back Step]
+type = ChangeState
+value = 105
+triggerall = var(59) != 1
+triggerall = movetype != H
+trigger1 = command = "BB"
+trigger1 = statetype != A
+trigger1 = ctrl
+
+;挑発
+[State -1, Taunt]
+type = ChangeState
+value = 195
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "start"
+trigger1 = statetype != A
+trigger1 = ctrl
+
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\通常技\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+;立ち弱パンチ
+[State -1, Stand Light Punch]
+type = ChangeState
+value = 200
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "x"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+;立ち弱キック
+[State -1, Stand Light Kick]
+type = ChangeState
+value = 230
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "a"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+;しゃがみ弱パンチ
+[State -1, Crouching Light Punch]
+type = ChangeState
+value = 400
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "x"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+;しゃがみ弱キック
+[State -1, Crouching Light Kick]
+type = ChangeState
+value = 430
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "a"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+;空中弱パンチ
+[State -1, Jump Light Punch]
+type = ChangeState
+value = 600
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "x"||var(8) = [60000,60099]
+triggerall = statetype = A
+trigger1 = ctrl
+
+;空中弱キック
+[State -1, Jump Light Kick]
+type = ChangeState
+value = 630
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "a"||var(8) = [63000,63099]
+triggerall = statetype = A
+trigger1 = ctrl
+trigger2 = stateno = 600
+trigger2 = movecontact
+
+;==============================================================================
+[State -1, 追撃]
+type = ChangeState
+value = 350
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall =  command = "holdup"
+triggerall = statetype != A
+triggerall =  command = "y"
+trigger1 = p2statetype = L && p2stateno != 5120
+trigger1 = ctrl||anim = 40
+trigger2 = (stateno = 440)
+trigger2 = movehit
+
+[State -1, ファットプッシュ]
+type = ChangeState
+value = 300
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdback"
+triggerall =  command = "y"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+trigger3 = (stateno = [200,299])|| (stateno = [400,499])
+trigger3 = movecontact
+
+[State -1, ニールキック]
+type = ChangeState
+value = 310
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "holdfwd"
+triggerall =  command = "b"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+trigger3 = (stateno = [200,299])|| (stateno = [400,499])
+trigger3 = movecontact
+
+;------------------------------------------------------------------------------
+;立ち強パンチ
+[State -1, Stand Strong Punch]
+type = ChangeState
+value = 210
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "y"
+triggerall = command != "holdfwd"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+;------------------------------------------------------------------------------
+
+;立ち強キック
+[State -1, Standing Strong Kick]
+type = ChangeState
+value = 240
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "b"
+triggerall = command != "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+
+
+
+;------------------------------------------------------------------------------
+
+;しゃがみ強パンチ
+[State -1, Crouching Strong Punch]
+type = ChangeState
+value = 410
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "y"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+;------------------------------------------------------------------------------
+
+;しゃがみ強キック
+[State -1, Crouching Strong Kick]
+type = ChangeState
+value = 440
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "b"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl||stateno = 100||stateno = 102
+trigger2 = stateno = 200||stateno = 230||stateno = 400||stateno = 430
+trigger2 = Animelem = 2,>= 1
+
+
+;------------------------------------------------------------------------------
+;空中強パンチ
+[State -1, Jump Strong Punch]
+type = ChangeState
+value = 610
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "y"||var(8) = [61000,61099]
+triggerall = statetype = A
+trigger1 = ctrl
+trigger2 = stateno = 600||stateno = 630
+trigger2 = movecontact
+
+;------------------------------------------------------------------------------
+
+;空中強キック
+[State -1, Jump Strong Kick]
+type = ChangeState
+value = 640
+triggerall = var(59) != 1
+triggerall = movetype != H
+triggerall = command = "b"||var(8) = [64000,64099]
+triggerall = statetype = A
+trigger1 = ctrl
+trigger2 = stateno = 600||stateno = 630
+trigger2 = movecontact
+trigger3 = stateno = 610
+trigger3 = movecontact
+

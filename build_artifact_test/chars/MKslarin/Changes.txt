@@ -1,0 +1,31 @@
+Winane's Change Log:
+
+-Fixed debug cluttering due to non-integral PalFX and anim elem parameters.
+-Very slightly optimized some coding.
+-"Corrected" a few state controller labels.
+-Set "time = 0" for CPU commands.
+-Fixed all move* triggers, including for the EX fireball.
+-Removed silly triggers from AI VarSet.
+-Made CMD/AIR compatible with my AI activation code's command order standard.
+-Correction: "Pal.Default" -> "Pal.Defaults" in SuperMario.def.
+-Added some missing information in SuperMario.def.
+-Corrected spelling of "palettes" in folder name & SuperMario.def.  :P
+-Changed "\"s to "/"s in SuperMario.def, HauntedCastle.def, and PeachCastle.def.
+-Added "intensity = 0" to HauntedCastle.def, PeachCastle.def, and BowsersCastle.def.
+-Corrected Elecbyte's old mistakes in StateDefs 5100, 5110, and 5900.
+-Removed all unmodified common state overrides, and told Mugen to get those from data/common1.cns.
+-Corrected capitalization of palette file names.
+-Corrected header of HauntedCastle.sff.
+-Optimized ending.sff and BowsersCastle.sff.
+-Losslessly fixed clipping in BowserTheme.mp3.
+-Fixed stage bounds in HauntedCastle.def & PeachCastle.def.
+-Removed extra bg element and some other junk from HauntedCastle.def & PeachCastle.def.
+-In Peach Castle stage, moved the sprite up so that:
+  1. we can see all of your beautiful artwork.
+  2. characters with wide stances won't be standing on the little tree.
+-Inserted a space into names of HauntedCastle.def & PeachCastle.def, and an apostrophe into name of BowsersCastle.def.  =P
+-Added IsHomeTeam AI activation method.
+-Fixed conflict between sprite 5070,0 and anim 5070.
+-Fixed palette issues and optimized SuperMario.sff.  (Note that I cropped all the sprites, so keep a backup copy of the old version if keeping them uncropped makes things easier for you in any way.)
+-Added "p1sprpriority = 1" to [State 900, 1], [State 910, 1], [State 920, 1], and [State 930, 1].  (Wasn't necessary, since 1 is the default value, but still...)
+-Updated all palettes with coin colors.

@@ -1,0 +1,342 @@
+==========================================================================================
+Ragna the Bloodedge
+From Blazblue / Blazblue Cross Tag Battle
+Version 1.2
+For M.U.G.E.N 1.0 and above
+==========================================================================================
+
+==========================================================================================
+Notes
+==========================================================================================
+-In Mugen 1.0, The Ultra Burst Meter will cause a string of Debug errors. To fix this, swap out "BurstHUD.cns" with "BurstHUD10.cns" in the Def file.
+
+-This character was made with only single and turns mode in mind, so using this in simul mode is probably not a good idea.
+==========================================================================================
+
+==========================================================================================
+Change log
+==========================================================================================
+6/19/2022
+-EXA Update has been applied. More Info here: https://drive.google.com/file/d/1s9ySAFwmIriLWjqfqI85obh6GorL-Xv7/view?usp=sharing
+
+01/25/2022 - 1.163
+- Fixed an error the Damage dampener didn't reset when Ultra Bursting
+- Carnage Scissors, Seed of Tartarus, and Blood Scythe can now hit armored opponents
+- Fixed minor visual errors
+
+01/16/2022 - 1.162
+- Fixed an error where the Astral Heat can Chip Kill
+- Fixed minor visual errors
+
+06/30/2020 - 1.1611
+- Fixed an error where Ragna could not be killed by f1
+
+06/21/2020 - 1.161
+- Fixed an error where the Back Dash's Palfx would override the Rapid Cancel's Palfx
+- Changed layering for Burst Icon
+
+06/20/2021 - 1.16
+-New Mechanic: Not Over Yet
+  -Upon reaching 35% health or below and not being in a hurt state, you will receive the following benefits for the rest of the round:
+   +All Distortion Drives deal 20% more damage (Stacks with Ultra Burst's damage buff)
+   +Immediately Gain 500 Meter
+   +Slowly gain meter overtime
+   +Gain a defense buff that scales up to 35% according to how much health you currently have (Less health means more defense)
+  -Only triggers once per round
+-New Mechanic: Ultra Dead Angle (Burst while Guarding)
+  -Using this will cancel your guard stun and make you invulnerable for ten frames after the super pause. This also puts you into the Ultra Burst state, but it will only last a third of the time it would if you were to Ultra Burst normally.
+-Ground throw now has 5 frames of startup, Dash Grab now has 3 frames of startup
+-Stationary, Forward, and air dodges now have less invul time against physical attacks
+-Invul time upon air recovery lasts a little longer and control is regained a little sooner
+-Directional inputs now have more influence over air recovery
+-Distortion Drives can now be triggered with any combination of A, B, and C rather than just A+B (Example: QCF B+C, QCB A+C)
+-Changed default Liedown time to 15 frames
+-A red X now appears over the Burst Icon when in a situation where it is not usable
+-Added an Invalid Combo Indicator
+-General Aesthetic Changes
+-5C is now special cancelable on hit
+-Running A is now Special Cancelable
+
+
+00/00/2021 - 1.152
+- Fixed "sound does not exist" debug errors in IKEMEN GO
+- Fixed visual bugs that occur during Ultra Burst in IKEMEN GO
+
+01/27/2021 - 1.151
+- Changed the attribute flags on certain moves
+
+12/05/2020 - 1.15
+- Holding up since the first jump will no longer trigger an air jump
+- Fine tuned special intro with Jin Kisaragi
+- Japanese voice has also been updated
+
+11/07/2020 - 1.14
+- Fixed all Hitdefs so they may properly interact with reversal defs
+- Fixed turn to face behavior during normal burst
+
+09/27/2020  - 1.13
+- Reduced active frames and adjusted hitbox on air throw attempt.
+- Adjusted Launch Trajectory on Devoured By Darkness
+- Adjusted Frame Data on 4A
+- Fixed an error where air dodge's remaining invul frames would linger upon landing
+- Added Compatability for Faust's "This Is... Me?"
+
+07/26/2020  - 1.12
+- Damage Scaling Adjustments
+- Adjusted the hitboxes on Hell's Fang and the ground version of Gauntlet Hades so they can hit smaller opponents more consistently
+- Adjusted hitboxes and velocities for the A auto combo so it can hit more consistently at a further range
+- Adjusted launch trajectory for forward throw and air throw
+- Ultra Burst's aura effect will be temporarily disabled whenever Ragna is in a custom state
+- Additional Effects
+- the opponent can also recover from Carnage Scissors and Devoured by Darkness sooner
+- Fixed an Error where Ragna could not be KOed via lifeadd in certain cases
+- The soul eater particles will now disappear if Ragna gets hit before they reach him
+
+
+01/27/2020  - 1.101
+- Fixed an error where Ragna could not be killed by certain astral heats and finishers
+
+01/04/2020  - 1.1
+- New 2B, Its now Ragna's old 6D from the Blazblue Main series
+- Adjusted velocity for Running B and grounded Blood Scythe
+- 5BBB Now knocks the opponent back a set distance without wall bouncing, making it easier to follow up with certain attacks
+- Added Soul Eater Particles that spawn upon hitting with a soul eater move, Ragna now Heals once the particles move into him rather than instantly after hitting with a soul eater move
+- Fixed an error in the incremental cornerpush code
+- Added Special intro against Yumi
+- Added Special intro against somebody
+- Japanese Snd file has also been updated for the new interactions
+
+11/09/2019 - 1.09
+- New system mechanic: Ultra Burst. Burst can now be used in a neutral state, and doing so will put Ragna in a powered up state that gives the following benefits:
+ +Health and Meter will gradually recover overtime (Unless you're taking damage)
+ +Damage output will be increased by 20%
+ +Timer will be frozen
+ +Hitting the opponent with the Ultra Burst will launch them upward and will be unable to recover from it
+ +Hitting the opponent with the ultra burst will also grant 500 meter instantly
+The time that the Ultra Burst state will last is proportionate to the amount of health lost prior to activating, Attempting an astral heat will immediately end the Ultra Burst state
+- Implemented throw escape system, the opponent can now escape Ragna's normal throws by inputting A+B, B+C, X+Y, or Z within 14 frames after being grabbed. However, throws are inescapable on counterhit
+- New Burst icon
+- New astral heat BG
+- New Cut in for Astral Heat
+- Revised Burst System
+- Realigned aerial sprites
+- General improvements for effects
+- Ragna now makes use of custom fall states, bypassing fall.defence_up
+- Changed animation for running grab, also it can now be canceled into Carnage Scissors, Devoured by Darkness or Black Onslaught
+- Dead spike B now has longer startup than Dead spike A
+- Adjusted hitboxes for 5A and Inferno divider so they can hit smaller opponents more consistently
+- Expanded Hitboxes for Devoured by Darkness and Black Onslaught downward
+- Axe Kick now puts the opponent in a custom state that prevents them from recovering too early after hitting the ground
+- Implemented incremental cornerpush and hitstun decay
+- After a successful Burst, none of Ragna's attacks will connect until the opponent has recovered
+- Fixed an error where Ragna could Rapid Cancel his Burst
+- Changed scale from .315,.315 to .33,.33
+- Added AI
+- Added special intro against Jin Kisaragi
+- Japanese voice now uses Ragna's voice clips from BBTAG
+- For the sake of lowering the file size, the Japanese voice is now a separate download, which is available here:
+https://drive.google.com/file/d/14RcC_6o7IYGFpPtvnZfQQXILvFp4i3Vi/view?usp=sharing
+
+02/23/2019 - 1.064
+- Fixed an error where Dead Spike wouldn't count towards the combo meter under certain conditions
+
+02/21/2019 - 1.063
+- 5AAA is now only jump cancelable after the second hit
+- Adjusted the hitstun on jB, effectively preventing an infinite
+
+02/21/2019 - 1.06
+- Upgraded to Nep Heart's Burst system (Ragna can now burst during custom states, but not during throws and supers)
+- All attacks now deal extra damage on counter hit 
+- 5C now only causes the opponent to stagger on counter hit. Otherwise, it causes a hard knockdown
+- Opponent stays in the stagger state a little longer and moves slower during it
+- Blood Scythe now causes a hard knockdown when used again in the same combo
+- New slash sounds, Japanese .snd has also been updated
+- Counter message now shows up when countering with Dead Spike
+
+12/27/2018 - 1.05
+- Added special interactions with Terumi. Japanese voice has also been updated to reflect this
+- Adjusted the frame data on Ragna's normals
+- The first hit of 5AAA, Hell's Fang, and both follow ups from EX Dead Spike are now air blockable
+- 5B, 2A, 2B, 2C, 66A, and 66B are now air blockable when used during a block string
+
+11/26/2018 - 1.04
+- Ragna now uses Ricepigeon's damage scaling system, the same system used by my most recent characters, damage values have also been adjusted accordingly
+- Added special intro with Azrael
+- Included Mister Fael Chan's updated japanese voice, Which has been updated again with a clip for the Azrael intro
+- Seed of Tatarus no longer has cornerpush
+- Fixed a bug where the special hitspark wouldn't show up if 5AAAA was blocked
+- Brought back the landing effect for Belial Edge
+
+10/06/2018 - 1.035
+- Fixed Ragna not landing after belial edge
+- Lowered the damage on devoured by darkness
+
+10/05/2018 - 1.033
+- Increased the height of Ragna's hurtbox during the dizzy animation
+
+10/01/2018 - 1.032
+- Fixed a bug that caused Ragna to go into a custom state during the continue screen
+
+10/01/2018 - 1.031
+- Made the timing for the Hell's Fang follow up a little more lenient
+- Added alternate japanese sound file, courtesy of Mister Fael Chan
+
+9/30/2018 - 1.03
+- Added a special hitspark for soul eater attacks (Thanks to Takehaya Susanoo)
+- Black Onslaught has been spruced up more (Again, Thanks to Takehaya Susanoo)
+- Ragna now moves forward a little bit during the second hit of Carnage Scissors
+- Made the fall velocity for Inferno Divider look more natural
+- Devoured by Darkness now absorbs less health when used during a combo
+- Fixed Ragna's turning animations
+- Included Takehaya Susanoo's Palette based on Ragna's official artwork
+
+9/29/2018 - 1.02
+- Increased the amount of time before Ragna reagins control after air dashing
+- Reduced the height Ragna goes up during the ground versoin of Gauntlet Hades
+- Gauntlet Hades is now an overhead, as it should've been (How did I miss this?)
+
+9/27/2018 - 1.015
+- Adjusted the size of the effects for Hell's Fang and Carnage Scissors
+- Hit box for the second hit of Carnage Scissors has been given a slight adjustment
+
+9/27/2018 - 1.011
+- Fixed a bug that would sometimes cause the opponent to fly backwards after being hit by Seed of Tartarus
+
+9/27/2018 - 1.01
+- A and B versions of Dead Spike can now be dash canceled like in previous Blazblue titles. Running attacks can also be used during this dash.
+- Adjusted the momentum on Gauntlet Hades and Blood Scythe
+- Adjusted the launch trajectory on the follow up for Gauntlet Hades
+- B Version of Dead Spike is smaller, but it also moves forward now
+- Increased the size of the effects for EX Deadspike and it's follow up as well as their hitboxes
+- Changed some of the grabbed animations
+- Fixed a bug where the dust from sliding after a run would follow Ragna while jumping
+- Fixed a bug where Ragna would regain meter during his force breaks
+- Added a landing sound to Nightmare Edge
+- During Devoured by Darkness, the slash effects now show up in front of the claw as opposed to behind
+- Made some of the effects look nicer
+- Spruced up Black Onslaught a bit
+
+9/26/2018 - 1.00
+- First Release
+==========================================================================================
+
+==========================================================================================
+To do list
+==========================================================================================
+- Fix bugs and errors that I might have missed
+==========================================================================================
+
+==========================================================================================
+Introduction
+==========================================================================================
+This Ragna uses a custom gameplay style. Though he's not source accurate, he still plays similarly to how he does in Cross Tag while having new stuff, as well as a few old moves from previous Blazblue titles. This read me will explain how this gameplay style works. His move list can be found in the .png included in this folder. 
+==========================================================================================
+
+==========================================================================================
+Default Button Layout
+==========================================================================================
+A, B, and C: Attack Buttons
+
+X: Rapid Cancel
+
+Y: Dodge
+
+Z: Grab
+==========================================================================================
+
+==========================================================================================
+Gameplay Mechanics
+==========================================================================================
+------------------------------------------------------------------------------------------
+Super Jump (Tap Down then Up in quick Succession)
+------------------------------------------------------------------------------------------
+Launches you forward in an upward arc. Covers more height and distance than a regular jump. 
+
+------------------------------------------------------------------------------------------
+Double Jump (Tap Up in the air)
+------------------------------------------------------------------------------------------
+Pretty self explanatory, allows you to jump a second time in the air. Can be canceled into after connecting any of your air normals. Can only be used once in the air, can't be used if you have already air dashed.
+
+------------------------------------------------------------------------------------------
+Air Dash (Double Tap Forward/Back while in the air)
+------------------------------------------------------------------------------------------
+Sends you flying forward or back for a set distance. Can be canceled into after connecting any of your air normals. Can only be used once in the air, can't be used if you have already double jumped.
+
+------------------------------------------------------------------------------------------
+Dodge (Y)
+------------------------------------------------------------------------------------------
+For a very short amount of time, you'll become invulnerable and can pass through the opponent and their projectiles. Just pressing Y will keep you stationary, pressing Y and forward at the same time will have you move forward a short distance, and pressing Y and back will have you back dash. The stationary dodge can also be done in the air. You will become vulnerable again near the end of the dodge animation, so be carful about how you time it.
+
+------------------------------------------------------------------------------------------
+Grab (Z)
+------------------------------------------------------------------------------------------
+Once again, pretty self explanatory. Overrides the opponent's guard, but only works if they're not in the air and not in a hit state
+
+------------------------------------------------------------------------------------------
+Air Grab (Z in the air)
+------------------------------------------------------------------------------------------
+Inversely, only works on airborne opponents and can work even when they're in a hit state. Can be used as a combo ender.
+
+------------------------------------------------------------------------------------------
+Running Grab (Z While Running)
+------------------------------------------------------------------------------------------
+Works on airborne opponents and standing opponents even when they're in a hit state. However, it won't work on crouching opponents.
+
+------------------------------------------------------------------------------------------
+Rapid Cancel (X When your attack has made contact with the opponent) (Costs 1000 meter) (Costs 500 meter if used during a Distortion Drive)
+------------------------------------------------------------------------------------------
+Using this will immediately put you in a neutral state, this can be used to extend combos, make otherwise unsafe moves safe, or make you more unpredictable to your opponent. Holding Forward or back while inputing the command will immediately have you run or back dash respectively (Air Dash Forward/Back when in the air), Holding up will immediately make you jump, and holding down while in the air will quickly bring you back to the ground.
+
+------------------------------------------------------------------------------------------
+Dead Angle Attack (Press Forward and X or Forward and B+C While guarding) (Costs 1000 meter)
+------------------------------------------------------------------------------------------
+Cancels your guard animation into an invulnerable attack animation that sends the opponent flying backward. Deals damage, but doesn't kill.
+
+------------------------------------------------------------------------------------------
+Burst (y+z while getting hit) (Can only be used once per round) (Doesn't work if you're in a custom state)
+------------------------------------------------------------------------------------------
+Deploys a non damaging blast around your character that sends you opponent flying away from you. A poorly timed burst can leave open for even more damage, so be careful.
+
+------------------------------------------------------------------------------------------
+Wake up Action
+------------------------------------------------------------------------------------------
+The wake up animation can be canceled into a forward dodge or a back dash. In Ragna's case, he can aslo cancel into Inferno Divider.
+
+==========================================================================================
+
+==========================================================================================
+Character Specific Mechanics
+==========================================================================================
+------------------------------------------------------------------------------------------
+Soul Eater
+------------------------------------------------------------------------------------------
+Ragna's maximum health is below average. However, certain moves will steal some of the opponent's health upon contact.
+The following attacks steal health:
+
+5AAAA
+5BB (second hit)
+5C
+2C
+jB
+Dead Spike
+Follow up attacks for Hell's Fang, Gauntlet Hades, and Nightmare Edge
+Inferno Divider and Axe Kick
+EX Dead Spike and both of it's follow ups
+Blood Scythe
+Carnage Scissors (second hit)
+Devoured by Darkness (final hit)
+
+==========================================================================================
+
+==========================================================================================
+Thanks to:
+- CozySquirtle, for providing the small port
+- Takehaya Susanoo for providing Ragna's voice clips from Cross Tag
+- Y2K from the Spriters Resource for ripping Ragna's sprites
+- Dustloop Wiki for the data on Ragna's moves
+- Boxdox.bb for the references on Ragna's animations and hitboxes
+- Elecbyte and Mugen Guild, for their very helpful references and documentation on how the Mugen code works
+- Mugen Guild again for providing feedback for my characters
+- You, for checking this character out, Have fun
+==========================================================================================
+

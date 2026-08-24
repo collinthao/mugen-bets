@@ -1,0 +1,11 @@
+Bless		- x
+
+Haste		- y
+
+Animate Dead	- z
+
+Lightning Bolt	- a
+
+Blind		- b
+
+Armageddon	- c

@@ -1,0 +1,160 @@
+;--------------------------------
+;FATALITY: TELEQUINESIS
+;--------------------------------
+
+[StateDef 10000]
+type = S
+MoveType = I
+Physics = S
+Juggle = 1
+velset = 0.0
+ctrl = 1
+
+[STATE 10000, 1]
+type = Helper
+trigger1 = 1
+trigger1 = NumHelper (7000) = 0; only appears if there is no other helper like this on the screen.
+ID = 7000
+pos = 160 -140
+postype = left
+stateno = 7000
+helpertype = normal
+name = "FINISH HIM!"
+keyctrl = 0
+ownpal = 1
+
+[State 10000  2]
+type = ChangeState
+trigger1 = AnimTime = 0 
+value = 0
+ctrl = 1
+
+;________________________-
+
+[StateDef 7000]
+type = S
+movetype = A
+physics = S
+anim = 99999999
+velset = 0,0
+ctrl = 1
+
+[State 7000, 1]
+type = HitDef
+triggerall = 1
+trigger1 = AnimElem = 1
+trigger1 = P2StateType != A
+attr = SCA, NA
+damage = 0,0
+animtype = Heavy
+hitflag = MA
+guardflag =  
+priority = 7,hit
+pausetime = 0,1
+sparkxy = 0,0
+sparkno = -1
+gurad.sparkno = -1
+hitsound = -1
+guardsound = -1
+ground.type = High
+ground.slidetime = 0
+ground.hittime = 0
+ground.velocity = 0
+air.velocity = 0
+air.fall = 1
+fall = 0
+p2stateno = 867031
+
+;----------------------
+;- "FINISH HIM!" - Message
+[Statedef 7010]
+type = S
+MoveType = I
+Physics = S
+Juggle = 1
+velset = 0.0
+anim = 7010
+ctrl = 0
+
+[State 7010, 1]
+type = PlaySnd
+trigger1 = Time = 1
+value = 3,3
+
+[State 7010, 2]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 7010, 3]
+type = Helper
+trigger1 = NumHelper (7000) = 1; must be at least 1 Helper, which is P2 Trembling on the screen.
+trigger1 = NumHelper (7010) = 0; There can be no message "FINISH HIM!" on the screen.
+trigger1 = P2StateNo  = 867031; P2 should be in this state for the message appears.
+id = 7010
+stateno = 7010
+pos = 160 -140
+postype = left
+helpertype = normal
+name = "FINISH HIM!"
+keyctrl = 0
+
+;-----------------
+[Statedef 867031]
+type = S
+MoveType = H
+Physics = S
+Juggle = 1
+ctrl = 0
+velset = 0.0
+
+[State 867031, 1]
+type = LifeSet
+trigger1 = 1
+value = 1
+
+[State 867031, 2]
+type = TargetLifeAdd
+trigger1 =P2life <= 1
+value = 1
+
+[State 867031, 3]
+type = SelfState
+trigger1 = Time = 480
+trigger1 = P2StateNo  = [3000,3200]; Put here the numbers of fatalities on AIR.
+value = 5050
+ctrl = 0
+
+[State 867031, 4]
+type = LifeSet
+trigger1 = Time = 480
+trigger1 = !P2StateNO  = [3000,3200]
+value = 0
+
+
+[State 867031, 5]
+type = ChangeState
+trigger1 = P2StateNo  != [3000,3200]
+value = 867032 ;-> Enemy will be sent to this state when the "fatality" is performed.
+ctrl = 0
+
+[State 867031, 6]
+type = ChangeAnim
+trigger1 = AnimExist (5300)
+trigger1 = !Anim = 5300
+value = 5300
+
+;---------------
+[Statedef 867032]
+type = S
+MoveType = H
+Physics = S
+Juggle = 1
+ctrl = 0
+velset = 0.0
+
+[State 867032, 1]
+type = ChangeAnim
+trigger1 = AnimExist (5300)
+trigger1 = Anim != 5300
+value = 5300

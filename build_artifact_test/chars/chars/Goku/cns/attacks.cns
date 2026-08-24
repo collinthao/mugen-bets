@@ -1,0 +1,2329 @@
+;================================================================================
+;                    通常技
+;================================================================================
+;============================================================
+;弱パンチ
+;============================================================
+[Statedef 200]
+type = S
+movetype = A
+physics = S
+anim = 200+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 200, pos]
+type = Velset
+trigger1 = time = 0
+x = 2
+
+[State 200, voice]
+type = PlaySnd
+trigger1 = AnimElem = 1
+triggerall = var(1) < 6
+value = 400,2;悟空攻撃ボイスふっ
+
+[State 200, voice]
+type = PlaySnd
+trigger1 = AnimElem = 1
+triggerall = var(1) >= 6
+value = 402,0;悟空攻撃ボイスふっ
+
+[State 200, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,0;空振り
+
+[State 200, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 2
+attr = S, NA
+damage = 20
+animtype = light
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-70
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 5
+ground.hittime  = 12
+ground.velocity = -4
+airguard.velocity = -1.9,-.8
+air.type = high
+air.velocity = -1.4,-3
+air.hittime = 12
+
+[State 200, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 2
+attr = , NA
+damage = 20
+animtype = light
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-70
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 5
+ground.hittime  = 12
+ground.velocity = -4
+airguard.velocity = -1.9,-.8
+air.type = high
+air.velocity = -1.4,-3
+air.hittime = 12
+
+[State 200, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;弱パンチ(近距離)
+;============================================================
+[Statedef 210]
+type = S
+movetype = A
+physics = S
+anim = 210+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 210, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,2;悟空攻撃ボイスふっ
+
+[State 210, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,0;悟空攻撃ボイスふっ
+
+[State 210, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,0;空振り
+
+[State 210, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 2
+attr = S, NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 22
+ground.hittime  = 22
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 210, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 2
+attr = , NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 22
+ground.hittime  = 22
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 210, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;強パンチ
+;============================================================
+[Statedef 220]
+type = S
+movetype = A
+physics = S
+anim = 220+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 220, pos]
+type = Velset
+trigger1 = time = 0
+x = 1
+
+[State 220, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,1;悟空攻撃ボイスはっ
+
+[State 210, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,1;悟空攻撃ボイスふっ
+
+[State 220, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,2;空振り
+
+[State 220, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 4
+attr = S, NA
+damage = 60
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -15,-70
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.type = high
+ground.slidetime = 12
+ground.hittime  = 16
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 220, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 4
+attr = , NA
+damage = 60
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -15,-70
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.type = high
+ground.slidetime = 12
+ground.hittime  = 16
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 220, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;強パンチ(近距離)
+;============================================================
+[Statedef 230]
+type = S
+movetype = A
+physics = S
+anim = 230+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 5;10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 230, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,1;悟空攻撃ボイスはっ
+
+[State 230, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,1;悟空攻撃ボイスふっ
+
+[State 230, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,2;空振り
+
+[State 230, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 2
+attr = S, NA
+damage = 50
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-95
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 12
+ground.hittime  = 16
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 230, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 2
+attr = , NA
+damage = 50
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-95
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 12
+ground.hittime  = 16
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 230, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;弱キック
+;============================================================
+[Statedef 250]
+type = S
+movetype = A
+physics = S
+anim = 250+(var(1)*(10000))
+juggle = 10
+poweradd = 30+(var(39)*(10))
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 250, pos]
+type = Velset
+trigger1 = time = 0
+x = 6
+
+[State 250, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,3;悟空攻撃ボイスよっ
+
+[State 250, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,2;悟空攻撃ボイスふっ
+
+[State 250, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,3;空振り
+
+[State 250, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = S, NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkxy = -20,-70
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = high
+ground.slidetime = 17
+ground.velocity = -6.3
+air.velocity = -3,-4
+
+[State 250, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkxy = -20,-70
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = high
+ground.slidetime = 17
+ground.velocity = -6.3
+air.velocity = -3,-4
+[State 250, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;弱キック(近距離)
+;============================================================
+[Statedef 260]
+type = S
+movetype = A
+physics = S
+anim = 260+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 260, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,0;悟空攻撃ボイスやっ
+
+[State 260, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,3;悟空攻撃ボイスふっ
+
+[State 260, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,1;空振り
+
+[State 260, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 2
+attr = S, NA
+damage = 20
+animtype = light
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,1;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.hittime = 9
+ground.type = low
+ground.slidetime = 9
+ground.velocity = -6.3
+air.velocity = -3,-4
+
+[State 260, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 2
+attr = , NA
+damage = 20
+animtype = light
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,1;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.hittime = 9
+ground.type = low
+ground.slidetime = 9
+ground.velocity = -6.3
+air.velocity = -3,-4
+
+[State 260, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;強キック
+;============================================================
+[Statedef 270]
+type = S
+movetype = A
+physics = S
+anim = 270+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 270, pos]
+type = Velset
+trigger1 = time = 0
+trigger2 = AnimElem = 3
+x = 8
+
+[State 270, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,0;悟空攻撃ボイスやっ
+
+[State 270, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,1;悟空攻撃ボイスふっ
+
+[State 270, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,1;空振り
+
+[State 270, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = S, NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkxy = -20,-70
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = high
+ground.slidetime = 17
+ground.velocity = -12.3
+air.velocity = -3,-4
+
+[State 270, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkxy = -20,-70
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = high
+ground.slidetime = 17
+ground.velocity = -12.3
+air.velocity = -3,-4
+
+[State 270, h2]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 4
+attr = S, NA
+damage = 40
+animtype = hard
+hitflag = MAF
+guardflag = MA
+sparkxy = -20,-90
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = high
+ground.slidetime = 17
+ground.velocity = -12.3
+air.velocity = -3,-4
+
+[State 270, h2]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 4
+attr = , NA
+damage = 40
+animtype = hard
+hitflag = MAF
+guardflag = MA
+sparkxy = -20,-90
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = high
+ground.slidetime = 17
+ground.velocity = -12.3
+air.velocity = -3,-4
+
+[State 270, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;強キック(近距離)
+;============================================================
+[Statedef 280]
+type = S
+movetype = A
+physics = S
+anim = 280+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 5;5
+velset = 0,0
+ctrl = 0
+facep2 = 1
+sprpriority = 2
+hitcountpersist = 1
+
+[State 280, pos]
+type = Velset
+trigger1 = time = 0
+x = 8
+
+[State 280, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,3;悟空攻撃ボイスよっ
+
+[State 270, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,2;悟空攻撃ボイスふっ
+
+[State 280, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,3;空振り
+
+[State 280, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = S, NA
+damage = 60
+animtype = diagup
+hitflag = MAF
+guardflag = MA
+pausetime = 12,13
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-110
+hitsound = S5,7;吹っ飛び
+guardsound = S6,0;ガード
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1,-9
+air.velocity = -2.2,ifelse(HitCount <= 3,-9,-3.2)
+fall = 1
+air.fall = 1
+fall.recover = 0
+envshake.time = 13
+envshake.freq = 120
+envshake.ampl = 6
+
+[State 280, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = diagup
+hitflag = MAF
+guardflag = MA
+pausetime = 12,13
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-110
+hitsound = S5,7;吹っ飛び
+guardsound = S6,0;ガード
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1,-9
+air.velocity = -2.2,ifelse(HitCount <= 3,-9,-3.2)
+fall = 1
+air.fall = 1
+fall.recover = 0
+envshake.time = 13
+envshake.freq = 120
+envshake.ampl = 6
+
+[State 280, jump] ;ジャンプキャンセル
+type = ChangeState
+triggerall = var(59) <= 0
+trigger1 = movecontact && Command = "holdup"
+trigger1 = moveguarded = 0
+value = 40
+ctrl = 1
+var(5) = 1
+
+[State 280, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;しゃがみ弱パンチ
+;============================================================
+[Statedef 400]
+type = C
+movetype = A
+physics = C
+anim = 400+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 400, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,2;悟空攻撃ボイスふっ
+
+[State 400, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,0;悟空攻撃ボイスふっ
+
+[State 400, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,0;空振り
+
+[State 400, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 2
+attr = C, NA
+damage = 20
+animtype = light
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -10,-50
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = low
+ground.slidetime = 7
+ground.velocity = -6
+air.velocity = -2,-3.5
+
+[State 400, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 2
+attr = , NA
+damage = 20
+animtype = light
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -10,-50
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = low
+ground.slidetime = 7
+ground.velocity = -6
+air.velocity = -2,-3.5
+
+[State 400, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;============================================================
+;しゃがみ強パンチ
+;============================================================
+[Statedef 410]
+type = C
+movetype = A
+physics = C
+anim = 410+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 410, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,1;悟空攻撃ボイスはっ
+
+[State 410, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,1;悟空攻撃ボイスふっ
+
+[State 410, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,2;空振り
+
+[State 410, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 2
+attr = C, NA
+damage = 60
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -10,-55
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = low
+ground.slidetime = 17
+ground.velocity = -6.3
+air.velocity = -3,-4
+
+[State 410, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 2
+attr = , NA
+damage = 60
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -10,-55
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 17
+ground.type = low
+ground.slidetime = 17
+ground.velocity = -6.3
+air.velocity = -3,-4
+
+[State 410, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;============================================================
+;しゃがみ弱キック
+;============================================================
+[Statedef 420]
+type = C
+movetype = A
+physics = C
+anim = 420+(var(1)*(10000))
+juggle = 10
+poweradd = 20+(var(39)*(10))
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 420, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,0;悟空攻撃ボイスやっ
+
+[State 420, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,2;悟空攻撃ボイスふっ
+
+[State 420, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,1;空振り
+
+[State 420, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = C, NA
+damage = 30
+animtype = light
+hitflag = MAF
+guardflag = L
+sparkxy = -10,-30
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+hitsound = S5,1;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 9
+ground.type = low
+ground.slidetime = 6
+ground.velocity = -5
+air.velocity = -4,-6
+yaccel = .5
+down.velocity = -5,0
+down.hittime = 20
+
+[State 420, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 30
+animtype = light
+hitflag = MAF
+guardflag = L
+sparkxy = -10,-30
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+hitsound = S5,1;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 9
+ground.type = low
+ground.slidetime = 6
+ground.velocity = -5
+air.velocity = -4,-6
+yaccel = .5
+down.velocity = -5,0
+down.hittime = 20
+
+[State 420, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;============================================================
+;しゃがみ強キック
+;============================================================
+[Statedef 430]
+type = C
+movetype = A
+physics = C
+anim = 430+(var(1)*(10000))
+juggle = 10
+poweradd = 30+(var(39)*(10))
+velset = 0
+ctrl = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 430, pos]
+type = Velset
+trigger1 = time = 0
+x = 8 
+
+[State 430, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,3;悟空攻撃ボイスよっ
+
+[State 430, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,3;悟空攻撃ボイスふっ
+
+[State 430, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,4
+
+[State 430, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = C, NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = L
+sparkxy = -10,-55
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 9
+ground.type = trip
+ground.slidetime = 9
+ground.velocity = -4,-6
+air.velocity = -4,-6
+fall = 1
+yaccel = .5
+
+[State 430, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = L
+sparkxy = -10,-55
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 12,13
+ground.hittime = 9
+ground.type = trip
+ground.slidetime = 9
+ground.velocity = -4,-6
+air.velocity = -4,-6
+fall = 1
+yaccel = .5
+
+
+[State 430, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;============================================================
+;ダッシュ弱パンチ 
+;============================================================
+[Statedef 500]
+type = S
+movetype = A
+physics = S
+anim = 500+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+juggle = 10
+velset = 15
+ctrl = 0
+hitcountpersist = 1
+
+[State 500, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,2;悟空攻撃ボイスふっ
+
+[State 500, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,0;空振り
+
+[State 500, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 2
+attr = S, NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 22
+ground.hittime  = 22
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 500, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 2
+attr = , NA
+damage = 20
+animtype = medium
+hitflag = MAF
+guardflag = MA
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 12,12
+ground.type = high
+ground.slidetime = 22
+ground.hittime  = 22
+ground.velocity = -5.5
+air.velocity = -2.5,-4
+
+[State 500, line1];スピードライン１
+type = Explod
+trigger1 = Time % 4 = 0
+anim = 4055  
+postype = p1
+pos = 0, -55
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 500, line2];スピードライン２
+type = Explod
+trigger1 = Time % 4 = 0
+anim = 4056  
+postype = p1
+pos = -5, -45
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 500, line3];スピードライン３
+type = Explod
+trigger1 = Time %4 = 0
+anim = 4057  
+postype = p1
+pos = -15, -25
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 500, line4];スピードライン４
+type = Explod
+trigger1 = Time %4 = 0 
+anim = 4058
+postype = p1
+pos = 10, -75
+velocity = 0, 0
+accel = 0, 0
+random = 40, 15
+removetime = -2
+ownpal = 1
+
+[State 500, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;ダッシュ強パンチ 
+;============================================================
+[Statedef 510]
+type = S
+movetype = A
+physics = S
+anim = 510+(var(1)*(10000))
+poweradd = 40+(var(39)*(10))
+juggle = 10
+velset = 0
+ctrl = 0
+hitcountpersist = 1
+
+[State 510, pos]
+type = Posadd
+trigger1 = 1
+x = 10
+
+[State 510, snd]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 0,1;移動音
+
+[State 510, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = S, SA
+hitflag = MAF
+guardflag = M
+animtype = Hard
+air.animtype = Back
+priority = 5, Hit
+damage = 80
+pausetime = 14,14
+guard.pausetime	= 12,12
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -30,-78
+hitsound  = S5,3
+guardsound = S3,0
+;ground.type = Trip
+;air.type = Trip
+ground.slidetime = 15
+ground.hittime = 15
+air.hittime = 15
+yaccel = 0.45
+ground.velocity	= -11.2,-5.4
+guard.velocity = -4
+air.velocity = -11.2,-5.4
+airguard.velocity = -4.2,-5.4
+ground.cornerpush.veloff = -4
+fall = 1
+fall.recover = 0
+envshake.time = 17
+envshake.freq = 120
+envshake.ampl = 7
+
+[State 510, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , SA
+hitflag = MAF
+guardflag = M
+animtype = Hard
+air.animtype = Back
+priority = 5, Hit
+damage = 80
+pausetime = 14,14
+guard.pausetime	= 12,12
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -30,-78
+hitsound  = S5,3
+guardsound = S3,0
+;ground.type = Trip
+;air.type = Trip
+ground.slidetime = 15
+ground.hittime = 15
+air.hittime = 15
+yaccel = 0.45
+ground.velocity	= -11.2,-5.4
+guard.velocity = -4
+air.velocity = -11.2,-5.4
+airguard.velocity = -4.2,-5.4
+ground.cornerpush.veloff = -4
+fall = 1
+fall.recover = 0
+envshake.time = 17
+envshake.freq = 120
+envshake.ampl = 7
+
+[State 510, line1];スピードライン１
+type = Explod
+trigger1 = Time % 4 = 0
+anim = 4055  
+postype = p1
+pos = 5, -60
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 510, line2];スピードライン２
+type = Explod
+trigger1 = Time % 4 = 0
+anim = 4056  
+postype = p1
+pos = 0, -50
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 510, line3];スピードライン３
+type = Explod
+trigger1 = Time %4 = 0
+anim = 4057  
+postype = p1
+pos = 10, -30
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 510, line4];スピードライン４
+type = Explod
+trigger1 = Time %4 = 0 
+anim = 4058
+postype = p1
+pos = 20, -80
+velocity = 0, 0
+accel = 0, 0
+random = 40, 15
+removetime = -2
+ownpal = 1
+
+[State 510, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;ダッシュ弱キック
+;============================================================
+[Statedef 520]
+type = S
+movetype = A
+physics = S
+anim = 520+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 1
+velset = 0,0
+ctrl = 0
+facep2 = 1
+sprpriority = 2
+hitcountpersist = 1
+
+[State 520, pos]
+type = Velset
+trigger1 = time = 0
+x = 4
+
+[State 520, pos]
+type = Velset
+trigger1 = time = 2
+x = 5
+
+[State 520, pos]
+type = Velset
+trigger1 = time = 4
+x = 6
+
+[State 520, pos]
+type = Velset
+trigger1 = animelem = 3
+x = 14
+
+[State 520, pos]
+type = Velset
+trigger1 = animelem = 4
+x = 5
+
+[State 520, pos]
+type = Velset
+trigger1 = animelem = 5
+x = 2
+
+[State 520, pos]
+type = Velset
+trigger1 = animelem = 6
+x = 1
+
+[State 520, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,3;悟空攻撃ボイスよっ
+
+[State 520, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,3;空振り
+
+[State 520, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = c, NA
+damage = 60
+animtype = heavy
+hitflag = MAFd
+guardflag = L
+pausetime = 12,13
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -10,-30
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+ground.type = trip
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -2.2,-2.2
+air.velocity = -2.2,-3.2
+ground.hittime  = 17
+fall = 1
+air.fall = 1
+fall.recover = 0
+;yaccel = .5
+
+[State 520, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = heavy
+hitflag = MAFd
+guardflag = L
+pausetime = 12,13
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -10,-30
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+ground.type = trip
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -2.2,-2.2
+air.velocity = -2.2,-3.2
+ground.hittime  = 17
+fall = 1
+air.fall = 1
+fall.recover = 0
+;yaccel = .5
+
+[state 520, dust]
+type = explod
+trigger1 = time = 0;> 0
+pos = 0,0
+pos2 = -2,0
+spacing = 1
+anim = 4030;土煙横
+bindtime = -1
+ownpal = 1
+
+[State 520, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;============================================================
+;ダッシュ強キック
+;============================================================
+[Statedef 530]
+type = S
+movetype = A
+physics = S
+anim = 530+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 1
+velset = 0,0
+ctrl = 0
+facep2 = 1
+sprpriority = 2
+hitcountpersist = 1
+
+[State 530, pos]
+type = Velset
+trigger1 = time = 0
+x = 9
+
+[State 530, pos]
+type = Velset
+trigger1 = time = 2
+x = 12
+
+[State 530, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,3;悟空攻撃ボイスよっ
+
+[State 530, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,3;空振り
+
+[State 530, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = S, NA
+damage = 60
+animtype = diagup
+hitflag = MAF
+guardflag = MA
+pausetime = 12,13
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-110
+hitsound = S5,7;吹っ飛び
+guardsound = S6,0;ガード
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1,-9
+air.velocity = -2.2,-3.2
+fall = 1
+air.fall = 1
+fall.recover = 0
+envshake.time = 13
+envshake.freq = 120
+envshake.ampl = 6
+
+[State 530, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = diagup
+hitflag = MAF
+guardflag = MA
+pausetime = 12,13
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-110
+hitsound = S5,7;吹っ飛び
+guardsound = S6,0;ガード
+ground.type = High
+ground.slidetime = 12
+ground.hittime  = 15
+ground.velocity = -1,-9
+air.velocity = -2.2,-3.2
+fall = 1
+air.fall = 1
+fall.recover = 0
+envshake.time = 13
+envshake.freq = 120
+envshake.ampl = 6
+
+[State 530, line1];スピードライン１
+type = Explod
+trigger1 = Time % 4 = 0
+anim = 4055  
+postype = p1
+pos = -15, -55
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 530, line2];スピードライン２
+type = Explod
+trigger1 = Time % 4 = 0
+anim = 4056  
+postype = p1
+pos = -20, -45
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 530, line3];スピードライン３
+type = Explod
+trigger1 = Time % 4 = 0
+anim = 4057  
+postype = p1
+pos = -25, -25
+velocity = 0, 0
+accel = 0, 0
+random = 20, 20
+removetime = -2
+ownpal = 1
+sprpriority = 2
+
+[State 530, line4];スピードライン４
+type = Explod
+trigger1 = Time % 4 = 0 
+anim = 4058
+postype = p1
+pos = -5, -75
+velocity = 0, 0
+accel = 0, 0
+random = 40, 15
+removetime = -2
+ownpal = 1
+
+[State 530, jump] ;ジャンプキャンセル
+type = ChangeState
+triggerall = var(59) <= 0 
+trigger1 = movecontact && Command = "holdup"
+trigger1 = moveguarded = 0
+value = 40
+ctrl = 1
+var(5) = 1
+
+[State 530, e]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;============================================================
+;ジャンプ弱パンチ 
+;============================================================
+[Statedef 600]
+type = A
+movetype = A
+physics = A
+anim = 600+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+juggle = 1
+ctrl = 0
+sprpriority = 2 
+hitcountpersist = 1
+
+[State 200, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,2;悟空攻撃ボイスふっ
+
+[State 600, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,0;悟空攻撃ボイスふっ
+
+[State 600, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,0;空振り
+
+[State 600, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = A, NA
+damage = 20
+animtype = light
+;hitflag = MAF
+guardflag = HA
+priority = 3
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -10,-80
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 11,13
+ground.type = high
+ground.slidetime = 5
+ground.hittime  = 5
+ground.velocity = -4
+air.velocity = -1.3,-1
+
+[State 600, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 20
+animtype = light
+;hitflag = MAF
+guardflag = HA
+priority = 3
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -10,-80
+hitsound = S5,0;弱
+guardsound = S6,0;ガード
+pausetime = 11,13
+ground.type = high
+ground.slidetime = 5
+ground.hittime  = 5
+ground.velocity = -4
+air.velocity = -1.3,-1
+
+;============================================================
+;ジャンプ強パンチ 
+;============================================================
+[Statedef 610]
+type = A
+movetype = A
+physics = A
+anim = 610+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 1
+ctrl = 0
+sprpriority = 2 
+hitcountpersist = 1
+
+[State 610, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,1;悟空攻撃ボイスはっ
+
+[State 610, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,1;悟空攻撃ボイスふっ
+
+[State 610, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,2;空振り
+
+[State 610, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = A, NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 4
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-70
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 11,13
+ground.type = low
+ground.slidetime = 17
+ground.hittime  = 20
+ground.velocity = -5
+air.velocity = -2,-1
+
+[State 610, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 4
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-70
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 11,13
+ground.type = low
+ground.slidetime = 17
+ground.hittime  = 20
+ground.velocity = -5
+air.velocity = -2,-1
+
+;============================================================
+;ジャンプ強パンチ(横)
+;============================================================
+[Statedef 615]
+type = A
+movetype = A
+physics = A
+anim = 610+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+juggle = 1
+ctrl = 0
+sprpriority = 2 
+velset = 3,-3
+hitcountpersist = 1
+
+[State 610, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,1;悟空攻撃ボイスはっ
+
+[State 610, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,1;悟空攻撃ボイスふっ
+
+[State 610, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,2;空振り
+
+[State 610, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = A, NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 4
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-70
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 11,13
+ground.type = low
+ground.slidetime = 17
+ground.hittime  = 20
+ground.velocity = -5
+air.velocity = -2,-1
+
+[State 610, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 4
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-70
+hitsound = S5,2;中
+guardsound = S6,0;ガード
+pausetime = 11,13
+ground.type = low
+ground.slidetime = 17
+ground.hittime  = 20
+ground.velocity = -5
+air.velocity = -2,-1
+
+;============================================================
+;ジャンプ弱キック 
+;============================================================
+[Statedef 620]
+type = A
+movetype = A
+physics = A
+juggle = 1
+anim = 620+(var(1)*(10000))
+poweradd = 20+(var(39)*(10))
+ctrl = 0
+sprpriority = 2 
+hitcountpersist = 1
+
+[State 620, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,0;悟空攻撃ボイスやっ
+
+[State 620, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,2;悟空攻撃ボイスふっ
+
+[State 620, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,1;空振り
+
+[State 620, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = A, NA
+damage = 30
+animtype = light
+hitflag = MAF
+guardflag = HA
+priority =3
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,1;弱
+guardsound = S6,0;ガード
+pausetime = 11,12
+ground.type = low
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -4
+air.velocity = -1.3, -1
+
+[State 620, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 30
+animtype = light
+hitflag = MAF
+guardflag = HA
+priority =3
+sparkno = s4100;弱
+guard.sparkno = s4500;ガード
+sparkxy = -20,-80
+hitsound = S5,1;弱
+guardsound = S6,0;ガード
+pausetime = 11,12
+ground.type = low
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -4
+air.velocity = -1.3, -1
+
+;============================================================
+;ジャンプ強キック
+;============================================================
+[Statedef 630]
+type = A
+movetype = A
+physics = A
+juggle = 1
+anim = 630+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+ctrl = 0
+sprpriority = 2
+hitcountpersist = 1
+
+[State 630, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,3;悟空攻撃ボイスよっ
+
+[State 630, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,3;悟空攻撃ボイスふっ
+
+[State 630, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,4;空振り
+
+[State 630, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = A, NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 5
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-60
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 11,12
+ground.type = high
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -4
+air.velocity = -2, -1
+fall.recover = 0
+
+[State 630, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 5
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-60
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 11,12
+ground.type = high
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -4
+air.velocity = -2, -1
+fall.recover = 0
+
+;============================================================
+;ジャンプ強キック(横)
+;============================================================
+[Statedef 635]
+type = A
+movetype = A
+physics = A
+juggle = 1
+anim = 630+(var(1)*(10000))
+poweradd = 30+(var(39)*(10))
+ctrl = 0
+sprpriority = 2 
+velset = 3,-3
+hitcountpersist = 1
+
+[State 630, voice]
+type = PlaySnd
+triggerall = var(1) < 6
+trigger1 = AnimElem = 1
+value = 400,3;悟空攻撃ボイスよっ
+
+[State 630, voice]
+type = PlaySnd
+triggerall = var(1) >= 6
+trigger1 = AnimElem = 1
+value = 402,3;悟空攻撃ボイスふっ
+
+[State 630, snd]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 4,4;空振り
+
+[State 630, h1]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+attr = A, NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 5
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-60
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 11,12
+ground.type = high
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -4
+air.velocity = -2, -1
+fall.recover = 0
+
+[State 630, h1]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+attr = , NA
+damage = 60
+animtype = hard
+hitflag = MAF
+guardflag = HA
+priority = 5
+sparkno = s4150;中
+guard.sparkno = s4500;ガード
+sparkxy = -20,-60
+hitsound = S5,3;弱
+guardsound = S6,0;ガード
+pausetime = 11,12
+ground.type = high
+ground.slidetime = 20
+ground.hittime  = 20
+ground.velocity = -4
+air.velocity = -2, -1
+fall.recover = 0
+
+
+;============================================================
+;投げ
+;============================================================
+[Statedef 700]
+type = S
+movetype = A
+physics = S
+anim = 700+(var(1)*(10000))
+poweradd = 0
+velset = 0
+ctrl = 0
+juggle = 0
+hitcountpersist = 1
+
+[State 260, sound]
+type = PlaySnd
+triggerall = var(1) = 7
+trigger1 = time = 0
+value = 900,15
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time = 0
+trigger1 = Pos Y >= 0
+var(2) = 0
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time = 0
+trigger1 = Pos Y < 0
+var(2) = 1
+
+[State 3200, dust2];煙大
+type = explod
+trigger1 = AnimElem = 1
+anim = 706
+pos = 0,-20
+sprpriority = -1
+bindtime = 1
+ownpal = 1
+removeongethit = 1
+facing = 1
+removetime = 9
+supermovetime = 9
+pausemovetime = 9
+scale = 0.4, 0.4
+
+[State 3200, voice2]
+type = PlaySnd
+triggerALL = NumExplod(700) = 0
+triggerall = var(1) < 6
+trigger1 = time = 0
+value = 900,6
+[State 3200, voice2]
+type = PlaySnd
+triggerALL = NumExplod(700) = 0
+triggerall = var(1) < 6
+trigger1 = time = 0
+value = 900,6
+
+[State 3200, voice2]
+type = PlaySnd
+triggerALL = NumExplod(700) = 0
+triggerall = var(1) >= 6
+trigger1 = time = 0
+value = 900,27
+[State 3200, voice2]
+type = PlaySnd
+triggerALL = NumExplod(700) = 0
+triggerall = var(1) >= 6
+trigger1 = time = 0
+value = 900,27
+
+[State 930, dust]
+type = Explod
+triggerALL = NumExplod(700) = 0
+trigger1 = 1
+anim = 3562
+postype = p1
+pos = 0,0
+bindtime = -1
+sprpriority = 2
+ownpal = 1
+ID = 700
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = AnimElem = 2
+x = 20
+y = 0
+
+[State 1300, 2]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+trigger1 = var(2) = 0
+attr = S, NT
+damage = 0
+animtype = hard
+hitflag = MF
+guardflag = P
+sparkno = -1
+guard.sparkno = -1
+sparkxy = 0,-60
+hitsound = -1
+guardsound = -1
+pausetime = 0,0
+p1stateno = ifelse(var(1) = 7,9113,9103)
+p2stateno = 705
+p2facing = 1
+[State 1300, 2]
+type = HitDef
+triggerall = var(39) < 8
+trigger1 = AnimElem = 3
+trigger1 = var(2) = 1
+attr = S, NT
+damage = 0
+animtype = hard
+hitflag = AF
+guardflag = P
+sparkno = -1
+guard.sparkno = -1
+sparkxy = 0,-60
+hitsound = -1
+guardsound = -1
+pausetime = 0,0
+p1stateno = ifelse(var(1) = 7,9113,9103)
+p2stateno = 705
+p2facing = 1
+
+[State 1300, 2]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+trigger1 = var(2) = 0
+attr = , NT
+damage = 0
+animtype = hard
+hitflag = MF
+guardflag = P
+sparkno = -1
+guard.sparkno = -1
+sparkxy = 0,-60
+hitsound = -1
+guardsound = -1
+pausetime = 0,0
+p1stateno = ifelse(var(1) = 7,9113,9103)
+p2stateno = 705
+p2facing = 1
+[State 1300, 2]
+type = HitDef
+triggerall = var(39) >= 8
+trigger1 = AnimElem = 3
+trigger1 = var(2) = 1
+attr = , NT
+damage = 0
+animtype = hard
+hitflag = AF
+guardflag = P
+sparkno = -1
+guard.sparkno = -1
+sparkxy = 0,-60
+hitsound = -1
+guardsound = -1
+pausetime = 0,0
+p1stateno = ifelse(var(1) = 7,9113,9103)
+p2stateno = 705
+p2facing = 1
+
+
+[State 1300, 3]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 701
+
+;-----------------------ミスった
+[Statedef 701]
+type = S
+movetype = A
+physics = S
+anim = 702+(var(1)*(10000))
+poweradd = 0
+velset = 0
+ctrl = 0
+hitcountpersist = 1
+
+[State 1302, state]
+type = changestate
+trigger1 = animtime = 0
+trigger1 = pos y < 0
+value = 1317
+
+[State 1302, state]
+type = changestate
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+
+;----------------------------喰らう人
+[Statedef 705]
+type = A
+movetype = H
+physics = N
+poweradd = 0
+velset = 0
+ctrl = 0
+facep2 = 1
+sprpriority = 0
+
+[State -2]
+type = destroyself
+trigger1 = ishelper
+
+[State 1306, 4]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 5010
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = 0
+
+[State 0, PosSet]
+type = posadd
+trigger1 = Time = 0
+x = p2bodydist x -10
+y = p2dist y -0
+
+[State 1306, 5]
+type = SelfState
+trigger1 = Time = 30
+value = 5030
+

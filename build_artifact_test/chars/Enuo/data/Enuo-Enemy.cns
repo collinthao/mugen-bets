@@ -1,0 +1,1739 @@
+
+
+;グランドクロス 投げられ部分
+[Statedef 900]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = SelfState
+trigger1 = PrevStateno = [120,155]
+trigger1 = Gethitvar(guarded)
+value = PrevStateno
+ignorehitpause = 1
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+ignorehitpause = 1
+
+[State ]
+type = Statetypeset
+trigger1 = statetype=L
+statetype = A
+ignorehitpause = 1
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+ignorehitpause = 1
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+ignorehitpause = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+ignorehitpause = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+ignorehitpause = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+ignorehitpause = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+ignorehitpause = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+ignorehitpause = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+ignorehitpause = 1
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+ignorehitpause = 1
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = ,HT
+ignorehitpause = 1
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+ignorehitpause = 1
+
+[State ]
+type = Posfreeze
+trigger1 = 1
+ignorehitpause = 1
+
+[State ]
+type = Trans
+trigger1 = Gametime%4 < 2
+trans = addalpha
+alpha = 128,128
+ignorehitpause = 1
+
+[State ]
+type = changeanim
+trigger1 = SelfAnimExist(Anim)
+value = anim
+elem = animelemno(0)
+
+[State ]
+type = offset
+trigger1 = 1
+x = -time%2
+ignorehitpause = 1
+
+[State ]
+type = velset
+trigger1 = Numenemy
+x = Enemy(Enemy,name!="Enuo"&&Numenemy>1),var(31)
+y = Enemy(Enemy,name!="Enuo"&&Numenemy>1),sysvar(2)
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+trigger1 = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y))
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) != 301 && ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) != 301
+trigger2 = !Playeridexist(floor(vel x)) && !Playeridexist(floor(vel y))
+value = 901
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && !Numpartner
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel x)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = playerid(floor(vel x)),var(18) = [0,3]
+value = 990 + playerid(floor(vel x)),var(18)
+ignorehitpause = 1
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && !Numpartner
+trigger1 = ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel y)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = playerid(floor(vel y)),var(18) = [0,3]
+value = 990 + playerid(floor(vel y)),var(18)
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && Numpartner
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel x)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel x)),var(18+(partner,ID<ID)) = [0,3]
+value = 990 + playerid(floor(vel x)),var(18+(partner,ID<ID))
+ignorehitpause = 1
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && Numpartner
+trigger1 = ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel y)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel y)),var(18+(partner,ID<ID)) = [0,3]
+value = 990 + playerid(floor(vel y)),var(18+(partner,ID<ID))
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && !Numpartner
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel x)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = playerid(floor(vel x)),var(18) >= 12
+value = 992
+ignorehitpause = 1
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && !Numpartner
+trigger1 = ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel y)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = playerid(floor(vel y)),var(18) >= 12
+value = 992
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && Numpartner
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel x)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel x)),var(18+(partner,ID<ID)) >= 12
+value = 992
+ignorehitpause = 1
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && Numpartner
+trigger1 = ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel y)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel y)),var(18+(partner,ID<ID)) >= 12
+value = 992
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && Numpartner
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel x)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel x)),var(18+(partner,ID<ID)) = 7
+value = 960
+ignorehitpause = 1
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y)) && Numpartner
+trigger1 = ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel y)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel y)),var(18+(partner,ID<ID)) = 7
+value = 960
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y))
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel x)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel x)),var(18) = 7
+value = 960
+ignorehitpause = 1
+[State ]
+type = ChangeState
+triggerall = Numenemy
+triggerall = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y))
+trigger1 = ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) = 301 && ((playerid(floor(vel y)),sysvar(4)&(33554431))/32768) = [760,761]
+trigger1 = Numpartner > 0
+trigger1 = playerid(floor(vel y)),var(18) = 7
+value = 960
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+triggerall = Numenemy
+trigger1 = Playeridexist(floor(vel x)) && Playeridexist(floor(vel y))
+trigger1 = ((playerid(floor(vel x)),sysvar(4)&(32767-63))/64) = 301 || ((playerid(floor(vel y)),sysvar(4)&(32767-63))/64) = 301
+trigger1 = Time = 300
+value = 900
+ignorehitpause = 1
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State ]
+type = SelfState
+trigger1 = Time > 600
+trigger2 = !Alive
+value = 5000
+ignorehitpause = 1
+
+
+[Statedef 901]
+type = U
+movetype = U
+physics = N
+
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+ignorehitpause = 1
+
+[State ]
+type = Hitvelset
+trigger1 = 1
+ignorehitpause = 1
+
+[State ]
+type = SelfState
+trigger1 = 1
+value = 5000
+ignorehitpause = 1
+
+[Statedef 950]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+Statetype = A
+[State ]
+type = changeanim2
+trigger1 = 1
+value = 950
+ignorehitpause = 1
+[State ]
+type = changeanim
+trigger1 = Gethitvar(chainid) = 2120
+trigger1 = Selfanimexist(5030)
+value = 5030
+ignorehitpause = 1
+
+[State ]
+type = ChangeState
+trigger1 = Gethitvar(chainid) = 2120
+value = 990
+ignorehitpause = 1
+
+[State ]
+type = Velset
+triggerall = Name != "Enuo"
+trigger1 = !Numpartner
+trigger1 = (Enemy(Enemy,name!="Enuo"&&Numenemy>1),var(20)&(1048575-1023)) < 1024
+trigger2 = Numpartner
+trigger2 = (Enemy(Enemy,name!="Enuo"&&Numenemy>1),var(20 +(Partner,id < ID) )&(1048575-1023)) < 1024
+x = -4
+y = -4
+
+[State ]
+type = Selfstate
+triggerall = Name != "Enuo"
+trigger1 = !Numpartner
+trigger1 = (Enemy(Enemy,name!="Enuo"&&Numenemy>1),var(20)&(1048575-1023)) < 1024
+trigger2 = Numpartner
+trigger2 = (Enemy(Enemy,name!="Enuo"&&Numenemy>1),var(20 +(Partner,id < ID) )&(1048575-1023)) < 1024
+value = 5030
+
+[State ]
+type = ChangeState
+trigger1 = !HitOver
+value = 951
+
+[State ]
+type = Velset
+trigger1 = !Alive
+x = -4
+y = -4
+
+[State ]
+type = ChangeState
+trigger1 = !Alive
+value = 953
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+
+[State ]
+type = Posset
+trigger1 = 1
+y = 0
+ignorehitpause = 1
+
+[State ]
+type = Velset
+trigger1 = Command = "holdback"
+trigger2 = Command = "holdfwd"
+x =  2 * (Command = "holdfwd") - 2*(Command = "holdback")
+
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+
+[Statedef 951]
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+Statetype = S
+
+[State ]
+type = changeanim2
+trigger1 = 1
+value = 950
+ignorehitpause = 1
+
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = ,HT
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+
+[State ]
+type = StateTypeSet
+trigger1 = Time = 0
+trigger1 = GetHitVar(yvel) != 0 || GetHitVar(fall)
+trigger2 = Pos Y != 0
+statetype = a
+
+[State ]
+type = ChangeState
+trigger1 = HitShakeOver
+trigger1 = GetHitVar(yvel) = 0 && !GetHitVar(fall)
+value = 952
+
+[State ]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 953
+
+
+[Statedef 952]
+type    = S
+movetype= H
+physics = S
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+Statetype = S
+
+[State ]
+type = changeanim2
+trigger1 = 1
+value = 950
+ignorehitpause = 1
+
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = ,HT
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+
+[State 5001, 1]
+type = HitVelSet
+trigger1 = Time = 0
+x = 1
+
+[State ]
+type = VelMul
+trigger1 = Time >= GetHitVar(slidetime)
+x = .6
+
+[State 5001, 4]
+type = VelSet
+trigger1 = HitOver
+x = 0
+
+[State 5001, 6]
+type = ChangeState
+trigger1 = HitOver
+value = 950
+
+[Statedef 953]
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+Statetype = A
+
+[State ]
+type = changeanim2
+trigger1 = 1
+value = 950
+ignorehitpause = 1
+
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = ,HT
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+
+
+[State ]
+type = HitVelSet
+trigger1 = Time = 0
+x = 1
+y = 1
+
+[State ]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State ]
+type = ChangeState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 954
+
+[Statedef 954]
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+Statetype = L
+
+[State ]
+type = changeanim2
+trigger1 = 1
+value = 950
+ignorehitpause = 1
+
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+
+[State ]
+type = Velmul
+trigger1 = 1
+x = .85
+
+[State ]
+type = Velset
+trigger1 = 1
+y = 0
+
+[State ]
+type = Selfstate
+trigger1 = Time >= 30 && !Alive
+value = 5150
+
+[State ]
+type = ChangeState
+trigger1 = Time >= 30
+value = 955
+
+[Statedef 955]
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+Statetype = L
+
+[State ]
+type = changeanim2
+trigger1 = 1
+value = 950
+ignorehitpause = 1
+
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+
+[State ]
+type = ChangeState
+trigger1 = Time >= 30
+value = 950
+
+[Statedef 960]
+
+type = U
+movetype = U
+physics = N
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+[State ]
+type = pause
+trigger1 = !Time
+time=0
+movetype=0
+[State ]
+type = Palfx
+trigger1 = 1
+time = -1
+add = 255,0,0
+Sinadd = 255,0,0,3
+
+[State ]
+type = SelfState
+trigger1 = 1
+value = 0 + (Statetype = A) * 50
+ctrl = 1
+
+
+[Statedef 980]
+
+type = U
+movetype = U
+physics = N
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 1
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = sca
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = sac
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+unhittable=0
+p2defmul=1
+anim=-1
+[State ]
+type = pause
+trigger1 = !Time
+time=0
+movetype=0
+
+[State ]
+type = ChangeState
+trigger1 = Hitshakeover
+value = 992
+
+
+;石化
+[Statedef 990]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = statetype=L
+statetype = A
+
+[State ]
+type = Palfx
+trigger1 = 1
+time = 1
+color = 0
+mul = 192,192,192
+
+[State ]
+type = Offset
+trigger1 = Alive
+trigger1 = command = "back" || command = "up" || command = "down" || command = "fwd" || command="recovery"
+x = Random%5-Random%5
+y = Random%5-Random%5
+[State ]
+type = Hitadd
+trigger1 = Alive
+trigger1 = command = "back" || command = "up" || command = "down" || command = "fwd" || command="recovery"
+value = -1
+
+[State ]
+type = changeanim
+trigger1 = SelfAnimExist(Anim)
+value = anim
+elem = animelemno(0)
+
+
+[State ]
+type = Velset
+trigger1 = name != "Enuo"
+trigger1 = !Time && !Hitover
+x = gethitvar(xvel) * facing
+y = gethitvar(yvel)
+
+[State ]
+type = VelMul
+trigger1 = name != "Enuo"
+trigger1 = !Time
+x = 0.85
+
+[State ]
+type = Posfreeze
+trigger1 = name != "Enuo"
+trigger1 = !Hitover
+
+[State ]
+type = veladd
+trigger1 = name != "Enuo"
+trigger1 = Hitover
+y = gethitvar(yaccel)
+
+[State ]
+type = Velset
+trigger1 = name != "Enuo"
+trigger1 = Hitover && pos Y >= 0 && vel y > 0 && !(vel x)
+y = 0
+
+[State ]
+type = Velset
+trigger1 = name != "Enuo"
+trigger1 = Hitover && pos Y >= 0 && vel y > 0 && abs(Vel x)=0.25
+x = 0
+y = -2
+
+[State ]
+type = Velset
+trigger1 = name != "Enuo"
+trigger1 = Hitover && pos Y >= 0 && vel y > 0 && abs(Vel x)=0.5
+x = 0.25 * (1 - 2 *(Vel x<0))
+y = -4
+
+[State ]
+type = Velset
+trigger1 = name != "Enuo"
+trigger1 = Hitover && pos Y >= 0 && vel y > 0 && Vel x
+x = 0.5 * (1 - 2 *(Vel x<0))
+y = -6
+
+[State ]
+type = Posset
+trigger1 = name != "Enuo"
+trigger1 = Hitover && pos Y >= 0 && vel y > 0
+y = 0
+
+
+[State ]
+type = Defencemulset
+trigger1 = 1
+value = 2
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+p2defmul=1
+unhittable=0
+anim=-1
+
+[State ]
+type = LIfeset
+trigger1 = Gethitvar(chainid) = 2120 && !Time
+trigger1 = name != "Enuo" && Numenemy
+trigger1 = !(Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+value = 0 + (Random%9+1)* !(Enemy(Numenemy>1&&Enemy,Name!="Enuo"),Palno > 3)
+ignorehitpause = 1
+
+[State ]
+type = LIfeset
+trigger1 = Gethitvar(chainid) = 2120 && !Time
+trigger1 = name != "Enuo" && Numenemy
+trigger1 = (Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+value = (Life/2)
+ignorehitpause = 1
+
+[State ]
+type = Palfx
+trigger1 = !Alive
+time = -1
+color = 0
+mul = 192,192,192
+[State ]
+type = ChangeState
+trigger1 = !Alive
+value = 5150
+
+[State ]
+type = SelfState
+trigger1 = Time > (600 + hitcount*12) && hitcount < 0
+value = 5040
+
+[State ]
+type = SelfState
+trigger1 = Time > 600
+value = 5000
+
+
+;ストップ
+[Statedef 991]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = statetype=L
+statetype = A
+
+[State ]
+type = Palfx
+trigger1 = Time > 30
+time = 1
+add = 64+192*(time%4 < 2),0,0
+
+[State ]
+type = changeanim
+trigger1 = SelfAnimExist(Anim)
+value = anim
+elem = animelemno(0)
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+p2defmul=1
+unhittable=0
+anim=-1
+
+[State ]
+type = SelfState
+trigger1 = Time > 600
+trigger2 = !Alive
+value = 5000
+
+;即死
+[Statedef 992]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = statetype=L
+statetype = A
+
+[State ]
+type = Offset
+trigger1 = 1
+x = Time%2
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+
+[State ]
+type = LifeSet
+trigger1 = name != "Enuo"
+trigger1 = !(Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+trigger1 = Enemy(Numenemy>1&&Enemy,Name!="Enuo"),Palno > 3 || !Time
+value = 0 + (Random%9+1)* !(Enemy(Numenemy>1&&Enemy,Name!="Enuo"),Palno > 3)
+
+[State ]
+type = Lifeadd
+trigger1 = name != "Enuo"
+trigger1 = (Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+trigger1 = !Time
+value = -(Life/2)
+absolute = 1
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+p2defmul=1
+unhittable=0
+anim=-1
+
+[State ]
+type = Velset
+trigger1 = Time > 600
+trigger2 = !Alive
+trigger3 = Enemy(Numenemy>1&&Enemy,Name!="Enuo"),Palno < 4 || (Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+trigger3 = Time > 60
+x = -4
+y = -4
+
+[State ]
+type = SelfState
+trigger1 = Time > 600
+trigger2 = !Alive
+trigger3 = Enemy(Numenemy>1&&Enemy,Name!="Enuo"),Palno < 4 || (Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+trigger3 = Time > 60
+value = 5050
+
+;瀕死
+[Statedef 993]
+type = U
+movetype = U
+physics = N
+
+[State ]
+type = Statetypeset
+trigger1 = 1
+movetype = H
+
+[State ]
+type = Statetypeset
+trigger1 = statetype=L
+statetype = A
+
+[State ]
+type = Offset
+trigger1 = 1
+x = Time%2
+
+[State ]
+type = Velset
+trigger1 = 1
+x = 0
+y = 0
+
+[State ]
+type = LifeSet
+trigger1 = name != "Enuo"
+trigger1 = !(Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+trigger1 = !Time
+value = 1+Random%9
+
+[State ]
+type = Lifeadd
+trigger1 = name != "Enuo"
+trigger1 = (Enemy(Numenemy>1&&Enemy,Name!="Enuo"),sysvar(1)&16)
+trigger1 = !Time
+value = -(Life/2)
+absolute = 1
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 0
+attr = 
+stateno = 5000
+
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 1
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 2
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 3
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 4
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 5
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 6
+attr = 
+stateno = 5000
+[State ]
+type = Hitoverride
+trigger1 = 1
+time = 7
+attr = 
+stateno = 5000
+[State ]
+type = nothitby
+trigger1 = 1
+value = 
+[State ]
+type = nothitby
+trigger1 = 1
+value2 = 
+[State ]
+type = superpause
+trigger1 = !Time
+time=0
+movetype=0
+darken=0
+p2defmul=1
+unhittable=0
+anim=-1
+
+[State ]
+type = SelfState
+trigger1 = Time
+value = 5000

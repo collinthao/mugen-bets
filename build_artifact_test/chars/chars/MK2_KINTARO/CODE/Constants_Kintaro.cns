@@ -1,0 +1,56 @@
+﻿
+[Data]
+life = 1000		
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 0
+liedown.time = 15
+airjuggle = 20	
+sparkno = 2		
+guard.sparkno = 40
+KO.echo = 0		
+volumescale = 100		
+IntPersistIndex = 0
+FloatPersistIndex = 0
+  				
+[Size]
+xscale = .87
+yscale = .87
+ground.back = 28
+ground.front = 28
+air.back = 35	
+air.front = 35
+height = 65	
+attack.dist = 150	
+proj.attack.dist = 90	
+proj.doscale = 1 
+head.pos = 10, -117
+mid.pos = 0, -52
+shadowoffset = .5
+draw.offset = 0,-2	
+
+[Velocity]
+walk.fwd  = 2.5
+walk.back = -2.2
+run.fwd  = 0, 0
+run.back = 0,0
+jump.neu = 0,-10
+jump.back = -6
+jump.fwd = 6
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = .65
+stand.friction = 0.00000000000000000000000000000000001
+crouch.friction = 0 .0000000000000000000000000000000001
+
+;---------------------------------------------------------------------------
+[Quotes]
+victory1 = "You challenge me in Mortal Kombat?, I decline your challenge, there will be no kombat today. Only fatalities!."
+victory2 = "Great Shao Kahn, I stand at your command."
+victory3 = "Do not speak ill of Kintaro when I am kind enough to bring you a gift... a quick death."
+victory4 = "Some believed you lost after Mortal Kombat my prince. But Kintaro did not believe such folly. There is no force that could destroy 'The Prince of Pain'... unless it was 'The Scourge of Outworld'."
+victory5 = "The pride of the Shokan race is in my shoulders now. My prince Goro... I will avenge you!."
+victory6 = "Humans... Less ugly when they burn!."

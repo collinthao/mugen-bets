@@ -1,0 +1,36 @@
+;----------------------------------;
+; Created by Using FighterFactory3 ;
+;----------------------------------;
+
+;Definition for the Character
+[Info]
+name = "Son (Dad 'n Me)"
+displayname = "Son"
+versiondate = 06,07,2024
+mugenversion =1.0
+author ="achilldude"
+pal.defaults = 1,2
+
+[Files]
+sprite = Sprites.sff
+anim = Animation.air
+sound = Sound.snd
+cmd = Command.cmd
+cns = Data.cns
+stcommon = common1.cns
+st = 10ov.cns
+st1 = Constants.cns
+st2 = Basics.cns
+st3 = Specials.cns
+st4 = Hypers.cns
+st9 = AI.cns
+pal1 = pal/son.act
+pal2 = pal/son2.act
+pal3 = pal/son3.act
+pal4 = pal/son4.act
+pal5 = pal/son5.act
+pal6 = pal/son6.act
+
+[Arcade]
+;intro.storyboard = 
+;ending.storyboard = 

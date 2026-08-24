@@ -1,0 +1,138 @@
+[Data]
+life = 1000
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 150
+liedown.time = 10
+airjuggle = 50
+sparkno = -1
+guard.sparkno = -1
+KO.echo = 0
+volumescale = 255
+IntPersistIndex = 60
+FloatPersistIndex = 40
+
+[Size]
+xscale = 1
+yscale = 1
+ground.back = 15
+ground.front = 16
+air.back = 15
+air.front = 15
+height = 85
+attack.dist = 160
+proj.attack.dist = 90
+proj.doscale = 0
+head.pos = 1,-85
+mid.pos = 7,-53
+shadowoffset = 0
+draw.offset = 0,0
+
+[Velocity]
+walk.fwd  = 2.6
+walk.back = -2.4
+run.fwd  = 6,0
+run.back = -6,-4
+jump.neu = 0,-10
+jump.back = -3.5
+jump.fwd = 3.5
+runjump.back = -2.55,-8.1
+runjump.fwd = 5,-12.1
+airjump.neu = 0,-9.1
+airjump.back = -2.57
+airjump.fwd = 2.7
+air.gethit.groundrecover = -0.15,-3.5
+air.gethit.airrecover.mul = 0.5,0.5
+air.gethit.airrecover.add = 0,-4.5
+air.gethit.airrecover.back = -1
+air.gethit.airrecover.fwd = 0
+air.gethit.airrecover.up = -2
+air.gethit.airrecover.down = 1.5
+
+[Movement]
+airjump.num = 1
+airjump.height = 50
+yaccel = 0.60
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundLevel = 25
+air.gethit.groundRecover.ground.threshold = -20
+air.gethit.groundRecover.groundLevel = 10
+air.gethit.airRecover.threshold = -1
+air.gethit.airRecover.yAccel = 0.35
+air.gethit.trip.groundLevel = 15
+down.bounce.offset = 0,20
+down.bounce.yAccel = 0.4
+down.bounce.groundLevel = 12
+down.friction.threshold = 0.5
+
+;---------------------------------------------------------------------------
+; Winquotes
+[Quotes]
+victory1 = "I'm a 12.0 on the 10.0 scale of badness!"
+victory2 = "Who's a man and a half? I'm a man and a half!"
+victory3 = "Rip and tear rip and... TEAR RIP AND TEAR... RIP AND TEAR!!!"
+victory4 = "Here comes the Night Train!"
+victory5 = "I`m a bad man! How bad? Real bad!"
+victory6 = "I've gotta handful of vertebrae and a headful of mad!"
+victory7 = "You`re stupid! And you`re gonna be stupid and dead!!"
+victory8 = "My cause is just... My will is strong... And my gun is very, very large!"
+victory9 = "You think you can get me?!? Wait, maybe you don't think. Well, I do! And I think you're dead!"
+victory10 = "There nothing wrong with you that I can't fix... WITH MY HANDS!"
+victory11 = "Knock knock who's there? ME, ME, ME, ME...."
+victory12 = "Whooooo Baby! I'M BURNIN' OUTTA CONTROL!!"
+victory13 = "I'M YOUR WORST NIGHTMARE!"
+victory14 = "I'm a MAN, I'M SUPER BAD!!!"
+victory15 = "I'M COOKIN' WITH GAS!"
+victory16 = "Dig the prowess, the capacity for violence!"
+victory17 = "Go fuck yourself!"
+victory18 = "Get off scumm!"
+victory19 = "They are rage, brutal, without mercy. But me. I'm worse."
+
+;---------------------------------------------------------------------------
+victory20 = "..."    ;for purists
+
+;---------------------------------------------------------------------------
+; Character-specific
+victory30 = "Copycat..."    ;Against Master Chief
+victory31 = "And another demon bites the dust."    ;Against Demons
+victory32 = "Demons, aliens, I take both of them!"    ;Against Aliens
+victory33 = "Looks like the hunter just become the prey!"    ;Against Predator
+victory34 = "Demons, vampires, I take both of them!"    ;Against Vampires
+victory35 = "Demons, apes, what's next? Demon apes?"    ;Against Apes
+victory36 = "You're nothing but scrapmetal!"    ;Against Cyborgs
+victory37 = "Demons, half-demons, it dosen't make much difference."    ;Against DMC
+victory38 = "Demon possessed stripper outfits... That was the most ridiculous thing, I've ever heard!"    ;Against KLK
+victory39 = "Hey lady, haven'tcha heard? Chivalry's DEAD!"    ;Against Samus
+victory40 = "Okay, since when do witches started to use guns?"    ;Against Bayonetta
+victory41 = "Back to hell, freak!"    ;Againste demonspawns and monsters
+victory42 = "You need better weapons than that."    ;Against Sharpshooters and Gun nuts
+victory43 = "I've wondered, how many bullets I have to pump in you before you die? Now I know..."    ;Against Deadpool
+victory44 = "What killed the dinosaurs? ME!"    ;Against reptiles
+victory45 = "Flirting won't get you anywhere with me!"    ;Against Succubus
+victory46 = "You have some good punches and kicks... Too bad you need far more than that to take me!"    ;Against Female fighters
+victory47 = "You only scratched the surface, pussycat!"    ;Against Felicia
+victory48 = "What? Did you expect me to just drop my gun and give up?"    ;Against Magical girls
+victory49 = "Are you angry? I'm rage!"    ;Against Angry guys
+victory50 = "Looks like I CAN catch you, and beat you!"    ;Against Speed demons
+victory51 = "Looks like your Princess need a new hero."    ;Against Mario
+victory52 = "Keep poking someone else with your butterknife, wuss!"    ;Against Link
+victory53 = "Ultimate Life Form my ass, just a smarthmouth edgelord."    ;Against Shadow
+victory54 = "I've fought demons more fearsome than you!"    ;Against Shao Kahn
+victory55 = "Oversized sword, are you compensating something?"    ;Against Cloud, Sephiroth, etc.
+victory56 = "Your fancy toy isn't so deadly afterall."    ;Against Jedis
+victory57 = "Now I showed you how a real man use a chainsaw!"    ;Against chainsaw users
+victory58 = "Now transform to a trashcan, that's more fitting to you!"    ;Against Mechas
+victory59 = "I give YOU nightmares."    ;Freddy Krueger
+victory60 = "Okay, that kid just totally freaked me out!"    ;Against Steven Universe
+victory61 = "Just shut up!"    ;Against Naruto & Darkstar
+victory62 = "I think I just reaped your soul!"    ;Against Ichigo
+victory63 = "Seems like you CAN'T STAND your ground."    ;Against JoJo
+victory64 = "From heaven to hell."    ;Against Kid Icarus
+victory65 = "I can send you to heaven! Anytime..."    ;Against Panty
+victory66 = "I have been waiting for you FOREVER to show up, blondie. And you disappointed me..."    ;Against Duke Nukem
+victory67 = "Do you want an excuse from me? Wait! Wait FOR-EVER!!"    ;Against Duke Nukem
+victory68 = "'When It's Done' Now im done with you!"    ;Against Duke Nukem

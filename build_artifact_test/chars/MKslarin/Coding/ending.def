@@ -1,0 +1,2322 @@
+; Introduction cutscene for SuperMario's story.
+
+
+[SceneDef]
+spr = ending.sff
+startscene = 0         ;Starting scene number (for debugging)
+
+;------------------------------------
+[Scene 0]
+; Fade
+fadein.time = 500       ;Time to take for fading in
+fadein.col = 0,0,0     ;Use 255,255,255 for white-fade
+fadeout.time = 15
+fadeout.col = 0,0,0
+; Screen color
+clearcolor = 0,0,0
+; Overlay Anims (from 0 to 9)
+layerall.pos = 160,0   ;Default position for all layers
+layer0.anim =  1       ;Anim action number
+layer0.offset = 0,32   ;Position offset
+layer0.starttime = 60   ;Time to start display
+; Music
+bgm = EndingBad.mp3        ;Name of music file to play
+bgm.loop = 0
+bgvolume = 255
+; Total time
+end.time = 820
+
+;------------------------------------
+[Scene 1]
+; Fade
+fadein.time = 15
+fadein.col = 0,0,0
+fadeout.time = 2
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  2
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 10
+
+;------------------------------------
+[Scene 2]
+; Fade
+fadein.time = 2
+fadein.col = 255,255,255
+fadeout.time = 2
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  3
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 10
+
+;------------------------------------
+[Scene 3]
+; Fade
+fadein.time = 2
+fadein.col = 255,255,255
+fadeout.time = 2
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  4
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 10
+
+;------------------------------------
+[Scene 4]
+; Fade
+fadein.time = 2
+fadein.col = 255,255,255
+fadeout.time = 2
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  2
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 10
+
+;------------------------------------
+[Scene 5]
+; Fade
+fadein.time = 2
+fadein.col = 255,255,255
+fadeout.time = 2
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  3
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 10
+
+;------------------------------------
+[Scene 6]
+; Fade
+fadein.time = 2
+fadein.col = 255,255,255
+fadeout.time = 120
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  4
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 10
+
+;------------------------------------
+[Scene 7]
+; Fade
+fadein.time = 120
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  5
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 180
+
+;------------------------------------
+[Scene 8]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  6
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 9]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  7
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 10]
+; Fade
+fadein.time = 0
+fadein.col = 255,255,255
+fadeout.time = 15
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  8
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 11]
+; Fade
+fadein.time = 15
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  9
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 140
+
+;------------------------------------
+[Scene 12]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  10
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 140
+
+;------------------------------------
+[Scene 13]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  11
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 140
+
+;------------------------------------
+[Scene 14]
+; Fade
+fadein.time = 0
+fadein.col = 255,255,255
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  12
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 140
+
+;------------------------------------
+[Scene 15]
+; Fade
+fadein.time = 0
+fadein.col = 255,255,255
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  13
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 140
+
+;------------------------------------
+[Scene 16]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  14
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 180
+
+;------------------------------------
+[Scene 17]
+; Fade
+fadein.time = 70
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  15
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 180
+
+;------------------------------------
+[Scene 18]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 75
+fadeout.col = 70,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  16
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 310
+
+;------------------------------------
+[Scene 19]
+; Fade
+fadein.time = 135
+fadein.col = 70,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  17
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 20]
+; Fade
+fadein.time = 0
+fadein.col = 100,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  18
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 21]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  19
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 290
+
+;------------------------------------
+[Scene 22]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 60
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  20
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 160
+
+;------------------------------------
+[Scene 23]
+; Fade
+fadein.time = 45
+fadein.col = 255,255,255
+fadeout.time = 10
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  21
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 24]
+; Fade
+fadein.time = 10
+fadein.col = 255,255,255
+fadeout.time = 120
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  22
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 25]
+; Fade
+fadein.time = 140
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  23
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 26]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  24
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 27]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  25
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 28]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  26
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 29]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  27
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 30]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  28
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 31]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  29
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 160
+
+;------------------------------------
+[Scene 32]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  30
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 33]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  31
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 34]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  32
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 35]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  33
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 36]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  34
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 37]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  35
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 38]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  36
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 39]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  37
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 200
+
+;------------------------------------
+[Scene 40]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  38
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 200
+
+;------------------------------------
+[Scene 41]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  39
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 200
+
+;------------------------------------
+[Scene 42]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  40
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 165
+
+;------------------------------------
+[Scene 43]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  41
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 165
+
+;------------------------------------
+[Scene 44]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 30
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  40
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 165
+
+;------------------------------------
+[Scene 45]
+; Fade
+fadein.time = 30
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  42
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 180
+
+;------------------------------------
+[Scene 46]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  43
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 180
+
+;------------------------------------
+[Scene 47]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 10
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  44
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 60
+
+;------------------------------------
+[Scene 48]
+; Fade
+fadein.time = 10
+fadein.col = 255,255,255
+fadeout.time = 180
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  45
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 60
+
+;------------------------------------
+[Scene 48]
+; Fade
+fadein.time = 10
+fadein.col = 255,255,255
+fadeout.time = 300
+fadeout.col = 255,255,255
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  46
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 49]
+; Fade
+fadein.time = 180
+fadein.col = 255,255,255
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  47
+layer0.offset = 0,32
+layer0.starttime = 0
+; Music
+bgm = EndingGood.mp3        ;Name of music file to play
+bgm.loop = 0
+bgvolume = 255
+; Total time
+end.time = 340
+
+;------------------------------------
+[Scene 50]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  48
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 285
+
+;------------------------------------
+[Scene 51]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  49
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 140
+
+;------------------------------------
+[Scene 52]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  50
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 180
+
+;------------------------------------
+[Scene 53]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  51
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 90
+
+;------------------------------------
+[Scene 54]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  52
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 60
+
+;------------------------------------
+[Scene 55]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 105
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  53
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 56]
+; Fade
+fadein.time = 105
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  54
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 195
+
+;------------------------------------
+[Scene 57]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  55
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 165
+
+;------------------------------------
+[Scene 58]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 10
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  56
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 59]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 10
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  57
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 60]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  58
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 61]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  59
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 62]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  60
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 210
+
+;------------------------------------
+[Scene 63]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  61
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 64]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  62
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 65]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  63
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 66]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  64
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 67]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  65
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 68]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  66
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 69]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  67
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 160
+
+;------------------------------------
+[Scene 70]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  68
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 160
+
+;------------------------------------
+[Scene 71]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 40
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  69
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 160
+
+;------------------------------------
+[Scene 72]
+; Fade
+fadein.time = 40
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  70
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 135
+
+;------------------------------------
+[Scene 73]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  71
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 120
+
+;------------------------------------
+[Scene 74]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  72
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 30
+
+;------------------------------------
+[Scene 75]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  73
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 5
+
+;------------------------------------
+[Scene 76]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  74
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 150
+
+;------------------------------------
+[Scene 77]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  75
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 160
+
+;------------------------------------
+[Scene 78]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  76
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 270
+
+;------------------------------------
+[Scene 79]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  77
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 270
+
+;------------------------------------
+[Scene 80]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  78
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 270
+
+;------------------------------------
+[Scene 81]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  79
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 270
+
+;------------------------------------
+[Scene 82]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  80
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 83]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  81
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 84]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  82
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 85]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  83
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 260
+
+;------------------------------------
+[Scene 86]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  84
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 200
+
+;------------------------------------
+[Scene 87]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  85
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 200
+
+;------------------------------------
+[Scene 88]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  86
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 90
+
+;------------------------------------
+[Scene 89]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  87
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 210
+
+;------------------------------------
+[Scene 90]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  88
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 210
+
+;------------------------------------
+[Scene 91]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  89
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 210
+
+;------------------------------------
+[Scene 92]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  90
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 93]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  91
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 94]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 180
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  92
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 540
+
+;------------------------------------
+[Scene 95]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  93
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 96]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  94
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 97]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  95
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 98]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  96
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 99]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  97
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 100]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  98
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 101]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  99
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 102]
+; Fade
+fadein.time = 10
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  100
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 300
+
+;------------------------------------
+[Scene 103]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  101
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 240
+
+;------------------------------------
+[Scene 104]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  102
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 270
+
+;------------------------------------
+[Scene 105]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 20
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  103
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 270
+
+;------------------------------------
+[Scene 106]
+; Fade
+fadein.time = 20
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  104
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 75
+
+;------------------------------------
+[Scene 107]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  105
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 225
+
+;------------------------------------
+[Scene 108]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  106
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 5
+
+;------------------------------------
+[Scene 109]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  107
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 5
+
+;------------------------------------
+[Scene 110]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  108
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 5
+
+;------------------------------------
+[Scene 111]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  109
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 5
+
+;------------------------------------
+[Scene 112]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 0
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  110
+layer0.offset = 0,32
+layer0.starttime = 0
+; Total time
+end.time = 180
+
+;------------------------------------
+[Scene 113]
+; Fade
+fadein.time = 0
+fadein.col = 0,0,0
+fadeout.time = 120
+fadeout.col = 0,0,0
+; Screen color
+; The previous clearcolor value is carried over by default
+; Overlay Anims (from 0 to 9)
+; The previous layerall.pos value is carried over by default
+layer0.anim =  111
+layer0.offset = 0,32
+layer0.starttime = 0
+; Music
+bgm = NextTime.mp3        ;Name of music file to play
+bgm.loop = 0
+bgvolume = 255
+; Total time
+end.time = 300
+
+
+[Begin Action 1]
+1,0, 0,0, -1
+
+[Begin Action 2]
+2,0, 0,0, -1
+
+[Begin Action 3]
+3,0, 0,0, -1
+
+[Begin Action 4]
+4,0, 0,0, -1
+
+[Begin Action 5]
+5,0, 0,0, -1
+
+[Begin Action 6]
+6,0, 0,0, -1
+
+[Begin Action 7]
+7,0, 0,0, -1
+
+[Begin Action 8]
+8,0, 0,0, -1
+
+[Begin Action 9]
+9,0, 0,0, -1
+
+[Begin Action 10]
+10,0, 0,0, -1
+
+[Begin Action 11]
+11,0, 0,0, -1
+
+[Begin Action 12]
+12,0, 0,0, -1
+
+[Begin Action 13]
+13,0, 0,0, -1
+
+[Begin Action 14]
+14,0, 0,0, -1
+
+[Begin Action 15]
+15,0, 0,0, -1
+
+[Begin Action 16]
+16,0, 0,0, -1
+
+[Begin Action 17]
+Loopstart
+17,0, 0,0, 3
+18,0, 0,0, 3
+
+[Begin Action 18]
+Loopstart
+19,0, 0,0, 3
+20,0, 0,0, 3
+
+[Begin Action 19]
+Loopstart
+21,0, 0,0, 3
+22,0, 0,0, 3
+
+[Begin Action 20]
+23,0, 0,0, -1
+
+[Begin Action 21]
+24,0, 0,0, -1
+
+[Begin Action 22]
+25,0, 0,0, -1
+
+[Begin Action 23]
+26,0, 0,0, -1
+
+[Begin Action 24]
+27,0, 0,0, -1
+
+[Begin Action 25]
+28,0, 0,0, -1
+
+[Begin Action 26]
+29,0, 0,0, -1
+
+[Begin Action 27]
+30,0, 0,0, -1
+
+[Begin Action 28]
+31,0, 0,0, -1
+
+[Begin Action 29]
+32,0, 0,0, -1
+
+[Begin Action 30]
+33,0, 0,0, -1
+
+[Begin Action 31]
+34,0, 0,0, -1
+
+[Begin Action 32]
+35,0, 0,0, -1
+
+[Begin Action 33]
+36,0, 0,0, -1
+
+[Begin Action 34]
+37,0, 0,0, -1
+
+[Begin Action 35]
+38,0, 0,0, -1
+
+[Begin Action 36]
+39,0, 0,0, -1
+
+[Begin Action 37]
+40,0, 0,0, -1
+
+[Begin Action 38]
+41,0, 0,0, -1
+
+[Begin Action 39]
+42,0, 0,0, -1
+
+[Begin Action 40]
+Loopstart
+43,0, 0,0, 3
+44,0, 0,0, 3
+
+[Begin Action 41]
+45,0, 0,0, -1
+
+[Begin Action 42]
+Loopstart
+46,0, 0,0, 3
+47,0, 0,0, 3
+
+[Begin Action 43]
+Loopstart
+48,0, 0,0, 3
+49,0, 0,0, 3
+
+[Begin Action 44]
+50,0, 0,0, -1
+
+[Begin Action 45]
+51,0, 0,0, -1
+
+[Begin Action 46]
+52,0, 0,0, -1
+
+[Begin Action 47]
+53,0, 0,0, -1
+
+[Begin Action 48]
+54,0, 0,0, -1
+
+[Begin Action 49]
+55,0, 0,0, -1
+
+[Begin Action 50]
+56,0, 0,0, -1
+
+[Begin Action 51]
+57,0, 0,0, -1
+
+[Begin Action 52]
+58,0, 0,0, -1
+
+[Begin Action 53]
+59,0, 0,0, -1
+
+[Begin Action 54]
+60,0, 0,0, -1
+
+[Begin Action 55]
+61,0, 0,0, -1
+
+[Begin Action 56]
+62,0, 0,0, -1
+
+[Begin Action 57]
+63,0, 0,0, -1
+
+[Begin Action 58]
+64,0, 0,0, -1
+
+[Begin Action 59]
+65,0, 0,0, -1
+
+[Begin Action 60]
+66,0, 0,0, -1
+
+[Begin Action 61]
+67,0, 0,0, -1
+
+[Begin Action 62]
+68,0, 0,0, -1
+
+[Begin Action 63]
+69,0, 0,0, -1
+
+[Begin Action 64]
+70,0, 0,0, -1
+
+[Begin Action 65]
+71,0, 0,0, -1
+
+[Begin Action 66]
+72,0, 0,0, -1
+
+[Begin Action 67]
+73,0, 0,0, -1
+
+[Begin Action 68]
+74,0, 0,0, -1
+
+[Begin Action 69]
+75,0, 0,0, -1
+
+[Begin Action 70]
+76,0, 0,0, -1
+
+[Begin Action 71]
+77,0, 0,0, -1
+
+[Begin Action 72]
+78,0, 0,0, -1
+
+[Begin Action 73]
+79,0, 0,0, -1
+
+[Begin Action 74]
+80,0, 0,0, -1
+
+[Begin Action 75]
+81,0, 0,0, -1
+
+[Begin Action 76]
+82,0, 0,0, -1
+
+[Begin Action 77]
+83,0, 0,0, -1
+
+[Begin Action 78]
+84,0, 0,0, -1
+
+[Begin Action 79]
+85,0, 0,0, -1
+
+[Begin Action 80]
+86,0, 0,0, -1
+
+[Begin Action 81]
+87,0, 0,0, -1
+
+[Begin Action 82]
+88,0, 0,0, -1
+
+[Begin Action 83]
+89,0, 0,0, -1
+
+[Begin Action 84]
+90,0, 0,0, -1
+
+[Begin Action 85]
+91,0, 0,0, -1
+
+[Begin Action 86]
+92,0, 0,0, -1
+
+[Begin Action 87]
+93,0, 0,0, -1
+
+[Begin Action 88]
+94,0, 0,0, -1
+
+[Begin Action 89]
+95,0, 0,0, -1
+
+[Begin Action 90]
+96,0, 0,0, -1
+
+[Begin Action 91]
+97,0, 0,0, -1
+
+[Begin Action 92]
+98,0, 0,0, -1
+
+[Begin Action 93]
+99,0, 0,0, -1
+
+[Begin Action 94]
+100,0, 0,0, -1
+
+[Begin Action 95]
+101,0, 0,0, -1
+
+[Begin Action 96]
+102,0, 0,0, -1
+
+[Begin Action 97]
+103,0, 0,0, -1
+
+[Begin Action 98]
+104,0, 0,0, -1
+
+[Begin Action 99]
+105,0, 0,0, -1
+
+[Begin Action 100]
+106,0, 0,0, -1
+
+[Begin Action 101]
+107,0, 0,0, -1
+
+[Begin Action 102]
+108,0, 0,0, -1
+
+[Begin Action 103]
+109,0, 0,0, -1
+
+[Begin Action 104]
+110,0, 0,0, -1
+
+[Begin Action 105]
+111,0, 0,0, -1
+
+[Begin Action 106]
+112,0, 0,0, -1
+
+[Begin Action 107]
+113,0, 0,0, -1
+
+[Begin Action 108]
+114,0, 0,0, -1
+
+[Begin Action 109]
+115,0, 0,0, -1
+
+[Begin Action 110]
+116,0, 0,0, -1
+
+[Begin Action 111]
+116,0, 0,0, -1
+
+
+

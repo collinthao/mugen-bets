@@ -1,0 +1,873 @@
+
+[Statedef 3000]
+type    = S
+movetype= A
+physics = N
+poweradd= 40
+ctrl = 0
+velset = 0,0
+anim = 3000
+
+[State golpe]
+type = PlaySnd
+trigger1 = AnimElem = 5
+persistent = 0
+value = 50,8
+
+[State 0, EnvShake]
+type = envshake
+trigger1 = time = 18
+time = 30
+freq = 166
+
+[State 1000, 1]
+type = Helper
+trigger1 = Time = 18 || Time = 21 || Time = 24
+trigger2 = Time = 27 || Time = 30 || Time = 33
+trigger3 = Time = 36 || Time = 39 || Time = 42
+trigger4 = Time = 45
+stateno = 3001
+name = "Sonic Scream"
+id = 3001
+postype = p1
+pos = 15,-21
+helpertype = normal
+ownpal = 1
+
+[State 0, ChangeAnim]
+type = ChangeAnim
+trigger1 = Time = 48
+value = 3001
+persistent = 0
+
+[State end]
+type = changestate
+trigger1 = anim = 3001
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+[Statedef 3001]
+type    = A
+movetype= A
+physics = N
+poweradd= 0
+anim = 3002
+velset = 8,0
+ctrl = 0
+sprpriority = 3
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State ]
+type = Hitdef
+trigger1 = !movecontact
+damage = 6,3
+pausetime = 0,8
+attr = A,SP
+guardflag = M
+animtype = heavy
+air.animtype = back
+sparkno = -1 ;S6012
+guard.sparkno = -1 ;S6012
+sparkxy = 40, 0
+hitsound = S5,0
+guardsound = S0,0
+ground.type = high
+air.type = high
+ground.slidetime = 20
+ground.hittime = 24
+ground.velocity = -9, -9
+air.velocity = -6, -8
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+fall = 1
+air.fall = 1
+fall.recover = 0
+air.fall.recover = 0
+yaccel = .5
+numhits = 1
+kill = root, var(57)
+guard.kill = root, var(57)
+
+[State don't playa hate]
+type = playerpush
+trigger1 = 1
+value = 0
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State end]
+type = destroyself
+trigger1 = frontedgedist <= -50 ;-150
+
+[Statedef 3010]
+type    = S
+movetype= A
+physics = N
+poweradd= 40
+ctrl = 0
+velset = 0,0
+anim = 3010
+
+[State golpe]
+type = PlaySnd
+trigger1 = AnimElem = 5
+persistent = 0
+value = 7504,0
+
+[State golpe]
+type = PlaySnd
+trigger1 = AnimElem = 5
+persistent = 0
+value = 7504,5
+
+[State 0, EnvShake]
+type = envshake
+trigger1 = time = 18
+time = 30
+ampl = 7
+freq = 166
+
+[State 1000, 1]
+type = Helper
+trigger1 = Time = 18 || Time = 21 || Time = 24
+trigger2 = Time = 27 || Time = 30 || Time = 33
+trigger3 = Time = 36 || Time = 39 || Time = 42
+trigger4 = Time = 45
+stateno = 3011
+name = "Thunder Clap"
+id = 3011
+postype = p1
+pos = 30,-21
+helpertype = normal
+ownpal = 1
+
+[State end]
+type = changestate
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+[Statedef 3011]
+type    = A
+movetype= A
+physics = N
+poweradd= 0
+anim = 3011
+velset = 8,0
+ctrl = 0
+sprpriority = 3
+
+[State angulo]
+type = AngleDraw
+trigger1 = 1
+value = -45
+ignorehitpause = 1
+
+[State 0, Trans]
+type = Trans
+trigger1 = 1
+trans = addalpha
+alpha = 256,128
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State ]
+type = Hitdef
+trigger1 = !movecontact
+damage = 7,4
+pausetime = 0,8
+attr = A,SP
+guardflag = M
+animtype = heavy
+air.animtype = back
+sparkno = -1 ;S6012
+guard.sparkno = -1 ;S6012
+sparkxy = 40, 0
+hitsound = S5,0
+guardsound = S0,0
+ground.type = high
+air.type = high
+ground.slidetime = 20
+ground.hittime = 24
+ground.velocity = -9, -9
+air.velocity = -6, -8
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+fall = 1
+air.fall = 1
+fall.recover = 0
+air.fall.recover = 0
+yaccel = .5
+numhits = 1
+kill = root, var(57)
+guard.kill = root, var(57)
+
+[State don't playa hate]
+type = playerpush
+trigger1 = 1
+value = 0
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State end]
+type = destroyself
+trigger1 = animtime = 0
+
+[Statedef 3020]
+type    = S
+movetype= A
+physics = N
+poweradd= 40
+ctrl = 0
+velset = 0,0
+anim = 3020
+
+[State 1000, 1]
+type = Helper
+trigger1 =AnimElem = 6
+stateno = 3021
+name = "Octi-Blade"
+id = 3021
+postype = p1
+pos = 30,-21
+helpertype = normal
+ownpal = 1
+
+[State end]
+type = changestate
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+[Statedef 3021]
+type    = A
+movetype= A
+physics = N
+poweradd= 0
+anim = 3021
+velset = 11,0
+ctrl = 0
+sprpriority = 3
+
+[State golpe]
+type = PlaySnd
+trigger1 = Time = 0
+persistent = 0
+value = 7504,1
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State ]
+type = Hitdef
+trigger1 = !moveguarded
+damage = 18,60
+pausetime = 0,8
+attr = A,SP
+guardflag = MAL
+air.animtype = back
+sparkno = S10100+(random%3)
+guard.sparkno = -1 ;S6012
+sparkxy = 0, 0
+hitsound = S7504,2
+guardsound = S6,0
+animtype = Med
+ground.type = Trip
+ground.slidetime = 17
+ground.hittime  = 17
+ground.velocity = -2
+air.velocity = -3,-2
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+fall = 1
+air.fall = 1
+fall.recover = 0
+air.fall.recover = 0
+yaccel = .5
+numhits = 1
+kill = root, var(57)
+guard.kill = root, var(57)
+
+[State ]
+type = Helper
+trigger1 = MoveHit
+helpertype = Normal
+ID = 7016
+name = "drop"
+postype = p1
+pos = 40,-40
+stateno = 7016
+ownpal = 1
+[State ]
+type = Helper
+trigger1 = MoveHit
+helpertype = Normal
+ID = 7016
+name = "drop"
+postype = p1
+pos = 40,-40
+stateno = 7016
+ownpal = 1
+
+[State 0, HitReset]
+type = MoveHitReset
+trigger1 = MoveHit
+
+[State don't playa hate]
+type = playerpush
+trigger1 = 1
+value = 0
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = MoveGuarded
+value = 3022
+
+[State end]
+type = destroyself
+trigger1 = frontedgedist <= -50 ;-150
+
+[Statedef 3022]
+type    = A
+movetype= A
+physics = N
+poweradd= 0
+anim = 3021
+velset = 11,0
+ctrl = 0
+sprpriority = 3
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0, VelSet]
+type = VelSet
+trigger1 = Pos Y > -240
+x = -7
+y = -7
+
+[State don't playa hate]
+type = playerpush
+trigger1 = 1
+value = 0
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State end]
+type = destroyself
+trigger1 = Pos Y <= -240 ;-150
+
+[Statedef 3030]
+type = S
+movetype = A
+physics = S
+anim = 3030
+velset = 0
+ctrl = 0
+poweradd= 40
+
+[State golpe]
+type = PlaySnd
+trigger1 = animelem = 2
+value = 7504,3
+
+[State 3000, Charge]
+type=explod
+trigger1 = AnimElem = 2
+anim=3031
+ID=3031
+sprpriority=5
+postype=p1
+pos=-8,-20
+removetime=18
+scale=0.5,0.5
+pausemovetime = 400
+
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = AnimElem = 3
+ID = 3031
+pos = -15,-19
+
+[State 0, ModifyExplod]
+type = ModifyExplod
+trigger1 = AnimElem = 5
+ID = 3031
+pos = -5,-16
+
+[State 1000, 1]
+type = Helper
+trigger1 = animelem = 6
+stateno = 3031
+name = "Lightning Bolt"
+id = 3031
+postype = p1
+pos = 30,-21
+helpertype = normal
+ownpal = 1
+
+[State 1020, 8]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[Statedef 3031]
+type    = A
+movetype= A
+physics = N
+poweradd= 0
+anim = 3032
+velset = 0,0
+ctrl = 0
+sprpriority = 3
+
+[State 0, VelSet]
+type = VelAdd
+trigger1 = AnimElem = 4
+x = 8
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State ]
+type = Hitdef
+trigger1 = !movecontact
+damage = 70,35
+pausetime = 0,3
+attr = A,SP
+guardflag = M
+animtype = heavy
+air.animtype = back
+sparkno = -1 ;S6012
+guard.sparkno = -1 ;S6012
+sparkxy = 40, 0
+hitsound = S7504,4
+guardsound = S6,0
+ground.type = high
+air.type = high
+ground.slidetime = 20
+ground.hittime = 30
+ground.velocity = -8, 0
+air.velocity = -3, 0
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+air.fall = 1
+fall.recover = 0
+air.fall.recover = 0
+yaccel = .5
+numhits = 0
+kill = root, var(57)
+guard.kill = root, var(57)
+
+[State don't playa hate]
+type = playerpush
+trigger1 = 1
+value = 0
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State end]
+type = changestate
+trigger1 = movecontact
+value = 3032
+
+[State end]
+type = destroyself
+trigger1 = frontedgedist <= -50 ;-150
+
+[Statedef 3032]
+type    = A
+movetype= A
+physics = N
+poweradd= 0
+anim = 3033
+velset = 0,0
+ctrl = 0
+sprpriority = 3
+
+[State stop]
+type = PosAdd
+trigger1 = Time = 0
+x = 60
+
+[State end]
+type = destroyself
+trigger1 = AnimTime = 0
+
+[Statedef 3040]
+type    = A
+movetype= A
+physics = N
+juggle  = 4
+poweradd= 110
+velset = 0,-8
+anim = 3040
+ctrl = 0
+
+[State 1000, 0.1]
+type = Posset
+trigger1 = !time
+Y = 0
+
+[State 1000, 0.1]
+type = Velset
+trigger1 = time = 5
+Y = 0
+
+[State golpe]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = 7504,15
+
+[State golpe]
+type = PlaySnd
+trigger1 = AnimElemTime(11) = 1
+value = 7504,16
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = Target, StateNo = 3042
+trigger1 = AnimElemTime(6) >= 0
+trigger1 = AnimElemTime(7) < 0
+time = 1
+pos = 38,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = Target, StateNo = 3042
+trigger1 = AnimElemTime(7) >= 0
+trigger1 = AnimElemTime(8) < 0
+time = 1
+pos = 88,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = Target, StateNo = 3042
+trigger1 = AnimElemTime(8) >= 0
+trigger1 = AnimElemTime(9) < 0
+time = 1
+pos = 138,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = Target, StateNo = 3042
+trigger1 = AnimElemTime(9) >= 0
+trigger1 = AnimElemTime(10) < 0
+time = 1
+pos = 188,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = Target, StateNo = 3042
+trigger1 = AnimElemTime(10) >= 0
+trigger1 = AnimElemTime(11) < 0
+time = 1
+pos = 238,0
+
+[State 1010, 2]
+type = HitDef
+trigger1 = !movehit
+trigger1 = !moveguarded
+numhits = 0
+damage    = 25,5
+attr = A,SP
+guardflag = M
+animtype = heavy
+air.animtype = high
+priority = 5, hit
+hitsound   = S5,0
+guardsound = S6,0
+sparkno = S10100+(random%3)
+kill = 0
+guard.kill = 0
+p2facing = 1
+ground.slidetime = 10
+guard.slidetime = 20
+ground.hittime = 40
+guard.hittime = 40
+ground.velocity = -3, 0
+air.velocity = -3, -5
+guard.velocity = -3
+air.cornerpush.veloff = -10
+ground.cornerpush.veloff = -10
+p2stateno = 3042
+envshake.time = 10
+envshake.ampl = -2
+
+[State 1000, ChangeState]
+type = ChangeState
+trigger1 = AnimElemTime(10) >= 0
+trigger1 = Target, StateNo = 3042
+value = 3041
+
+[State 1000, ChangeState]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+[Statedef 3041]
+type    = A
+movetype= A
+physics = N
+juggle  = 4
+poweradd= 110
+velset = 0,0
+anim = 3041
+ctrl = 0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(1) >= 0
+trigger1 = AnimElemTime(2) < 0
+time = 1
+pos = 238,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(2) >= 0
+trigger1 = AnimElemTime(3) < 0
+time = 1
+pos = 239,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(3) >= 0
+trigger1 = AnimElemTime(4) < 0
+time = 1
+pos = 240,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(4) >= 0
+trigger1 = AnimElemTime(5) < 0
+time = 1
+pos = 233,0
+
+[State Sigolpearon]
+type = TargetState
+trigger1 = AnimElem = 4
+value = 3043
+
+[State golpe]
+type = PlaySnd
+trigger1 = AnimElem = 4
+value = 7504,16
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(5) >= 0
+trigger1 = AnimElemTime(6) < 0
+time = 1
+pos = 215,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(6) >= 0
+trigger1 = AnimElemTime(7) < 0
+time = 1
+pos = 165,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(7) >= 0
+trigger1 = AnimElemTime(8) < 0
+time = 1
+pos = 115,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(8) >= 0
+trigger1 = AnimElemTime(9) < 0
+time = 1
+pos = 65,0
+
+[State 0, TargetBind]
+type = targetbind
+trigger1 = AnimElemTime(9) >= 0
+trigger1 = AnimElemTime(10) < 0
+time = 1
+pos = 25,0
+
+[State Sigolpearon]
+type = TargetState
+trigger1 = AnimElemTime(9) = 2
+value = 3044
+
+[State 1000, ChangeState]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 50
+ctrl = 1
+
+[Statedef 3042]
+type    = A;S
+movetype= H
+physics = N
+ctrl = 0
+velset = 0,0
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0, NotHitBy]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 1506, ChangeAnim2]
+type = ChangeAnim
+trigger1 = anim != 5012
+trigger1 = anim != 5017
+value = 5012
+
+[State 1506, ChangeAnim2]
+type = ChangeAnim
+trigger1 = anim = 5012 && AnimTime = 0
+value = 5017
+
+[State shang tsung mk2]
+type = ChangeAnim
+Trigger1 = name = "juano`s morph guy"
+Trigger1 = anim != 9108103+ifelse(name = "juano`s morph guy",var(20)*1000,0)
+value = 5000+ifelse(name = "juano`s morph guy",var(20),0)
+
+[State omega shang tsung]
+type = ChangeAnim
+Trigger1 = name = "SHANG TSUNG" && authorname = "OMEGAPSYCHO"
+Trigger1 = !time
+value = ifelse(!enemynear,fvar(20),5000,500+ceil(enemynear,fvar(20)))
+
+[State Sigolpearon]
+type = ChangeState
+trigger1 = Time = 50
+value = 5050
+
+[Statedef 3043]
+type    = A;S
+movetype= H
+physics = N
+ctrl = 0
+velset = 0,0
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0, NotHitBy]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 1506, ChangeAnim2]
+type = ChangeAnim
+trigger1 = anim != 5002 && anim != 5007 &&name != "juano`s morph guy"
+value = 5002
+persistent = 0
+
+[State 1506, ChangeAnim2]
+type = ChangeAnim
+trigger1 = anim = 5002 && AnimTime = 0
+value = 5007
+
+[State 1020, subjalado]
+type = Changeanim
+triggerall = name = "Juano`s Sub guy" && anim != 29901
+trigger1 = !time
+value = 29901
+
+[State 1020, compatiblejalado]
+type = Changeanim
+triggerall = name != "Juano`s Sub guy" && anim != 9108103+ifelse(name = "juano`s morph guy",var(20),0)
+triggerall = selfanimexist(9108103+ifelse(name = "juano`s morph guy",var(20)*1000,0))
+trigger1 = !time
+value = 9108103+ifelse(name = "juano`s morph guy",var(20)*1000,0)
+
+[Statedef 3044]
+type    = S
+movetype= I
+physics = S
+velset = 0,0
+ctrl = 0
+
+[State 0, PosSet]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 1021, 1]
+type = Changeanim
+trigger1 = animexist(5300+ifelse(name = "juano`s morph guy",var(20),0))
+trigger1 = anim != 5300
+trigger1 = time = 0
+value = 5300+ifelse(name = "juano`s morph guy",var(20),0)
+
+;[State 1021, 1]
+;type = Changeanim2
+;trigger1 = !animexist(5300)
+;trigger1 = anim != 7052
+;trigger1 = time = 0
+;value = 7052
+
+[State omega shang tsung]
+type = ChangeAnim
+Trigger1 = name = "SHANG TSUNG" && authorname = "OMEGAPSYCHO"
+Trigger1 = !time
+value = ifelse(!enemynear,fvar(20),5300,800+ceil(enemynear,fvar(20)))
+
+[State Sigolpearon]
+type = ChangeState
+trigger1 = time = 75 && Life = 0
+value = 5050
+
+[State 1021, 3]
+type = Selfstate
+trigger1 = time = 150
+value = 0
+ctrl = 1
+

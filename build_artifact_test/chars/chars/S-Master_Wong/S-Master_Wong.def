@@ -1,0 +1,37 @@
+;
+[Info]
+Name         = "Wong_Fei_Hung(AC)"
+DisplayName  = "Shabby_Master_Wong" 
+VersionDate  = 
+MugenVersion = 06,14,2003
+Author       = "AMASO"
+Pal.Defaults = 4,2,7,12
+
+[Files]
+Cmd      = S-Master_Wong/hehehehehe!hehehehehe!!.txt
+Cns      = S-Master_Wong/Wong_Fei_Hung(AC).cns
+St       = S-Master_Wong/Wong_Fei_Hung(AC).cns  
+St1      = S-Master_Wong/Wong_Fei_Hung(AC)-N.cns
+St2      = S-Master_Wong/Wong_Fei_Hung(AC)-S.cns
+St3      = S-Master_Wong/Wong_Fei_Hung(AC)-H.cns
+St4      = S-Master_Wong/Wong_Fei_Hung(AC)_-2.cns
+St5      = S-Master_Wong/Wong_Fei_Hung(AC)_-3.cns
+St6      = S-Master_Wong/Wong_Fei_Hung(AC)-X.cns
+StCommon = S-Master_Wong/Wong_Fei_Hung(AC)_COMMON.cns 
+Sprite   = S-Master_Wong/Wong_Fei_Hung(AC).sff 
+Anim     = S-Master_Wong/Wong_Fei_Hung(AC).air 
+Sound    = Wong_Fei_Hung(AC).snd 
+
+
+Pal1 = Act/Wong_Fei_Hung(AC)4.act
+Pal2 = Act/Wong_Fei_Hung(AC)5.act
+Pal3 = Act/Wong_Fei_Hung(AC)6.act
+Pal4 = Act/Wong_Fei_Hung(AC)1.act
+Pal5 = Act/Wong_Fei_Hung(AC)2.act
+Pal6 = Act/Wong_Fei_Hung(AC)3.act
+Pal7 = Act/Wong_Fei_Hung(AC)7.act
+Pal8 = Act/Wong_Fei_Hung(AC)2.act
+Pal9 = Act/Wong_Fei_Hung(AC)09.act
+Pal10 = Act/Wong_Fei_Hung(AC)10.act
+Pal11 = Act/Wong_Fei_Hung(AC)11.act
+Pal12 = Act/Wong_Fei_Hung(AC)12.act
