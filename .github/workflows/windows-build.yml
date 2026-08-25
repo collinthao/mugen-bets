@@ -90,7 +90,7 @@ jobs:
                   break
                 }
                 catch {
-                  Write-Host "Download failed from $u: $($_.Exception.Message)"
+                  Write-Host ("Download failed from {0}: {1}" -f $u, $_.Exception.Message)
                 }
               }
               if (-not $downloaded) {
