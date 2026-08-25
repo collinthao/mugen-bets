@@ -64,11 +64,14 @@ void MugenBattleManager::StartBattle()
 
 	// Launch MugenWatcher from the mugen runtime directory
 	fs::path watcherPath = (mugenDir.empty() ? fs::path("MugenWatcher.exe") : mugenDir / "MugenWatcher.exe");
-	CreateProcessA(
+	BOOL okWatcher = CreateProcessA(
 		(LPSTR)watcherPath.string().c_str(),
 		NULL, NULL, NULL, FALSE, 0, NULL, (LPSTR)mugenCwd,
 		&si, &pi1
 	);
+	if (!okWatcher) {
+		std::cerr << "Failed to start MugenWatcher: " << GetLastError() << "\n";
+	}
 
 	// Build full command-line for mugen.exe inside mugenDir
 	fs::path mugenPath = (mugenDir.empty() ? fs::path("mugen.exe") : mugenDir / "mugen.exe");
@@ -77,22 +80,35 @@ void MugenBattleManager::StartBattle()
 	std::vector<char> cmdBuf(fullCmd.begin(), fullCmd.end());
 	cmdBuf.push_back('\0');
 
-	CreateProcessA(
+	BOOL okMugen = CreateProcessA(
 		NULL,
 		cmdBuf.data(),
 		NULL, NULL, FALSE, 0, NULL, (LPSTR)mugenCwd,
-		&si, &pi1
+		&si, &pi2
 	);
+	if (!okMugen) {
+		std::cerr << "Failed to start mugen.exe: " << GetLastError() << "\n";
+	}
 
 }
 		
 void MugenBattleManager::WaitForBattleEnd()
 {
-		
-	WaitForSingleObject(pi1.hProcess, INFINITE);
-		
-	CloseHandle(pi1.hProcess);
-	CloseHandle(pi1.hThread);
+	// Wait for the mugen engine process to exit (pi2), then tidy up both watcher and engine handles
+	if (pi2.hProcess) {
+		WaitForSingleObject(pi2.hProcess, INFINITE);
+		CloseHandle(pi2.hProcess);
+		CloseHandle(pi2.hThread);
+		pi2 = {};
+	}
+	// Close watcher handles if still valid
+	if (pi1.hProcess) {
+		// Give watcher a brief moment to exit if it hasn't already
+		DWORD rc = WaitForSingleObject(pi1.hProcess, 1000);
+		CloseHandle(pi1.hProcess);
+		CloseHandle(pi1.hThread);
+		pi1 = {};
+	}
 	
 }
 	
