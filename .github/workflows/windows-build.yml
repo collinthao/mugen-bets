@@ -61,76 +61,8 @@ jobs:
           New-Item -ItemType Directory -Path $outDir -Force | Out-Null
           $exe = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Filter *.exe -Recurse | Where-Object { $_.Name -match 'Mugen-Bets.exe' } | Select-Object -First 1
           if (-not $exe) { Write-Error "Executable not found"; exit 1 }
+          Write-Host "Copying exe: $($exe.FullName) -> $outDir"
           Copy-Item -Path $exe.FullName -Destination $outDir -Force
-          # Ensure all required runtime data is included.
-          $repoRoot = $env:GITHUB_WORKSPACE
-          $exeDir = Split-Path $exe.FullName
-
-          # Check common locations for the mugen-1.1b1 folder (explicit paths) first
-          $candidates = @(
-            (Join-Path $repoRoot 'Mugen-Bets\mugen-1.1b1'),
-            (Join-Path $repoRoot 'mugen-1.1b1'),
-            (Join-Path $repoRoot 'Mugen-Bets\mugen-1.1b1\mugen-1.1b1'),
-            (Join-Path $exeDir 'mugen-1.1b1')
-          )
-          $foundMugen = $null
-          foreach ($p in $candidates) {
-            if (Test-Path $p) { $foundMugen = Get-Item $p; break }
-          }
-          # Fallback: robust recursive search for directory name 'mugen-1.1b1'
-          if (-not $foundMugen) { $foundMugen = Get-ChildItem -Path $repoRoot -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -ieq 'mugen-1.1b1' } | Select-Object -First 1 }
-          if ($foundMugen) {
-            Write-Host "Copying mugen-1.1b1 from $($foundMugen.FullName) -> $outDir"
-            Copy-Item -Path $foundMugen.FullName -Destination $outDir -Recurse -Force
-          }
-          else {
-            Write-Host "mugen-1.1b1 folder not found in repo or next to build output"
-          }
-
-          # Also ensure chars directories are present (search repo and build output)
-          # Also find any 'chars' directories anywhere in the repo or next to build output and include them
-          $charsFound = Get-ChildItem -Path $repoRoot -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -ieq 'chars' }
-          if (-not $charsFound) { $charsFound = Get-ChildItem -Path $exeDir -Directory -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Name -ieq 'chars' } }
-          foreach ($c in $charsFound) {
-            Write-Host "Copying chars folder: $($c.FullName) -> $outDir\chars"
-            $dest = Join-Path $outDir 'chars'
-            Copy-Item -Path $c.FullName -Destination $dest -Recurse -Force
-          }
-
-          # Explicit fallback: directly copy the nested chars folder if present in the inner project path
-          $explicitChars = Join-Path $repoRoot 'Mugen-Bets\mugen-1.1b1\chars'
-          if (Test-Path $explicitChars) {
-            Write-Host "Explicitly copying chars from $explicitChars -> $outDir\mugen-1.1b1\chars"
-            $destParent = Join-Path $outDir 'mugen-1.1b1'
-            New-Item -ItemType Directory -Path $destParent -Force | Out-Null
-            Copy-Item -Path $explicitChars -Destination (Join-Path $destParent 'chars') -Recurse -Force
-          }
-
-          # Copy other common asset folders if present in repo root
-          $otherFolders = @('data','stages','sound')
-          foreach ($f in $otherFolders) {
-            $src = Join-Path $repoRoot $f
-            if (Test-Path $src) { Write-Host "Copying $src -> $outDir"; Copy-Item -Path $src -Destination $outDir -Recurse -Force }
-          }
-
-          # Copy any mugen engine executables found anywhere in the repo or next to build output
-          $engineExes = @()
-          $engineExes += Get-ChildItem -Path $exeDir -Filter 'mugen*.exe' -File -ErrorAction SilentlyContinue
-          $engineExes += Get-ChildItem -Path $repoRoot -Filter 'mugen*.exe' -Recurse -File -ErrorAction SilentlyContinue
-          $engineExes = $engineExes | Select-Object -Unique
-          foreach ($eng in $engineExes) {
-            $destPath = Join-Path $outDir (Split-Path $eng.FullName -Leaf)
-            if ($eng.FullName -ieq $destPath) {
-              Write-Host "Skipping copy of $($eng.FullName) — already in artifact"
-            }
-            else {
-              Write-Host "Including engine exe: $($eng.FullName) -> $outDir"
-              Copy-Item -Path $eng.FullName -Destination $outDir -Force
-            }
-          }
-          # Copy any dll/pdb sitting next to the exe
-          $exeDir = Split-Path $exe.FullName
-          Get-ChildItem -Path $exeDir -Include *.dll,*.pdb -File | ForEach-Object { Copy-Item -Path $_.FullName -Destination $outDir -Force }
 
       - name: Zip artifact
         shell: pwsh
@@ -148,10 +80,11 @@ jobs:
           $zf = [System.IO.Compression.ZipFile]::OpenRead($zip)
           $entries = $zf.Entries | ForEach-Object { $_.FullName }
           $zf.Dispose()
-          $required = @('mugen-1.1b1/font/f-4x6.def','mugen-1.1b1/chars/')
+          # Ensure the release contains the built executable only
+          $required = @('Mugen-Bets.exe')
           $missing = @()
           foreach ($r in $required) {
-            if (-not ($entries -match ([regex]::Escape($r)))) { $missing += $r }
+            if (-not ($entries -contains $r)) { $missing += $r }
           }
           if ($missing.Count -gt 0) { Write-Error "Missing required entries in ZIP: $missing"; exit 1 }
           Write-Host "ZIP verification passed"
