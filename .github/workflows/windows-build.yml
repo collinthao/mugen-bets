@@ -17,6 +17,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - name: Ensure Git LFS objects
+        run: |
+          git lfs install --local || true
+          git lfs pull || true
 
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1
@@ -130,6 +138,23 @@ jobs:
           $zip = "$env:GITHUB_WORKSPACE\Mugen-Bets-release.zip"
           if (Test-Path $zip) { Remove-Item $zip }
           Compress-Archive -Path "$env:GITHUB_WORKSPACE\build_artifact\*" -DestinationPath $zip -Force
+
+      - name: Verify ZIP contents include font and chars
+        shell: pwsh
+        run: |
+          $zip = "$env:GITHUB_WORKSPACE\Mugen-Bets-release.zip"
+          if (-not (Test-Path $zip)) { Write-Error "ZIP not found: $zip"; exit 1 }
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $zf = [System.IO.Compression.ZipFile]::OpenRead($zip)
+          $entries = $zf.Entries | ForEach-Object { $_.FullName }
+          $zf.Dispose()
+          $required = @('mugen-1.1b1/font/f-4x6.def','mugen-1.1b1/chars/')
+          $missing = @()
+          foreach ($r in $required) {
+            if (-not ($entries -match ([regex]::Escape($r)))) { $missing += $r }
+          }
+          if ($missing.Count -gt 0) { Write-Error "Missing required entries in ZIP: $missing"; exit 1 }
+          Write-Host "ZIP verification passed"
 
       - name: Create-or-find public Release and upload asset (REST)
         shell: pwsh

@@ -35,42 +35,12 @@ namespace MugenBattleManager
 fs::path MugenBattleManager::findMugenDir()
 {
 	fs::path base = fs::current_path();
-
-	// 1) Walk upward from current path to find a sibling "mugen-1.1b1" (covers running from build folders)
-	for (fs::path p = base; !p.empty(); p = p.parent_path()) {
-		fs::path cand = p / "mugen-1.1b1";
-		if (fs::exists(cand) && fs::is_directory(cand)) return cand;
-		if (p == p.root_path()) break;
-	}
-
-	// 2) Try the executable directory (if different from current_path)
-	char exePathBuf[MAX_PATH] = {0};
-	if (GetModuleFileNameA(NULL, exePathBuf, MAX_PATH) > 0) {
-		fs::path exeDir = fs::path(exePathBuf).parent_path();
-		for (fs::path p = exeDir; !p.empty(); p = p.parent_path()) {
-			fs::path cand = p / "mugen-1.1b1";
-			if (fs::exists(cand) && fs::is_directory(cand)) return cand;
-			if (p == p.root_path()) break;
-		}
-	}
-
-	// 3) fallback: recursive search under current tree (slower)
+	fs::path cand = base / "mugen-1.1b1";
+	if (fs::exists(cand) && fs::is_directory(cand)) return cand;
+	// fallback: recursive search for folder named 'mugen-1.1b1'
 	for (auto &p : fs::recursive_directory_iterator(base)) {
 		if (p.is_directory() && p.path().filename() == "mugen-1.1b1") return p.path();
 	}
-
-	// 4) try to find repository root (look for solution file or .git) and search from there
-	fs::path repoRoot;
-	for (fs::path p = base; !p.empty(); p = p.parent_path()) {
-		if (fs::exists(p / "Mugen-Bets.slnx") || fs::exists(p / ".git")) { repoRoot = p; break; }
-		if (p == p.root_path()) break;
-	}
-	if (!repoRoot.empty()) {
-		for (auto &q : fs::recursive_directory_iterator(repoRoot)) {
-			if (q.is_directory() && q.path().filename() == "mugen-1.1b1") return q.path();
-		}
-	}
-
 	return fs::path{};
 }
 
