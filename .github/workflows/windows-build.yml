@@ -64,6 +64,38 @@ jobs:
           Write-Host "Copying exe: $($exe.FullName) -> $outDir"
           Copy-Item -Path $exe.FullName -Destination $outDir -Force
 
+          # Include VC++ 2008 SxS CRT from repo if present, otherwise download and extract the redistributable in CI
+          $vc90src = Join-Path $env:GITHUB_WORKSPACE 'vcredist\Microsoft.VC90.CRT'
+          $vc90dest = Join-Path $outDir 'Microsoft.VC90.CRT'
+          if (Test-Path $vc90src) {
+            Write-Host "Including Microsoft.VC90.CRT from repo: $vc90src -> $vc90dest"
+            Copy-Item -Path $vc90src -Destination $vc90dest -Recurse -Force
+          }
+          else {
+            Write-Host "Microsoft.VC90.CRT not found in repo; attempting to download and extract vcredist_x86.exe"
+            $tmp = Join-Path $env:TEMP "vcredist_extract"
+            $vcredistExe = Join-Path $env:TEMP "vcredist_x86.exe"
+            if (-not (Test-Path $vcredistExe)) {
+              $url = 'https://download.microsoft.com/download/1/5/8/158E5E2F-5A2E-4E6C-A9C7-7E63E0B0E5E8/vcredist_x86.exe'
+              Write-Host "Downloading vcredist from $url"
+              Invoke-WebRequest -Uri $url -OutFile $vcredistExe -UseBasicParsing -ErrorAction Stop
+            }
+            Remove-Item -Recurse -Force -ErrorAction SilentlyContinue $tmp
+            New-Item -ItemType Directory -Path $tmp -Force | Out-Null
+            Write-Host "Extracting $vcredistExe to $tmp"
+            # Use the redistributable's self-extract to get the redist\Microsoft.VC90.CRT folder
+            $proc = Start-Process -FilePath $vcredistExe -ArgumentList "/x:$tmp","/Q" -NoNewWindow -Wait -PassThru
+            if ($proc.ExitCode -ne 0) { Write-Host "Extraction exit code: $($proc.ExitCode); attempting without /Q"; Start-Process -FilePath $vcredistExe -ArgumentList "/x:$tmp" -NoNewWindow -Wait }
+            $extracted = Join-Path $tmp 'redist\Microsoft.VC90.CRT'
+            if (Test-Path $extracted) {
+              Write-Host "Copying extracted Microsoft.VC90.CRT -> $vc90dest"
+              Copy-Item -Path $extracted -Destination $vc90dest -Recurse -Force
+            }
+            else {
+              Write-Host "Extraction did not produce expected folder $extracted. Skipping CRT bundling."
+            }
+          }
+
       - name: Zip artifact
         shell: pwsh
         run: |
