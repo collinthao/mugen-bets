@@ -204,7 +204,13 @@ jobs:
             Write-Host "No existing assets or failed to list assets: $_"
           }
 
-          Invoke-RestMethod -Uri $uploadUri -Headers $headers -Method Post -InFile $assetPath -ContentType 'application/zip' -ErrorAction Stop
+          # Use curl.exe to upload the asset to avoid transient .NET transport errors
+          $curlExe = 'curl.exe'
+          if (-not (Get-Command $curlExe -ErrorAction SilentlyContinue)) { Write-Error "curl.exe not found on runner"; exit 1 }
+          $curlArgs = @('-sS','-X','POST','-H',"Authorization: token $token",'-H','Content-Type: application/zip','--data-binary',"@$assetPath",$uploadUri)
+          Write-Host "Uploading with curl.exe: $curlExe $($curlArgs -join ' ')"
+          $proc = Start-Process -FilePath $curlExe -ArgumentList $curlArgs -NoNewWindow -Wait -PassThru
+          if ($proc.ExitCode -ne 0) { Write-Error "curl upload failed with exit code $($proc.ExitCode)"; exit $proc.ExitCode }
           Write-Host "Upload complete"
 
       - name: Create GitHub Release (on tag)
