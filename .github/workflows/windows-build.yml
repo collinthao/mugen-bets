@@ -76,9 +76,26 @@ jobs:
             $tmp = Join-Path $env:TEMP "vcredist_extract"
             $vcredistExe = Join-Path $env:TEMP "vcredist_x86.exe"
             if (-not (Test-Path $vcredistExe)) {
-              $url = 'https://download.microsoft.com/download/1/5/8/158E5E2F-5A2E-4E6C-A9C7-7E63E0B0E5E8/vcredist_x86.exe'
-              Write-Host "Downloading vcredist from $url"
-              Invoke-WebRequest -Uri $url -OutFile $vcredistExe -UseBasicParsing -ErrorAction Stop
+              $urls = @(
+                'https://download.microsoft.com/download/1/5/8/158E5E2F-5A2E-4E6C-A9C7-7E63E0B0E5E8/vcredist_x86.exe',
+                'https://download.microsoft.com/download/3/1/6/316D2BEE-7C20-4C1B-9F27-8E3B1F8A8E2B/vcredist_x86.exe',
+                'https://aka.ms/vs/17/release/vc_redist.x86.exe'
+              )
+              $downloaded = $false
+              foreach ($u in $urls) {
+                try {
+                  Write-Host "Attempting download from $u"
+                  Invoke-WebRequest -Uri $u -OutFile $vcredistExe -UseBasicParsing -ErrorAction Stop
+                  $downloaded = $true
+                  break
+                }
+                catch {
+                  Write-Host "Download failed from $u: $($_.Exception.Message)"
+                }
+              }
+              if (-not $downloaded) {
+                Write-Host "All vcredist download attempts failed. Skipping CRT bundling."
+              }
             }
             Remove-Item -Recurse -Force -ErrorAction SilentlyContinue $tmp
             New-Item -ItemType Directory -Path $tmp -Force | Out-Null
